@@ -14,8 +14,50 @@ use Illuminate\Http\Request;
 */
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1' , function ($api) {
-    $api->get('version', function () {
-        return response('this is version v1');
+$api->version('v1' , [
+    'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => ["serializer:array",'bindings'],
+
+] , function ($api) {
+
+    $api->group([],function ($api) {
+
+
+        /**
+         * Auth
+         *************************/
+        $api->post('/auth','AuthorizationController@store')
+            ->name('api.auth.store');
+
+
+
+        /**
+         * User
+         *************************/
+        $api->post('/user','UserController@store')
+            ->name('api.user.store');
     });
+
+    $api->group([
+        'middleware' => 'api.throttle'
+        ],function ($api) {
+
+        /**
+         * Auth
+         *************************/
+        $api->get('/auth','AuthorizationController@index')
+            ->name('api.auth.index');
+
+        $api->get('/auth/current' , 'AuthorizationController@update')
+            ->name('api.auth.update');
+
+        $api->delete('/auth/current' , 'AuthorizationController@destroy')
+            ->name('api.auth.destroy');
+
+        /**
+         *
+         ************************/
+
+    });
+
 });

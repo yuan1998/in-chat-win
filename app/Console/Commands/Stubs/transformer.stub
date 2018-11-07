@@ -1,0 +1,19 @@
+<?php
+
+namespace App\Transformers;
+
+use App\DummyClass;
+use League\Fractal\TransformerAbstract;
+
+class DummyClassTransformer extends TransformerAbstract
+{
+    public function transform(DummyClass $dummyInstance)
+    {
+        return [
+            'id' => $dummyInstance->id,
+            'create_at' => $dummyInstance->created_at->toDateTimeString(),
+            'updated_at' => $dummyInstance->updated_at->toDateTimeString(),
+        ];
+    }
+
+}
