@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\UserRequest;
 use App\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -16,6 +17,21 @@ class UserController extends Controller
         $data['password'] = bcrypt($data['password']);
 
         $user = User::create($data);
+
+        return $this->response->noContent()->setStatusCode(201);
+    }
+
+    public function repassword(Request $request)
+    {
+        $user = $this->user();
+        $password = $request->password;
+        $newPassword = $request->newPassword;
+
+        if ($user->password  !== bcrypt($password)) {
+            return $this->response->errorBadRequest('password error');
+        }
+        $user->password = bcrypt($newPassword);
+        $user->save();
 
         return $this->response->noContent()->setStatusCode(201);
     }

@@ -16,6 +16,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_id');
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->string('type')->nullable();
             $table->enum('list-model' , ['white' , 'black'])->default('white');
             $table->boolean( 'list-open')->default(false);

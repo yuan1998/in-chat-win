@@ -16,6 +16,7 @@ class CreateDomiansTable extends Migration
         Schema::create('domians', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('setting_id');
+            $table->string('description')->nullable();
             $table->string('domain')->unique();
             $table->boolean('open')->default(true);
             $table->string('tags')->nullable();

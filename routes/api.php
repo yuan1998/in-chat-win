@@ -55,8 +55,10 @@ $api->version('v1' , [
             ->name('api.auth.destroy');
 
         /**
-         *
+         * Setting
          ************************/
+        $api->post('/setting', 'SettingController@store')
+            ->name('api.setting.store');
 
     });
 
