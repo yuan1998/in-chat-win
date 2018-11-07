@@ -24,7 +24,7 @@ class SettingController extends Controller
     {
         $user = $this->user();
 
-        if ($user->id !== $settings->user_id){
+        if ($user->id != $settings->user_id){
             return $this->response->errorUnauthorized();
         }
 
@@ -39,8 +39,7 @@ class SettingController extends Controller
     {
         $user = $this->user();
 
-        Settings::query()
-            ->where('user_id' , $user->id)
+        Settings::where('user_id' , $user->id)
             ->whereIn('id', explode(',' , $ids))
             ->delete();
 
@@ -51,11 +50,19 @@ class SettingController extends Controller
     {
         $user = $this->user();
 
-        $items = Settings::query()
-            ->where('user_id' , $user)
+        $items = Settings::where('user_id' , $user->id)
             ->paginate(request()->get('paginate' , 20));
 
-        return $this->response->collection( $items , new SettingTransformer());
+        return $this->response->paginator( $items , new SettingTransformer('list'));
+    }
+
+    public function show(Settings $settings)
+    {
+        $user = $this->user();
+        if ($user->id !== $settings->user_id){
+            return $this->response->errorUnauthorized();
+        }
+        return $this->response->item($settings , new SettingTransformer());
     }
 
 }

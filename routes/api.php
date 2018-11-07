@@ -39,7 +39,7 @@ $api->version('v1' , [
     });
 
     $api->group([
-        'middleware' => 'api.throttle'
+        'middleware' => 'api.auth'
         ],function ($api) {
 
         /**
@@ -59,6 +59,10 @@ $api->version('v1' , [
          ************************/
         $api->post('/setting', 'SettingController@store')
             ->name('api.setting.store');
+        $api->get('/setting' , 'SettingController@index')
+            ->name('api.setting.index');
+        $api->patch('/setting/{settings}' , 'SettingController@update')
+            ->name('api.setting.update');
 
     });
 
