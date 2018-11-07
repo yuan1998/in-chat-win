@@ -63,6 +63,9 @@ $api->version('v1' , [
             ->name('api.setting.index');
         $api->patch('/setting/{settings}' , 'SettingController@update')
             ->name('api.setting.update');
+        $api->get('/setting/{settings}' , 'SettingController@show')
+            ->name('api.setting.show');
+
 
     });
 
