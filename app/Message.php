@@ -24,4 +24,9 @@ class Message extends Model
         return $this->belongsTo(Settings::class , 'setting_id');
     }
 
+    public function user ()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 }

@@ -67,7 +67,7 @@ class MessageController extends Controller
     {
         $user = $this->user();
 
-        if ($user->id != $settings->user_id) {
+        if ( !($message->user_id == $user->id && $message->setting_id == $settings->id) ) {
             return $this->response->errorUnauthorized();
         }
 
