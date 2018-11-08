@@ -17,7 +17,7 @@ class SettingTableSeeder extends Seeder
         $faker = app(Faker\Generator::class);
 
         factory(\App\Settings::class)
-            ->times(3)
+            ->times(10)
             ->make()
             ->each(function ($setting) use ($faker , $users) {
                 $setting->user_id = $faker->randomElement($users);

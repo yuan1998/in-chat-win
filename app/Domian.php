@@ -19,4 +19,14 @@ class Domian extends Model
         'open' => 'boolean'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function setting()
+    {
+        return $this->belongsTo(Settings::class , 'setting_id');
+    }
+
 }

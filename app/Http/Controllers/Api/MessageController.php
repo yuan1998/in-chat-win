@@ -47,4 +47,9 @@ class MessageController extends Controller
         return $this->response->noContent();
     }
 
+    public function index(MessageRequest $request)
+    {
+
+    }
+
 }

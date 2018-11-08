@@ -79,6 +79,19 @@ $api->version('v1' , [
 
 
 
+        /**
+         * Domain
+         ***********************/
+        $api->post('/domain' , 'DomianController@store')
+            ->name('api.domain.store');
+        $api->patch('/domain/{domian}' , 'DomianController@update')
+            ->name('api.domain.update');
+        $api->delete('/domain/{ids}',  'DomianController@destroy')
+            ->name('api.domain.destroy');
+        $api->get('/domain', 'DomianController@index')
+            ->name('api.domain.index');
+        $api->get('/domain/{domian}' , 'DomianController@show')
+            ->name('api.domain.show');
 
     });
 

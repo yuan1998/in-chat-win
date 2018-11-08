@@ -13,7 +13,7 @@ class DomianRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class DomianRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
+        $rules = [
         ];
+
+        switch (request()->method()) {
+            case "POST":
+                $rules = [
+                    'open'        => 'required',
+                    'domain'      => 'required|unique:domians,domain',
+                    'setting_id'  => 'required|message_setting',
+                    'description' => 'string',
+                ];
+                break;
+        }
+
+        return $rules;
     }
 }

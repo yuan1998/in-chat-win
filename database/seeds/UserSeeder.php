@@ -14,12 +14,12 @@ class UserSeeder extends Seeder
 
         $faker = app(Faker\Generator::class);
 
-        factory(\App\User::class)
+        $items =  factory(\App\User::class)
             ->times(6)
-            ->make()
-            ->each(function ($item) use ($faker) {
-                \App\User::create($item->toArray());
-            });
+            ->make();
+
+
+        \App\User::insert($items->makeVisible(['password', 'remember_token'])->toArray());
 
         $user = \App\User::find(1);
         $user->name = 'yuan1998';
