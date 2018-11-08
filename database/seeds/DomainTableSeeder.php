@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class MessageTableSeeder extends Seeder
+class DomainTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,15 +16,13 @@ class MessageTableSeeder extends Seeder
 
         $faker = app(Faker\Generator::class);
 
-        factory(\App\Message::class)
-            ->times(20)
+        factory(\App\Domian::class)
+            ->times(30)
             ->make()
-            ->each(function ($item) use ($ids , $users , $faker) {
-                $item->setting_id = $faker->randomElement($ids);
+            ->each(function ($item) use ($users , $ids , $faker) {
                 $item->user_id = $faker->randomElement($users);
-                \App\Message::create($item->toArray());
+                $item->setting_id = $faker->randomElement($ids);
+                \App\Domian::create($item->toArray());
             });
-
-
     }
 }

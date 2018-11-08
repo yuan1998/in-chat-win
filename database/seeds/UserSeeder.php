@@ -11,13 +11,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $data = [
-            'email' => 'chizhiyueshu@gmail.com',
-            'password' => bcrypt('3322123'),
-            'name' => 'yuan1998',
-            'uid' => (string) \UUID::generate()
-        ];
 
-        \App\User::create($data);
+        $faker = app(Faker\Generator::class);
+
+        factory(\App\User::class)
+            ->times(6)
+            ->make()
+            ->each(function ($item) use ($faker) {
+                \App\User::create($item->toArray());
+            });
+
+        $user = \App\User::find(1);
+        $user->name = 'yuan1998';
+        $user->email = 'chizhiyueshu@gmail.com';
+        $user->save();
     }
 }

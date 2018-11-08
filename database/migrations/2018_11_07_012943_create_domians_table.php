@@ -16,6 +16,7 @@ class CreateDomiansTable extends Migration
         Schema::create('domians', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('setting_id');
+            $table->unsignedInteger('user_id');
             $table->string('description')->nullable();
             $table->string('domain')->unique();
             $table->boolean('open')->default(true);
@@ -23,6 +24,7 @@ class CreateDomiansTable extends Migration
             $table->timestamps();
 
             $table->foreign('setting_id')->references('id')->on('settings')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
