@@ -11,17 +11,16 @@ class MessageTableSeeder extends Seeder
      */
     public function run()
     {
-        $ids =  \App\Settings::all()->pluck('id')->toArray();
-        $users = \App\User::all()->pluck('id')->toArray();
-
+        $ids =  \App\Settings::all()->toArray();
         $faker = app(Faker\Generator::class);
 
         factory(\App\Message::class)
             ->times(20)
             ->make()
-            ->each(function ($item) use ($ids , $users , $faker) {
-                $item->setting_id = $faker->randomElement($ids);
-                $item->user_id = $faker->randomElement($users);
+            ->each(function ($item) use ($ids , $faker) {
+                $set = $faker->randomElement($ids);
+                $item->setting_id = $set['id'];
+                $item->user_id = $set['user_id'];
                 \App\Message::create($item->toArray());
             });
 

@@ -14,44 +14,43 @@ use Illuminate\Http\Request;
 */
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1' , [
-    'namespace' => 'App\Http\Controllers\Api',
-    'middleware' => ["serializer:array",'bindings'],
+$api->version('v1', [
+    'namespace'  => 'App\Http\Controllers\Api',
+    'middleware' => ["serializer:array", 'bindings'],
 
-] , function ($api) {
+], function ($api) {
 
-    $api->group([],function ($api) {
+    $api->group([], function ($api) {
 
 
         /**
          * Auth
          *************************/
-        $api->post('/auth','AuthorizationController@store')
+        $api->post('/auth', 'AuthorizationController@store')
             ->name('api.auth.store');
-
 
 
         /**
          * User
          *************************/
-        $api->post('/user','UserController@store')
+        $api->post('/user', 'UserController@store')
             ->name('api.user.store');
     });
 
     $api->group([
         'middleware' => 'api.auth'
-        ],function ($api) {
+    ], function ($api) {
 
         /**
          * Auth
          *************************/
-        $api->get('/auth','AuthorizationController@index')
+        $api->get('/auth', 'AuthorizationController@index')
             ->name('api.auth.index');
 
-        $api->get('/auth/current' , 'AuthorizationController@update')
+        $api->get('/auth/current', 'AuthorizationController@update')
             ->name('api.auth.update');
 
-        $api->delete('/auth/current' , 'AuthorizationController@destroy')
+        $api->delete('/auth/current', 'AuthorizationController@destroy')
             ->name('api.auth.destroy');
 
         /**
@@ -59,11 +58,11 @@ $api->version('v1' , [
          ************************/
         $api->post('/setting', 'SettingController@store')
             ->name('api.setting.store');
-        $api->get('/setting' , 'SettingController@index')
+        $api->get('/setting', 'SettingController@index')
             ->name('api.setting.index');
-        $api->patch('/setting/{settings}' , 'SettingController@update')
+        $api->patch('/setting/{settings}', 'SettingController@update')
             ->name('api.setting.update');
-        $api->get('/setting/{settings}' , 'SettingController@show')
+        $api->get('/setting/{settings}', 'SettingController@show')
             ->name('api.setting.show');
 
 
@@ -76,21 +75,24 @@ $api->version('v1' , [
             ->name('api.message.update');
         $api->delete('/message/{ids}', 'MessageController@destroy')
             ->name('api.message.destroy');
-
+        $api->get('/setting/{settings}/message', 'MessageController@index')
+            ->name('api.message.index');
+        $api->get('/setting/{settings}/message/{message}', 'MessageController@show')
+            ->name('api.message.show');
 
 
         /**
          * Domain
          ***********************/
-        $api->post('/domain' , 'DomianController@store')
+        $api->post('/domain', 'DomianController@store')
             ->name('api.domain.store');
-        $api->patch('/domain/{domian}' , 'DomianController@update')
+        $api->patch('/domain/{domian}', 'DomianController@update')
             ->name('api.domain.update');
-        $api->delete('/domain/{ids}',  'DomianController@destroy')
+        $api->delete('/domain/{ids}', 'DomianController@destroy')
             ->name('api.domain.destroy');
         $api->get('/domain', 'DomianController@index')
             ->name('api.domain.index');
-        $api->get('/domain/{domian}' , 'DomianController@show')
+        $api->get('/domain/{domian}', 'DomianController@show')
             ->name('api.domain.show');
 
     });
