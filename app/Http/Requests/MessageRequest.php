@@ -25,17 +25,19 @@ class MessageRequest extends FormRequest
     {
         $rules = [];
 
-        switch(request()->method())
-        {
+        switch (request()->method()) {
             case "POST":
                 $rules = [
-                    'keyword' => 'required|string|unique:messages,keyword',
+                    'keyword'    => 'required|string|unique:messages,keyword',
                     'setting_id' => 'required|message-setting'
                 ];
                 break;
+            case "PATCH":
+                $rules = [
+                    'keyword'    => 'string|unique:messages,keyword',
+                ];
+                break;
         }
-        return [
-            //
-        ];
+        return $rules;
     }
 }

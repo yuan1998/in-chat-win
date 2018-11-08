@@ -67,6 +67,19 @@ $api->version('v1' , [
             ->name('api.setting.show');
 
 
+        /**
+         * Message
+         ***********************/
+        $api->post('/message', 'MessageController@store')
+            ->name('api.message.store');
+        $api->patch('/message/{message}', 'MessageController@update')
+            ->name('api.message.update');
+        $api->delete('/message/{ids}', 'MessageController@destroy')
+            ->name('api.message.destroy');
+
+
+
+
     });
 
 });

@@ -21,4 +21,30 @@ class MessageController extends Controller
 
         return $this->response->item($item , new MessageTransformer());
     }
+
+    public function update(MessageRequest $request , Message $message)
+    {
+        $user = $this->user();
+
+        if ($user->id != $message->user_id){
+            return $this->response->errorUnauthorized();
+        }
+
+        $message->fill($request->all());
+        $message->save();
+
+        return $this->response->item($message , new MessageTransformer());
+    }
+
+    public function destroy($ids)
+    {
+        $user = $this->user();
+
+        Message::where('user_id' , $user->id)
+            ->whereIn('id' , explode(',' , $ids))
+            ->delete();
+
+        return $this->response->noContent();
+    }
+
 }

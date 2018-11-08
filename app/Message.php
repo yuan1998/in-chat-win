@@ -10,14 +10,14 @@ class Message extends Model
             'setting_id',
             'keyword',
             'message',
-            'is_default'
+            'is_default',
+            'user_id'
     ];
 
     protected $casts = [
         'message' => 'json',
         'is_default' => 'boolean',
     ];
-
 
     public function setting ()
     {
