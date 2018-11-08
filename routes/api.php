@@ -47,11 +47,13 @@ $api->version('v1', [
         $api->get('/auth', 'AuthorizationController@index')
             ->name('api.auth.index');
 
-        $api->get('/auth/current', 'AuthorizationController@update')
+        $api->put('/auth/current', 'AuthorizationController@update')
             ->name('api.auth.update');
 
         $api->delete('/auth/current', 'AuthorizationController@destroy')
             ->name('api.auth.destroy');
+        $api->get('/auth/current' , 'AuthorizationController@show')
+            ->name('api.auth.show');
 
         /**
          * Setting

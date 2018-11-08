@@ -46,7 +46,7 @@ class AuthorizationController extends Controller
     public static function tokenArr($token)
     {
         return [
-            'yuan_access_token' => $token,
+            'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
         ];
@@ -56,5 +56,10 @@ class AuthorizationController extends Controller
     {
         \Auth::guard('api')->logout();
         return $this->response->noContent();
+    }
+
+    public function show()
+    {
+        return $this->response->item($this->user() , new UserTransformer());
     }
 }
