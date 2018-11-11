@@ -6,10 +6,10 @@
 import Vue       from 'vue'
 import VueRouter from 'vue-router'
 import routes    from './routes'
-import iView     from 'iview'
-import 'iview/dist/styles/iview.css'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 import App from './app.vue'
-import store from './store';
+import store from './store'
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,14 +18,48 @@ import store from './store';
  */
 
 Vue.use(VueRouter);
-Vue.use(iView);
+Vue.use(ElementUI);
 
 const router = new VueRouter({
-    mode: 'history',
     routes
 });
 
 Vue.config.productionTip = false;
+
+
+const whiteList = [
+    '/login',
+    '/welcome',
+    '/404',
+];
+
+router.beforeEach( async (to, from , next) => {
+    let user = store.getters['auth/gerUserInfo'] || await store.dispatch('auth/checkToken');
+
+    if( user ) {
+        if (!store.getters['router/getAdded']) {
+            router.addRoutes(store.getters['router/asyncRouterMap']);
+            store.commit('router/addRouterOver');
+            next({ ...to , replace:true});
+        }
+
+        if (to.path === '/login') {
+            next('/welcome');
+        }
+        else {
+            next();
+        }
+    }
+    else {
+        if (whiteList.includes(to.path)) {
+            next();
+        }else {
+            next('/login');
+        }
+    }
+
+
+});
 
 const app = new Vue({
     el: '#app' ,

@@ -1,4 +1,4 @@
-import {tokenName} from "./config";
+const { MIX_TOKEN_NAME } = process.env;
 
 const setStorage = (key , value) => window.localStorage.setItem(key , JSON.stringify(value));
 
@@ -9,8 +9,8 @@ const removeStorage = (key) => window.localStorage.removeItem(key);
 const clearStorage = () => window.localStorage.clear();
 
 const clearAuthStorage = () => {
-    removeStorage(tokenName);
-    removeStorage(tokenName + '_expired_at');
+    removeStorage(MIX_TOKEN_NAME);
+    removeStorage(MIX_TOKEN_NAME + '_expired_at');
 };
 
 

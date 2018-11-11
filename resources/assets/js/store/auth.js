@@ -24,15 +24,14 @@ const auth = {
     actions: {
         async login ({commit} , form) {
             let res = await login(form);
-
             if (res.status !== 201) {
-                return false;
+                return res;
             }
             commit('saveUser' , res.data);
-            return res.data;
+            return true;
         } ,
-        async logout ({commit} , form) {
-            if (!getters.user) {
+        async logout ({commit, state}) {
+            if (!state.user) {
                 return false;
             }
 
@@ -54,11 +53,10 @@ const auth = {
         },
         async checkToken({commit , dispatch}) {
             let token = await getToken();
-
             if (token === null)
                 return false;
-
-            return await dispatch('show');
+            let result = await dispatch('show');
+            return result;
         }
     }
 };

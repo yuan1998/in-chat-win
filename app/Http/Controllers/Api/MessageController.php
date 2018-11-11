@@ -57,10 +57,9 @@ class MessageController extends Controller
         }
 
         $items = Message::where('user_id' , $user->id)
-            ->where('setting_id' , $settings->id)
-            ->paginate($request->get('paginate' , 20));
+            ->where('setting_id' , $settings->id)->get();
 
-        return $this->response->paginator($items , new MessageTransformer());
+        return $this->response->collection($items , new MessageTransformer());
     }
 
     public function show(Settings $settings , Message $message)

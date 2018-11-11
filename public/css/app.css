@@ -1,3 +1,209 @@
+@charset "UTF-8";
+
+/**
+ * @Description: base.css
+ * @author Yuan !998🤓🤓
+ * @date 2018/7/26
+*/
+
+html {
+  /*标准字体大小设置 14 像素「rem 参照对象」*/
+  font-size: 14px;
+  /*滚动事件发生在 html 元素上；JS 中可以监听 html 的滚动*/
+  overflow-y: auto;
+  /*让 html 和浏览器窗口高度一致*/
+  height: 100%;
+  /*少数浏览器默认背景色为浅灰色，所以设置默认背景颜色为纯白*/
+  background-color: #fff;
+}
+
+html,
+body {
+  /*body 宽度大 html 度时，某些浏览器会出现内部滚动条；所以设置「html、body」宽度相同且「overflow-x: hidden」*/
+  /*overflow-x: hidden;*/
+  width: 100%;
+  /*取消部分浏览器点击有阴影*/
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  /*优化移动端滚动事件*/
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', Arial, sans-serif;
+  /*设置基本字体配置*/
+  /*让绝对定位元素，根据 body 定位*/
+  position: relative;
+  line-height: 1;
+  /*设置网页基本字体颜色为浅灰色*/
+  color: #666;
+  /*使字体渲染更顺滑*/
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/**
+ * 移除常用标签的浏览器默认的「margin、padding」
+ * pre、code、legend、fieldset、blockquote … 等标签不是很常用，所以就不一一列举，如果项目中使用到，可以自己单独写
+ */
+
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dd,
+ul,
+ol,
+th,
+td,
+button,
+figure,
+input,
+textarea,
+form {
+  margin: 0;
+  padding: 0;
+}
+
+/**
+ * 不同浏览器的 input、select、textarea 的盒子模型宽度计算方式不同，统一为最常见的 content-box
+ */
+
+table {
+  /*table 相邻单元格的边框间的距离设置为 0*/
+  border-spacing: 0;
+  /*默认情况下给 tr 设置 border 没有效果，如果 table 设置了边框为合并模式：「border-collapse: collapse;」就可以了*/
+  border-collapse: collapse;
+}
+
+/**
+ * 移除浏览器部分元素的默认边框
+ * acronym、fieldset … 等其他标签不是很常用，就不会一一列举；如果项目中用到，可以自己单独写
+ */
+
+img,
+input,
+button,
+textarea {
+  border: none;
+  /*-webkit-appearance: none;*/
+}
+
+input {
+  /*由于 input 默认不继承父元素的居中样式，所以设置：「text-align: inherit」*/
+  text-align: inherit;
+}
+
+textarea {
+  /*textarea 默认不可以放缩*/
+  resize: none;
+}
+
+/**
+ * 由于以下元素的部分属性没有继承父节点样式，所以声明这些元素的这些属性为父元素的属性
+ * 取消这些元素 `outline` 样式
+ */
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+select,
+button,
+option,
+textarea,
+optgroup {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  line-height: inherit;
+  color: inherit;
+  outline: none;
+}
+
+/**
+ * 取消超链接元素的默认文字装饰
+ * 另外 del、ins 标签的中划线、下划线还是挺好的，就不去掉
+ */
+
+a {
+  text-decoration: none;
+}
+
+ol,
+ul {
+  /*开发中 UI 设计的列表都是和原生的样式差太多，所以直接给取消 ol，ul 默认列表样式*/
+  list-style: none;
+}
+
+button,
+input[type='submit'],
+input[type='button'] {
+  /*鼠标经过是「小手」形状表示可点击*/
+  cursor: pointer;
+}
+
+input::-moz-focus-inner {
+  /*取消火狐浏览器部分版本 input 聚焦时默认的「padding、border」*/
+  padding: 0;
+  border: 0;
+}
+
+/*取消部分浏览器数字输入控件的操作按钮*/
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  margin: 0;
+  -webkit-appearance: none;
+}
+
+/*输入控件 placeholder 色设置 #999*/
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #999;
+}
+
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #999;
+}
+
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #999;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #999;
+}
+
+template {
+  /*由于部分浏览 template 会显示出来，所以要隐*/
+  display: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
 .container-login-page {
   height: 100%;
   display: block;
@@ -7,5 +213,243 @@
   left: 0;
   bottom: 0;
   top: 0;
+}
+
+.el-icon.y-icon {
+  font-size: 0;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.el-icon.y-icon img {
+  display: inline-block;
+  max-width: 100%;
+}
+
+.container-admin-page {
+  height: 100%;
+}
+
+.container-admin-page .component-header-title {
+  background-color: #f6f8f8;
+  border-bottom: 1px solid #dee5e7;
+  padding: 20px;
+  color: #58666e;
+  line-height: 24px;
+  font-size: 24px;
+}
+
+.container-admin-page .component-header-title h1 {
+  padding-left: 20px;
+  font-weight: 300;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.container-admin-page .admin-aside {
+  background-color: #fff;
+  -webkit-box-shadow: 0 2px 5px rgba(57, 70, 78, 0.2);
+          box-shadow: 0 2px 5px rgba(57, 70, 78, 0.2);
+  z-index: 102;
+  width: auto !important;
+  min-width: 65px !important;
+}
+
+.container-admin-page .admin-aside .el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 240px;
+  min-height: 100%;
+}
+
+.container-admin-page .admin-header {
+  background-color: #fff;
+  z-index: 100;
+  line-height: 60px;
+  -webkit-box-shadow: 0 2px 8px #f0f1f2;
+          box-shadow: 0 2px 8px #f0f1f2;
+}
+
+.container-admin-page .admin-header .y-user-dropdown {
+  float: right;
+}
+
+.container-admin-page .admin-header .collapse-btn {
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+  -webkit-transform: none;
+          transform: none;
+}
+
+.container-admin-page .admin-header .collapse-btn.y-active {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.container-admin-page .admin-main {
+  background-color: #ffffff;
+  padding: 0 30px;
+}
+
+.container-admin-page .el-tabs__header {
+  margin: 0;
+}
+
+.container-admin-page .el-tabs__header .el-tabs__nav:first-child {
+  margin-left: 10px;
+}
+
+.container-admin-page .el-tabs__header .el-tabs__nav:last-child {
+  margin-right: 10px;
+}
+
+.el-card.mac-card .el-card__body {
+  border-top: 28px solid rgba(230, 229, 229, 0.7);
+  -webkit-box-shadow: 0 1.4px 7px 0 rgba(0, 0, 0, 0.28);
+  box-shadow: 0 1.4px 7px 0 rgba(0, 0, 0, 0.28);
+  position: relative;
+  border-radius: 3px 3px 0 0;
+  padding: 5px 10px 10px 10px;
+  background-color: #ffffff;
+}
+
+.el-card.mac-card .el-card__body::after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: -17.5px;
+  left: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #f44;
+  -webkit-box-shadow: 0 0 0 2px #f44, 21px 0 0 2px #9b3, 42px 0 0 2px #fb5;
+  box-shadow: 0 0 0 2px #f44, 21px 0 0 2px #9b3, 42px 0 0 2px #fb5;
+}
+
+.el-card.setting-card .el-card__body {
+  height: 80px;
+}
+
+.el-card.setting-card .setting-card-footer {
+  bottom: 0;
+  right: 14px;
+  left: 0;
+  text-align: right;
+  position: absolute;
+}
+
+.el-card.setting-card.url-bra .el-card__body::before {
+  display: block;
+  position: absolute;
+  content: "";
+  top: -22.4px;
+  left: 77px;
+  width: calc(100% - 6 * 14px);
+  height: 16.8px;
+  border-radius: 2px;
+  background-color: #fff;
+}
+
+.el-card.message-card .el-card__body {
+  padding-top: 15px;
+  height: 300px;
+}
+
+.el-card.message-card .el-card__body .message-card_content {
+  width: 100%;
+  display: block;
+  height: 100%;
+  overflow: scroll;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  justify-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap .message-pop {
+  -ms-flex-preferred-size: 85%;
+      flex-basis: 85%;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap .message-pop .message-pop_text {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 9px;
+  font-size: 16px;
+  line-height: 21px;
+  background-color: #f3f3f3;
+  -ms-word-break: break-all;
+  word-break: break-all;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_right {
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  text-align: right;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_right .message-pop_text {
+  background-color: #daf4fe !important;
+}
+
+.el-card.message-card .mac-card-footer {
+  position: absolute;
+  bottom: 0;
+  right: 14px;
+  left: 0;
+  text-align: right;
+}
+
+.message-list_container .message-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  margin: 15px;
+}
+
+.message-list_container .message-header .message-header_filter {
+  -ms-flex-preferred-size: 200px;
+      flex-basis: 200px;
+  text-align: left;
+}
+
+.message-list_container .message-header .message-header_controll {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
+  margin: 15px;
+  text-align: right;
+}
+
+.message-value-container {
+  overflow: scroll;
+  max-height: 220px;
+}
+
+.message-value-container .message-value-form-item .el-form-item__label {
+  float: right !important;
+  width: 120px;
+}
+
+.message-value-container .message-value-form-item .message-value-label {
+  padding-left: 15px;
+}
+
+.message-value-container .message-value-form-item .el-form-item__content {
+  margin-left: 0 !important;
+  margin-right: 120px;
 }
 

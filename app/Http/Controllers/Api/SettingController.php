@@ -17,7 +17,7 @@ class SettingController extends Controller
         $data['user_id'] = $user->id;
         $item = Settings::create($data);
 
-        return $this->response->item($item , new SettingTransformer())->setStatusCode(201);
+        return $this->response->item($item , new SettingTransformer());
     }
 
     public function update(SettingRequest $request, Settings $settings)
@@ -32,7 +32,7 @@ class SettingController extends Controller
 
         $settings->fill($data);
         $settings->save();
-        return $this->response->item( $settings , new SettingTransformer())->setStatusCode(201);
+        return $this->response->item( $settings , new SettingTransformer());
     }
 
     public function destroy($ids)
@@ -53,7 +53,7 @@ class SettingController extends Controller
         $items = Settings::where('user_id' , $user->id)
             ->paginate(request()->get('paginate' , 20));
 
-        return $this->response->paginator( $items , new SettingTransformer('list'));
+        return $this->response->paginator( $items , new SettingTransformer());
     }
 
     public function show(Settings $settings)
@@ -63,6 +63,16 @@ class SettingController extends Controller
             return $this->response->errorUnauthorized();
         }
         return $this->response->item($settings , new SettingTransformer());
+    }
+
+    public function indexName()
+    {
+        $user = $this->user();
+
+        $items = Settings::where('user_id' , $user->id)
+            ->select(['id','name','user_id','description' ,'created_at' ,'updated_at'])->get();
+
+        return $this->response->collection($items , new SettingTransformer('list'));
     }
 
 }
