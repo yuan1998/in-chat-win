@@ -156,6 +156,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -182,45 +186,57 @@ var defaultForm = {
     },
     mounted: function () {
         var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-            var $store, $route, id, current, res, _res;
+            var $store, $route, settingCurrent, id, current, res, _res;
 
             return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                 while (1) {
                     switch (_context.prev = _context.next) {
                         case 0:
-                            $store = this.$store, $route = this.$route;
+                            $store = this.$store, $route = this.$route, settingCurrent = this.settingCurrent;
                             id = $route.params.id;
-                            current = $store.getters['setting/current'](id);
+                            current = settingCurrent;
+
+                            this.loading = true;
 
                             if (current) {
-                                _context.next = 14;
+                                _context.next = 10;
                                 break;
                             }
 
-                            this.loading = true;
                             _context.next = 7;
                             return $store.dispatch('setting/settingShow', id);
 
                         case 7:
                             res = _context.sent;
 
-                            if (!res) {
-                                _context.next = 13;
+                            console.log('Current', res);
+                            if (res.status !== 200) {
+                                id = null;
+                            }
+
+                        case 10:
+                            if (!(id !== null)) {
+                                _context.next = 17;
                                 break;
                             }
 
-                            _context.next = 11;
+                            _context.next = 13;
                             return $store.dispatch('message/current', id);
 
-                        case 11:
+                        case 13:
                             _res = _context.sent;
 
-                            console.log(_res);
+                            console.log('Id', _res);
+                            _context.next = 18;
+                            break;
 
-                        case 13:
+                        case 17:
+                            throw new Error('Error . id error');
+
+                        case 18:
                             this.loading = false;
 
-                        case 14:
+                        case 19:
                         case 'end':
                             return _context.stop();
                     }
@@ -402,12 +418,48 @@ var defaultForm = {
 
             return handleDelete;
         }(),
+        handleSetDefault: function () {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(id) {
+                var res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                _context5.next = 2;
+                                return this.$store.dispatch('setting/setDefault', id);
+
+                            case 2:
+                                res = _context5.sent;
+
+
+                                console.log(res);
+                                if (res.status === 200) {
+                                    this.$notify({
+                                        title: 'Congratulations',
+                                        message: 'He became king.',
+                                        type: 'success'
+                                    });
+                                }
+
+                            case 5:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, this);
+            }));
+
+            function handleSetDefault(_x2) {
+                return _ref5.apply(this, arguments);
+            }
+
+            return handleSetDefault;
+        }(),
         closeDialog: function closeDialog() {
             this.submitting = false;
             this.dialogVisible = false;
         },
         closedDialog: function closedDialog() {
-            console.log('closed');
             this.$refs['form'].resetFields();
         },
         closeDialogBefore: function closeDialogBefore(done) {
@@ -419,6 +471,9 @@ var defaultForm = {
     computed: {
         isCurrent: function isCurrent() {
             return this.$store.getters['message/current'](this.$route.params.id);
+        },
+        settingCurrent: function settingCurrent() {
+            return this.$store.getters['setting/current'](this.$route.params.id);
         },
         currentMessage: function currentMessage() {
             return this.isCurrent && this.$store.getters['message/message'];
@@ -439,6 +494,9 @@ var defaultForm = {
             return currentMessage.filter(function (item) {
                 return item.keyword.toLowerCase().indexOf(query.toLowerCase()) > -1;
             });
+        },
+        currentDefault: function currentDefault() {
+            return this.settingCurrent.default_message;
         }
     }
 });
@@ -524,7 +582,11 @@ var render = function() {
             _vm._l(_vm.filterable, function(item) {
               return _c(
                 "el-col",
-                { key: item.id, attrs: { span: 8 } },
+                {
+                  key: item.id,
+                  staticStyle: { "margin-bottom": "15px" },
+                  attrs: { span: 8 }
+                },
                 [
                   _c("el-card", { staticClass: "message-card mac-card" }, [
                     _c(
@@ -578,7 +640,15 @@ var render = function() {
                               "el-button",
                               {
                                 staticClass: "setting-card-btn",
-                                attrs: { type: "text" }
+                                attrs: {
+                                  disabled: _vm.currentDefault === item.id,
+                                  type: "text"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.handleSetDefault(item.id)
+                                  }
+                                }
                               },
                               [
                                 _vm._v(

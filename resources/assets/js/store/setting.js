@@ -1,5 +1,5 @@
-import {authRequest}                                from "../api/auth";
-import {params}                                     from "../utils/assist";
+import {authRequest}  from "../api/auth";
+import {params}       from "../utils/assist";
 import {mergeSetting} from "../utils/setting";
 
 const setting = {
@@ -83,12 +83,11 @@ const setting = {
             let url = 'setting/' + id;
             let res = await authRequest(url);
 
-            if (res.status !== 200) {
-                return false;
+            if (res.status === 200) {
+                commit('current' , mergeSetting(res.data));
             }
-
-            commit('current' , mergeSetting(res.data));
-            return true;
+            
+            return res;
         } ,
         async update ({state , commit , getters} , data) {
             let id = data.id;
@@ -116,6 +115,14 @@ const setting = {
             }
 
             return res;
+        } ,
+        async setDefault ({state , dispatch , commit} , id) {
+            let data = {
+                id: state.current.id ,
+                default_message: id ,
+            };
+
+            return await dispatch('update', data);
         }
     }
 };

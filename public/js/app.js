@@ -66656,19 +66656,14 @@ var setting = {
                             case 7:
                                 res = _context2.sent;
 
-                                if (!(res.status !== 200)) {
-                                    _context2.next = 10;
-                                    break;
+
+                                if (res.status === 200) {
+                                    commit('current', Object(__WEBPACK_IMPORTED_MODULE_3__utils_setting__["a" /* mergeSetting */])(res.data));
                                 }
 
-                                return _context2.abrupt("return", false);
+                                return _context2.abrupt("return", res);
 
                             case 10:
-
-                                commit('current', Object(__WEBPACK_IMPORTED_MODULE_3__utils_setting__["a" /* mergeSetting */])(res.data));
-                                return _context2.abrupt("return", true);
-
-                            case 12:
                             case "end":
                                 return _context2.stop();
                         }
@@ -66740,6 +66735,40 @@ var setting = {
             }
 
             return update;
+        }(),
+        setDefault: function () {
+            var _ref15 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref14, id) {
+                var state = _ref14.state,
+                    dispatch = _ref14.dispatch,
+                    commit = _ref14.commit;
+                var data;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                data = {
+                                    id: state.current.id,
+                                    default_message: id
+                                };
+                                _context4.next = 3;
+                                return dispatch('update', data);
+
+                            case 3:
+                                return _context4.abrupt("return", _context4.sent);
+
+                            case 4:
+                            case "end":
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this);
+            }));
+
+            function setDefault(_x7, _x8) {
+                return _ref15.apply(this, arguments);
+            }
+
+            return setDefault;
         }()
     }
 };

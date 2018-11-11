@@ -20,7 +20,7 @@
             </div>
         </div>
         <el-row v-if="filterable" :gutter="30">
-            <el-col :span="8" v-for="item in filterable" :key="item.id">
+            <el-col :span="8" v-for="item in filterable" :key="item.id" style="margin-bottom: 15px;">
                 <el-card class="message-card mac-card">
                     <div class="message-card_content">
                         <div class="message-pop_wrap message-pop_right">
@@ -39,7 +39,11 @@
                             </div>
                         </div>
                         <div class="message-card-footer mac-card-footer">
-                            <el-button class="setting-card-btn" type="text">
+                            <el-button
+                                    :disabled="currentDefault === item.id"
+                                    @click="handleSetDefault(item.id)"
+                                    class="setting-card-btn"
+                                    type="text">
                                 设定默认
                             </el-button>
                             <el-button
@@ -169,19 +173,28 @@
             }
         } ,
         async mounted () {
-            const {$store , $route} = this;
+            const {$store , $route , settingCurrent} = this;
             let id = $route.params.id;
-            let current = $store.getters['setting/current'](id);
+            let current = settingCurrent;
+            this.loading = true;
 
             if (!current) {
-                this.loading = true;
                 let res = await $store.dispatch('setting/settingShow' , id);
-                if (res) {
-                    let res = await $store.dispatch('message/current' , id);
-                    console.log(res);
+                console.log( 'Current' , res);
+                if (res.status !== 200) {
+                    id = null;
                 }
-                this.loading = false;
             }
+
+            if (id !== null) {
+                let res = await $store.dispatch('message/current' , id);
+                console.log( 'Id' , res);
+            }
+            else {
+                throw new Error('Error . id error');
+            }
+            this.loading = false;
+
         } ,
         methods: {
             clearQuery () {
@@ -268,12 +281,23 @@
                     type: 'success'
                 });
             } ,
+            async handleSetDefault (id) {
+                let res = await this.$store.dispatch('setting/setDefault',id);
+
+                console.log(res);
+                if(res.status === 200) {
+                    this.$notify({
+                        title: 'Congratulations' ,
+                        message: 'He became king.' ,
+                        type: 'success'
+                    });
+                }
+            },
             closeDialog() {
                 this.submitting = false;
                 this.dialogVisible = false;
             },
             closedDialog () {
-                console.log('closed');
                 this.$refs['form'].resetFields();
             },
             closeDialogBefore(done) {
@@ -286,6 +310,10 @@
             isCurrent () {
                 return this.$store.getters['message/current'](this.$route.params.id);
             } ,
+            settingCurrent()
+            {
+                return this.$store.getters['setting/current'](this.$route.params.id);
+            },
             currentMessage () {
                 return this.isCurrent && this.$store.getters['message/message'];
             } ,
@@ -307,6 +335,9 @@
                     return item.keyword.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
             } ,
+            currentDefault() {
+                return this.settingCurrent.default_message;
+            }
         }
     }
 </script>

@@ -1,5 +1,5 @@
 <template>
-    <div style="padding: 0 20px;">
+    <div >
         <div v-if="list === null">
             Loading....
         </div>
