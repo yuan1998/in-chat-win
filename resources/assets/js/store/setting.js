@@ -27,6 +27,7 @@ const setting = {
             return pagination;
         } ,
         current: ({current}) => (id) => {
+            console.log(current ,id);
             return (current && current.id == id) || (id === undefined)
                 ? current
                 : false;
@@ -73,11 +74,14 @@ const setting = {
 
             return res;
         } ,
-        async settingShow ({commit , getters} , id) {
+        async settingShow ({ commit , getters} , id) {
             let item = getters['idOf'](id);
             if (item) {
                 commit('current' , mergeSetting(item));
-                return true;
+                return {
+                    status: 200,
+                    data: getters['current']()
+                };
             }
 
             let url = 'setting/' + id;
@@ -86,7 +90,6 @@ const setting = {
             if (res.status === 200) {
                 commit('current' , mergeSetting(res.data));
             }
-            
             return res;
         } ,
         async update ({state , commit , getters} , data) {

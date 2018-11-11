@@ -159,7 +159,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
-//
 
 
 
@@ -618,13 +617,10 @@ var render = function() {
                             },
                             [
                               _c("div", { staticClass: "message-pop" }, [
-                                _c("p", { staticClass: "message-pop_text" }, [
-                                  _vm._v(
-                                    "\n                                " +
-                                      _vm._s(each.value) +
-                                      "\n                            "
-                                  )
-                                ])
+                                _c("p", {
+                                  staticClass: "message-pop_text",
+                                  domProps: { innerHTML: _vm._s(each.value) }
+                                })
                               ])
                             ]
                           )

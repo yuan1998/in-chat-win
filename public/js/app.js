@@ -66543,6 +66543,7 @@ var setting = {
         current: function current(_ref4) {
             var _current = _ref4.current;
             return function (id) {
+                console.log(_current, id);
                 return _current && _current.id == id || id === undefined ? _current : false;
             };
         },
@@ -66646,7 +66647,10 @@ var setting = {
                                 }
 
                                 commit('current', Object(__WEBPACK_IMPORTED_MODULE_3__utils_setting__["a" /* mergeSetting */])(item));
-                                return _context2.abrupt("return", true);
+                                return _context2.abrupt("return", {
+                                    status: 200,
+                                    data: getters['current']()
+                                });
 
                             case 4:
                                 url = 'setting/' + id;
@@ -66660,7 +66664,6 @@ var setting = {
                                 if (res.status === 200) {
                                     commit('current', Object(__WEBPACK_IMPORTED_MODULE_3__utils_setting__["a" /* mergeSetting */])(res.data));
                                 }
-
                                 return _context2.abrupt("return", res);
 
                             case 10:
