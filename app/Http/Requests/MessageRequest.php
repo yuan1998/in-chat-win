@@ -34,7 +34,7 @@ class MessageRequest extends FormRequest
                 break;
             case "PATCH":
                 $rules = [
-                    'keyword'    => 'string|unique:messages,keyword',
+                    'keyword'    => 'string|keyword-not-exists',
                 ];
                 break;
         }

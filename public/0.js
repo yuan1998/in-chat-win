@@ -135,6 +135,27 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -156,7 +177,6 @@ var defaultForm = {
             inputHover: false,
             dialogVisible: false,
             form: Object(__WEBPACK_IMPORTED_MODULE_1__utils_assist__["a" /* cloneOf */])(defaultForm),
-            isUpdate: null,
             submitting: false
         };
     },
@@ -234,31 +254,45 @@ var defaultForm = {
             var el = this.$refs[ref];
             el.scrollTop = el.scrollHeight;
         },
-        resetForm: function resetForm() {
-            this.form = Object(__WEBPACK_IMPORTED_MODULE_1__utils_assist__["a" /* cloneOf */])(defaultForm);
-            this.form.message = Object(__WEBPACK_IMPORTED_MODULE_1__utils_assist__["a" /* cloneOf */])(defaultMessage);
-        },
         handleUpdate: function handleUpdate(item) {
-            this.isUpdate = item.id;
             this.form = Object(__WEBPACK_IMPORTED_MODULE_1__utils_assist__["a" /* cloneOf */])(item);
             this.dialogVisible = true;
         },
-        handleSubmit: function handleSubmit() {
-            var isUpdate = this.isUpdate,
+        validatorKeyword: function validatorKeyword(rule, value, callback) {
+            if (value === '') {
+                callback(new Error('输入内容!'));
+            } else if (this.$store.getters['message/nameExists'](value, this.form.id)) {
+                callback(new Error('关键字已存在'));
+            } else {
+                callback();
+            }
+        },
+        handleSubmit: function handleSubmit(ref) {
+            var _this2 = this;
+
+            var $refs = this.$refs,
+                form = this.form,
                 handleSubmitCreate = this.handleSubmitCreate,
                 handleSubmitUpdate = this.handleSubmitUpdate;
 
 
-            isUpdate === null ? handleSubmitCreate() : handleSubmitUpdate();
+            $refs[ref].validate(function (valid) {
+                if (valid) {
+                    form.id === undefined ? handleSubmitCreate() : handleSubmitUpdate();
+                } else {
+                    _this2.$message.error('不行哦，Message is Empty.');
+                    return false;
+                }
+            });
         },
         handleSubmitCreate: function () {
             var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var $store, form, res;
+                var $store, form, closeDialog, res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                $store = this.$store, form = this.form;
+                                $store = this.$store, form = this.form, closeDialog = this.closeDialog;
 
                                 this.submitting = true;
 
@@ -275,9 +309,7 @@ var defaultForm = {
                                         message: form.keyword + ' 诞生了!',
                                         type: 'success'
                                     });
-                                    this.dialogVisible = false;
-                                    this.submitting = false;
-                                    this.resetForm();
+                                    closeDialog();
                                 }
 
                             case 6:
@@ -296,20 +328,21 @@ var defaultForm = {
         }(),
         handleSubmitUpdate: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
-                var $store, form, isUpdate, res;
+                var $store, form, closeDialog, res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                $store = this.$store, form = this.form, isUpdate = this.isUpdate;
+                                $store = this.$store, form = this.form, closeDialog = this.closeDialog;
 
                                 this.submitting = true;
 
                                 _context3.next = 4;
-                                return $store.dispatch('message/update', { id: isUpdate, form: form });
+                                return $store.dispatch('message/update', { id: form.id, data: form });
 
                             case 4:
                                 res = _context3.sent;
+
 
                                 if (res.status === 200) {
                                     this.$notify({
@@ -317,10 +350,7 @@ var defaultForm = {
                                         message: '你改变了' + form.keyword,
                                         type: 'success'
                                     });
-                                    this.dialogVisible = false;
-                                    this.submitting = false;
-                                    this.isUpdate = null;
-                                    this.resetForm();
+                                    closeDialog();
                                 }
 
                             case 6:
@@ -371,7 +401,20 @@ var defaultForm = {
             }
 
             return handleDelete;
-        }()
+        }(),
+        closeDialog: function closeDialog() {
+            this.submitting = false;
+            this.dialogVisible = false;
+        },
+        closedDialog: function closedDialog() {
+            console.log('closed');
+            this.$refs['form'].resetFields();
+        },
+        closeDialogBefore: function closeDialogBefore(done) {
+            if (!this.submitting) {
+                done();
+            }
+        }
     },
     computed: {
         isCurrent: function isCurrent() {
@@ -615,7 +658,11 @@ var render = function() {
                                           }
                                         }
                                       },
-                                      [_vm._v("确定")]
+                                      [
+                                        _vm._v(
+                                          "确定\n                                "
+                                        )
+                                      ]
                                     )
                                   ],
                                   1
@@ -659,13 +706,16 @@ var render = function() {
           on: {
             "update:visible": function($event) {
               _vm.dialogVisible = $event
-            }
+            },
+            closed: _vm.closedDialog,
+            "before-close": _vm.closeDialogBefore
           }
         },
         [
           _c(
             "el-form",
             {
+              ref: "form",
               attrs: {
                 model: _vm.form,
                 "label-position": "top",
@@ -675,7 +725,18 @@ var render = function() {
             [
               _c(
                 "el-form-item",
-                { attrs: { label: "活动名称" } },
+                {
+                  attrs: {
+                    label: "活动名称",
+                    prop: "keyword",
+                    rules: [
+                      {
+                        validator: _vm.validatorKeyword,
+                        trigger: ["blur", "change"]
+                      }
+                    ]
+                  }
+                },
                 [
                   _c("el-input", {
                     attrs: { autocomplete: "off" },
@@ -713,7 +774,18 @@ var render = function() {
                 _vm._l(_vm.form.message, function(item, index) {
                   return _c(
                     "el-form-item",
-                    { key: index, staticClass: "message-value-form-item" },
+                    {
+                      key: index,
+                      staticClass: "message-value-form-item",
+                      attrs: {
+                        rules: {
+                          required: true,
+                          message: "不行哦",
+                          trigger: "blur"
+                        },
+                        prop: "message." + index + ".value"
+                      }
+                    },
                     [
                       _c(
                         "div",
@@ -726,6 +798,17 @@ var render = function() {
                           _c(
                             "el-button",
                             {
+                              directives: [
+                                {
+                                  name: "show",
+                                  rawName: "v-show",
+                                  value:
+                                    _vm.form.message &&
+                                    _vm.form.message.length > 1,
+                                  expression:
+                                    "form.message && form.message.length > 1"
+                                }
+                              ],
                               attrs: {
                                 icon: "el-icon-circle-close",
                                 type: "text"
@@ -794,7 +877,11 @@ var render = function() {
                 "el-button",
                 {
                   attrs: { loading: _vm.submitting, type: "primary" },
-                  on: { click: _vm.handleSubmit }
+                  on: {
+                    click: function($event) {
+                      _vm.handleSubmit("form")
+                    }
+                  }
                 },
                 [_vm._v("\n                确 定\n            ")]
               )

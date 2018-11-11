@@ -55,7 +55,9 @@
                                 <p>这是一段内容这是一段内容确定删除吗？</p>
                                 <div style="text-align: right; margin: 0">
                                     <el-button size="mini" @click="item.model_show = false" type="text">取消</el-button>
-                                    <el-button type="primary" size="mini" :loading="item.delete_btn_loading" @click="handleDelete(item)">确定</el-button>
+                                    <el-button type="primary" size="mini" :loading="item.delete_btn_loading"
+                                               @click="handleDelete(item)">确定
+                                    </el-button>
                                 </div>
                                 <el-button class="setting-card-btn" type="text" slot="reference">
                                     削除
@@ -70,10 +72,23 @@
                 ref="dialog"
                 title="提示"
                 :visible.sync="dialogVisible"
+                @closed="closedDialog"
+                @before-close="closeDialogBefore"
                 width="50%">
-            <el-form :model="form" label-position="top" label-width="120px">
-                <el-form-item label="活动名称" >
-                    <el-input v-model="form.keyword" autocomplete="off"></el-input>
+            <el-form :model="form" ref="form" label-position="top" label-width="120px">
+                <el-form-item
+                        label="活动名称"
+                        prop="keyword"
+                        :rules="[
+                            {
+                                validator:validatorKeyword,
+                                trigger: ['blur','change'],
+                            },
+                        ]">
+                    <el-input
+                            v-model="form.keyword"
+                            autocomplete="off">
+                    </el-input>
                 </el-form-item>
                 <h1>
                     回复短句
@@ -88,12 +103,18 @@
                     <el-form-item
                             class="message-value-form-item"
                             v-for="(item , index) in form.message"
+                            :rules="{
+                                required: true, message: '不行哦', trigger: 'blur'
+                            }"
+                            :prop="'message.' + index + '.value'"
                             :key="index">
                         <div slot="label"
                              class="message-value-label">
-                            <el-button @click="removeMessageItem(index)"
-                                       icon="el-icon-circle-close"
-                                       type="text">
+                            <el-button
+                                    v-show="form.message && form.message.length > 1"
+                                    @click="removeMessageItem(index)"
+                                    icon="el-icon-circle-close"
+                                    type="text">
                                 削除
                             </el-button>
                         </div>
@@ -114,7 +135,7 @@
                 <el-button
                         :loading="submitting"
                         type="primary"
-                        @click="handleSubmit">
+                        @click="handleSubmit('form')">
                     确 定
                 </el-button>
             </span>
@@ -128,9 +149,9 @@
         value: ''
     };
     const defaultForm = {
-        keyword: '',
+        keyword: '' ,
         message: [
-            cloneOf(defaultMessage),
+            cloneOf(defaultMessage) ,
         ]
     };
 
@@ -142,10 +163,9 @@
                 query: '' ,
                 placeholder: '关键字' ,
                 inputHover: false ,
-                dialogVisible: false,
-                form: cloneOf(defaultForm),
-                isUpdate: null,
-                submitting: false,
+                dialogVisible: false ,
+                form: cloneOf(defaultForm) ,
+                submitting: false ,
             }
         } ,
         async mounted () {
@@ -167,77 +187,99 @@
             clearQuery () {
                 if (this.inputIcon === 'circle-close')
                     this.query = '';
-            },
+            } ,
             addMessageItem () {
                 this.form.message.push(cloneOf(defaultMessage));
-                this.$nextTick( () => {
+                this.$nextTick(() => {
                     this.containScrollBottom('contain');
                 })
-            },
-            removeMessageItem(index) {
-                this.form.message.splice(index, 1);
-            },
-            containScrollBottom(ref) {
+            } ,
+            removeMessageItem (index) {
+                this.form.message.splice(index , 1);
+            } ,
+            containScrollBottom (ref) {
                 let el = this.$refs[ref];
                 el.scrollTop = el.scrollHeight;
-            },
-            resetForm() {
-                this.form = cloneOf(defaultForm);
-                this.form.message = cloneOf(defaultMessage);
-            },
-            handleUpdate(item){
-                this.isUpdate = item.id;
+            } ,
+            handleUpdate (item) {
                 this.form = cloneOf(item);
                 this.dialogVisible = true;
-            },
-            handleSubmit() {
-                const { isUpdate , handleSubmitCreate , handleSubmitUpdate } = this;
+            } ,
+            validatorKeyword (rule , value , callback) {
+                if (value === '') {
+                    callback(new Error('输入内容!'));
+                }
+                else if (this.$store.getters['message/nameExists'](value , this.form.id)) {
+                    callback(new Error('关键字已存在'));
+                }
+                else {
+                    callback();
+                }
+            } ,
+            handleSubmit (ref) {
+                const {$refs , form , handleSubmitCreate , handleSubmitUpdate} = this;
 
-                isUpdate === null ? handleSubmitCreate() : handleSubmitUpdate();
-            },
-            async handleSubmitCreate(){
-                const { $store , form } = this;
+                $refs[ref].validate((valid) => {
+                    if (valid) {
+                        form.id === undefined ? handleSubmitCreate() : handleSubmitUpdate();
+                    } else {
+                        this.$message.error('不行哦，Message is Empty.');
+                        return false;
+                    }
+                });
+            } ,
+            async handleSubmitCreate () {
+                const { $store , form , closeDialog } = this;
                 this.submitting = true;
 
-                let res = await $store.dispatch('message/store',form);
+                let res = await $store.dispatch('message/store' , form);
 
                 if (res.status === 200) {
                     this.$notify({
-                        title: '恭喜',
-                        message: form.keyword + ' 诞生了!',
+                        title: '恭喜' ,
+                        message: form.keyword + ' 诞生了!' ,
                         type: 'success'
                     });
-                    this.dialogVisible = false;
-                    this.submitting = false;
-                    this.resetForm();
+                    closeDialog();
                 }
-            },
-            async handleSubmitUpdate(){
-                const { $store , form , isUpdate} = this;
+            } ,
+            async handleSubmitUpdate () {
+                const {$store , form , closeDialog} = this;
                 this.submitting = true;
 
-                let res = await $store.dispatch('message/update',{ id: isUpdate, form });
+                let res = await $store.dispatch('message/update' , {id: form.id , data: form});
+
                 if (res.status === 200) {
                     this.$notify({
-                        title: '恭喜',
-                        message: '你改变了' + form.keyword,
+                        title: '恭喜' ,
+                        message: '你改变了' + form.keyword ,
                         type: 'success'
                     });
-                    this.dialogVisible = false;
-                    this.submitting = false;
-                    this.isUpdate = null;
-                    this.resetForm();
+                    closeDialog();
                 }
-            },
-            async handleDelete(item){
+            } ,
+            async handleDelete (item) {
                 item.delete_btn_loading = true;
-                let res = await this.$store.dispatch('message/destroy',item.id);
+                let res = await this.$store.dispatch('message/destroy' , item.id);
 
                 this.$notify({
-                    title: '恭喜',
-                    message: '你杀死了' + item.keyword,
+                    title: '恭喜' ,
+                    message: '你杀死了' + item.keyword ,
                     type: 'success'
                 });
+            } ,
+            closeDialog() {
+                this.submitting = false;
+                this.dialogVisible = false;
+            },
+            closedDialog () {
+                console.log('closed');
+                this.$refs['form'].resetFields();
+            },
+            closeDialogBefore(done) {
+                if (!this.submitting) {
+                    done();
+                }
             }
         } ,
         computed: {

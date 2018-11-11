@@ -444,6 +444,10 @@ body {
   width: 120px;
 }
 
+.message-value-container .message-value-form-item .el-form-item__label::before {
+  display: none !important;
+}
+
 .message-value-container .message-value-form-item .message-value-label {
   padding-left: 15px;
 }

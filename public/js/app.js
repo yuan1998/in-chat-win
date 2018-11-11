@@ -66853,6 +66853,19 @@ var message = {
             var message = _ref2.message;
 
             return message;
+        },
+
+        nameExists: function nameExists(_ref3) {
+            var message = _ref3.message;
+            return function (name, id) {
+                if (!message) {
+                    return false;
+                } else {
+                    return message.findIndex(function (item) {
+                        return item.id !== id && item.keyword.toLowerCase() === name.toLowerCase();
+                    }) !== -1;
+                }
+            };
         }
     },
     mutations: {
@@ -66871,12 +66884,9 @@ var message = {
             });
             index !== -1 && state.message.splice(index, 1);
         },
-        changeMessage: function changeMessage(state, _ref3) {
-            var id = _ref3.id,
-                data = _ref3.data;
-
+        changeMessage: function changeMessage(state, data) {
             var index = state.message && state.message.findIndex(function (item) {
-                return item.id === id;
+                return item.id === data.id;
             });
             index !== -1 && state.message.splice(index, 1, data);
         }
@@ -66936,16 +66946,14 @@ var message = {
                             case 0:
                                 id = state.current;
 
-                                console.log(id);
-
                                 if (id) {
-                                    _context2.next = 4;
+                                    _context2.next = 3;
                                     break;
                                 }
 
                                 return _context2.abrupt('return', false);
 
-                            case 4:
+                            case 3:
 
                                 data.setting_id = id;
                                 options = {
@@ -66953,20 +66961,19 @@ var message = {
                                     url: 'message',
                                     method: "POST"
                                 };
-                                _context2.next = 8;
+                                _context2.next = 7;
                                 return Object(__WEBPACK_IMPORTED_MODULE_1__api_auth__["a" /* authRequest */])(options);
 
-                            case 8:
+                            case 7:
                                 res = _context2.sent;
 
-                                console.log(res.data);
                                 if (res.status === 200) {
                                     commit('addMessage', res.data);
                                 }
 
                                 return _context2.abrupt('return', res);
 
-                            case 12:
+                            case 10:
                             case 'end':
                                 return _context2.stop();
                         }

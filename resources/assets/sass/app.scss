@@ -241,6 +241,10 @@ body {
         .el-form-item__label{
             float: right !important;
             width: 120px;
+
+            &::before {
+                display: none !important;
+            }
         }
         .message-value-label {
             padding-left: 15px;

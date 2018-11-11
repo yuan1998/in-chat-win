@@ -13,7 +13,14 @@ const message = {
         message({message}) {
             return message;
         },
-
+        nameExists:({message}) => (name , id) => {
+            if (!message) {
+                return false;
+            }
+            else {
+                return message.findIndex(item => item.id !== id && item.keyword.toLowerCase() === name.toLowerCase()) !== -1;
+            }
+        }
     },
     mutations: {
         current(state , id) {
@@ -29,8 +36,8 @@ const message = {
             let index = state.message && state.message.findIndex( item => item.id === id);
             index !== -1 && state.message.splice(index , 1);
         },
-        changeMessage(state , {id , data}) {
-            let index = state.message && state.message.findIndex( item => item.id === id);
+        changeMessage(state , data) {
+            let index = state.message && state.message.findIndex( item => item.id === data.id);
             index !== -1 && state.message.splice(index , 1 , data);
         }
     },
@@ -54,7 +61,6 @@ const message = {
         },
         async store({ state , commit}, data) {
             let id = state.current ;
-            console.log(id);
             if(!id) {
                 return false;
             }
@@ -67,7 +73,6 @@ const message = {
             };
 
             let res = await authRequest(options);
-            console.log(res.data);
             if (res.status === 200) {
                 commit('addMessage',res.data);
             }
