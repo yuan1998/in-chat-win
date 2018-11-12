@@ -33,7 +33,7 @@
                         <div class="message-pop_wrap message-pop_left"
                              v-for="(each , index) in item.message " :key="index">
                             <div class="message-pop">
-                                <p class="message-pop_text" v-html="each.value">
+                                <p class="message-pop_text" v-html="strParse(each.value)">
                                 </p>
                             </div>
                         </div>
@@ -146,7 +146,8 @@
     </div>
 </template>
 <script>
-    import {cloneOf} from "../utils/assist";
+    import {cloneOf}  from "../utils/assist";
+    import {Yuandown} from "../utils/yuandown";
 
     const defaultMessage = {
         value: ''
@@ -303,6 +304,9 @@
                 if (!this.submitting) {
                     done();
                 }
+            },
+            strParse(str) {
+                return Yuandown(str);
             }
         } ,
         computed: {

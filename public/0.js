@@ -8,6 +8,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_assist__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_yuandown__ = __webpack_require__(241);
 
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
@@ -162,6 +163,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 
+
 var defaultMessage = {
     value: ''
 };
@@ -236,7 +238,7 @@ var defaultForm = {
                             this.loading = false;
 
                         case 19:
-                        case 'end':
+                        case "end":
                             return _context.stop();
                     }
                 }
@@ -328,7 +330,7 @@ var defaultForm = {
                                 }
 
                             case 6:
-                            case 'end':
+                            case "end":
                                 return _context2.stop();
                         }
                     }
@@ -369,7 +371,7 @@ var defaultForm = {
                                 }
 
                             case 6:
-                            case 'end':
+                            case "end":
                                 return _context3.stop();
                         }
                     }
@@ -404,7 +406,7 @@ var defaultForm = {
                                 });
 
                             case 5:
-                            case 'end':
+                            case "end":
                                 return _context4.stop();
                         }
                     }
@@ -441,7 +443,7 @@ var defaultForm = {
                                 }
 
                             case 5:
-                            case 'end':
+                            case "end":
                                 return _context5.stop();
                         }
                     }
@@ -465,6 +467,9 @@ var defaultForm = {
             if (!this.submitting) {
                 done();
             }
+        },
+        strParse: function strParse(str) {
+            return Object(__WEBPACK_IMPORTED_MODULE_2__utils_yuandown__["a" /* Yuandown */])(str);
         }
     },
     computed: {
@@ -619,7 +624,9 @@ var render = function() {
                               _c("div", { staticClass: "message-pop" }, [
                                 _c("p", {
                                   staticClass: "message-pop_text",
-                                  domProps: { innerHTML: _vm._s(each.value) }
+                                  domProps: {
+                                    innerHTML: _vm._s(_vm.strParse(each.value))
+                                  }
                                 })
                               ])
                             ]
@@ -970,6 +977,65 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-343ccb8a", module.exports)
   }
 }
+
+/***/ }),
+
+/***/ 241:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Yuandown; });
+/* unused harmony export rules */
+
+var escape = function escape(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    str = div.innerHTML;
+    div = undefined;
+    return str;
+};
+
+/**
+ *
+ * @type {{breakWord: {regex: RegExp, handle(*): *}, linkLine: {regex: RegExp, handle(*=): *}, colorFont: {regex: RegExp, handle(*=): *}}}
+ */
+var rules = {
+    linkLine: {
+        regex: /(?:\#\!)\s*(.*?)\s*#*\s*(?:\!\#)/m,
+        handle: function handle(str) {
+            var stra = void 0;
+            while ((stra = this.regex.exec(str)) !== null) {
+                str = str.replace(stra[0], '<a class="yuan-send-select-message" style="display: inline-block;color: #3184ff;padding-top: 5px;" >' + escape(stra[1].trim()) + '</a>').trim();
+            }
+            return str;
+        }
+    },
+    addAttribute: {
+        regex: /(!\[(.*?)\:(.*?)\])\((.*?)\)/m,
+        handle: function handle(str) {
+            var stra = void 0;
+            while ((stra = this.regex.exec(str)) !== null) {
+                str = str.replace(stra[0], '<span ' + stra[2] + '="' + stra[3] + '" >' + escape(stra[4].trim()) + '</span>').trim();
+            }
+            return str;
+        }
+    },
+    breakWord: {
+        regex: /\r\n?|\n/g,
+        handle: function handle(str) {
+            return str.replace(this.regex, '<br />');
+        }
+    }
+};
+
+var Yuandown = function Yuandown(str) {
+    for (var key in rules) {
+        str = rules[key].handle(str);
+    }
+    return str;
+};
+
+
 
 /***/ }),
 
