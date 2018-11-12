@@ -4,6 +4,7 @@ import auth from './auth'
 import router from './router'
 import setting from './setting'
 import message from './message'
+import domain from './domain'
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ const store = new Vuex.Store({
         auth,
         router,
         setting,
-        message
+        message,
+        domain,
     }
 });
 

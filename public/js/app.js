@@ -65169,6 +65169,8 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(203);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__setting__ = __webpack_require__(204);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__message__ = __webpack_require__(206);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__domain__ = __webpack_require__(245);
+
 
 
 
@@ -65183,7 +65185,8 @@ var store = new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
         auth: __WEBPACK_IMPORTED_MODULE_2__auth__["a" /* default */],
         router: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */],
         setting: __WEBPACK_IMPORTED_MODULE_4__setting__["a" /* default */],
-        message: __WEBPACK_IMPORTED_MODULE_5__message__["a" /* default */]
+        message: __WEBPACK_IMPORTED_MODULE_5__message__["a" /* default */],
+        domain: __WEBPACK_IMPORTED_MODULE_6__domain__["a" /* default */]
     }
 });
 
@@ -67134,14 +67137,16 @@ var authRequest = function () {
                     case 3:
                         token = _context3.sent;
 
-                        console.log(__WEBPACK_IMPORTED_MODULE_5__app_js__["default"]);
-
                         if (token) {
                             _context3.next = 9;
                             break;
                         }
 
                         __WEBPACK_IMPORTED_MODULE_5__app_js__["default"].$store.commit('auth/clearUser');
+                        _this.$notify.error({
+                            title: '错误',
+                            message: '登录超时.请重新登录.'
+                        });
                         __WEBPACK_IMPORTED_MODULE_5__app_js__["default"].$router.push('/login');
                         return _context3.abrupt("return", false);
 
@@ -67502,6 +67507,496 @@ var show = function () {
     index: index,
     show: show,
     destroy: destroy
+});
+
+/***/ }),
+/* 245 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_domain__ = __webpack_require__(246);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+var domain = {
+    namespaced: true,
+    state: {
+        domains: null,
+        current: null
+    },
+    getters: {
+        domains: function domains(_ref) {
+            var domains = _ref.domains;
+
+            return domains;
+        },
+
+        current: function current(_ref2) {
+            var _current = _ref2.current;
+            return function (id) {
+                return _current && _current.id === id || !id ? _current : false;
+            };
+        },
+        idOf: function idOf(_ref3) {
+            var domains = _ref3.domains;
+            return function (id) {
+                return domains && domains.findIndex(function (item) {
+                    return item.id == id;
+                });
+            };
+        },
+        idOfItem: function idOfItem(_ref4) {
+            var domains = _ref4.domains;
+            return function (id) {
+                return domains && domains.find(function (item) {
+                    return item.id == id;
+                });
+            };
+        },
+        domainInSetting: function domainInSetting(_ref5) {
+            var domains = _ref5.domains;
+            return function (id) {
+                return domains && domains.filter(function (item) {
+                    return item.setting_id === id;
+                });
+            };
+        }
+    },
+    mutations: {
+        current: function current(_ref6, data) {
+            var state = _ref6.state;
+
+            state.current = data;
+        },
+        domains: function domains(_ref7, data) {
+            var state = _ref7.state;
+
+            state.domains = data;
+        },
+        create: function create(_ref8, data) {
+            var state = _ref8.state;
+
+            state.domains.push(data);
+        },
+        update: function update(_ref9, _ref10) {
+            var state = _ref9.state;
+            var data = _ref10.data,
+                index = _ref10.index;
+
+            state.splice(index, 1, data);
+        },
+        destroy: function destroy(_ref11, index) {
+            var state = _ref11.state;
+
+            state.splice(index, 1);
+        }
+    },
+    actions: {
+        create: function () {
+            var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref12, data) {
+                var commit = _ref12.commit,
+                    rootGetters = _ref12.rootGetters;
+                var setting, res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                    while (1) {
+                        switch (_context.prev = _context.next) {
+                            case 0:
+                                setting = rootGetters['setting/current']();
+
+                                if (setting) {
+                                    _context.next = 3;
+                                    break;
+                                }
+
+                                return _context.abrupt('return', false);
+
+                            case 3:
+
+                                data.setting_id = setting.id;
+                                _context.next = 6;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_domain__["a" /* default */].create(data);
+
+                            case 6:
+                                res = _context.sent;
+
+
+                                if (res.status === 200) {
+                                    commit('create', res.data);
+                                }
+                                return _context.abrupt('return', res);
+
+                            case 9:
+                            case 'end':
+                                return _context.stop();
+                        }
+                    }
+                }, _callee, this);
+            }));
+
+            function create(_x, _x2) {
+                return _ref13.apply(this, arguments);
+            }
+
+            return create;
+        }(),
+        update: function () {
+            var _ref15 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref14, data) {
+                var commit = _ref14.commit,
+                    getters = _ref14.getters;
+                var id, res, index;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                id = data.id;
+                                _context2.next = 3;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_domain__["a" /* default */].update(id, data);
+
+                            case 3:
+                                res = _context2.sent;
+
+
+                                if (res.status === 200) {
+                                    index = getters['idOf'](id);
+
+                                    index !== -1 && commit('update', { index: index, data: res.data });
+                                }
+                                return _context2.abrupt('return', res);
+
+                            case 6:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function update(_x3, _x4) {
+                return _ref15.apply(this, arguments);
+            }
+
+            return update;
+        }(),
+        destroy: function () {
+            var _ref17 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref16, id) {
+                var commit = _ref16.commit,
+                    getters = _ref16.getters;
+                var res, index;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_domain__["a" /* default */].destroy(id);
+
+                            case 2:
+                                res = _context3.sent;
+
+
+                                if (res.status === 200) {
+                                    index = getters['idOf'](id);
+
+                                    index !== -1 && commit('destroy', index);
+                                }
+                                return _context3.abrupt('return', res);
+
+                            case 5:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function destroy(_x5, _x6) {
+                return _ref17.apply(this, arguments);
+            }
+
+            return destroy;
+        }(),
+        index: function () {
+            var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref18) {
+                var commit = _ref18.commit;
+                var res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                _context4.next = 2;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_domain__["a" /* default */].index();
+
+                            case 2:
+                                res = _context4.sent;
+
+
+                                if (res.status === 200) {
+                                    commit('domains', res.data.data);
+                                }
+                                return _context4.abrupt('return', res);
+
+                            case 5:
+                            case 'end':
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this);
+            }));
+
+            function index(_x7) {
+                return _ref19.apply(this, arguments);
+            }
+
+            return index;
+        }(),
+        show: function () {
+            var _ref21 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref20, id) {
+                var commit = _ref20.commit,
+                    getters = _ref20.getters;
+                var item, res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
+                                item = getters['idOfItem'](id);
+
+                                if (!item) {
+                                    _context5.next = 3;
+                                    break;
+                                }
+
+                                return _context5.abrupt('return', item);
+
+                            case 3:
+                                _context5.next = 5;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_domain__["a" /* default */].show(id);
+
+                            case 5:
+                                res = _context5.sent;
+
+                                if (!(res.status === 200)) {
+                                    _context5.next = 9;
+                                    break;
+                                }
+
+                                commit('create', res.data);
+                                return _context5.abrupt('return', res.data);
+
+                            case 9:
+                                return _context5.abrupt('return', res);
+
+                            case 10:
+                            case 'end':
+                                return _context5.stop();
+                        }
+                    }
+                }, _callee5, this);
+            }));
+
+            function show(_x8, _x9) {
+                return _ref21.apply(this, arguments);
+            }
+
+            return show;
+        }()
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (domain);
+
+/***/ }),
+/* 246 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__request__ = __webpack_require__(242);
+
+
+var _this = this;
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+var update = function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id, data) {
+        var options;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        options = {
+                            url: 'domain/' + id,
+                            data: data,
+                            method: 'PATCH'
+                        };
+                        _context.next = 3;
+                        return Object(__WEBPACK_IMPORTED_MODULE_1__request__["a" /* authRequest */])(options);
+
+                    case 3:
+                        return _context.abrupt('return', _context.sent);
+
+                    case 4:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, _this);
+    }));
+
+    return function update(_x, _x2) {
+        return _ref.apply(this, arguments);
+    };
+}();
+
+var create = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(data) {
+        var options;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        options = {
+                            url: 'domain',
+                            data: data,
+                            method: 'POST'
+                        };
+                        _context2.next = 3;
+                        return Object(__WEBPACK_IMPORTED_MODULE_1__request__["a" /* authRequest */])(options);
+
+                    case 3:
+                        return _context2.abrupt('return', _context2.sent);
+
+                    case 4:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, _this);
+    }));
+
+    return function create(_x3) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+var destroy = function () {
+    var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+        var options;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        options = {
+                            url: 'domain/' + id,
+                            method: 'DELETE'
+                        };
+                        _context3.next = 3;
+                        return Object(__WEBPACK_IMPORTED_MODULE_1__request__["a" /* authRequest */])(options);
+
+                    case 3:
+                        return _context3.abrupt('return', _context3.sent);
+
+                    case 4:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, _this);
+    }));
+
+    return function destroy(_x4) {
+        return _ref3.apply(this, arguments);
+    };
+}();
+
+var index = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4() {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        _context4.next = 2;
+                        return Object(__WEBPACK_IMPORTED_MODULE_1__request__["a" /* authRequest */])('domain');
+
+                    case 2:
+                        return _context4.abrupt('return', _context4.sent);
+
+                    case 3:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, _this);
+    }));
+
+    return function index() {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
+var show = function () {
+    var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(id) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        _context5.next = 2;
+                        return Object(__WEBPACK_IMPORTED_MODULE_1__request__["a" /* authRequest */])('domain/' + id);
+
+                    case 2:
+                        return _context5.abrupt('return', _context5.sent);
+
+                    case 3:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, _this);
+    }));
+
+    return function show(_x5) {
+        return _ref5.apply(this, arguments);
+    };
+}();
+
+var inSetting = function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(id) {
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        _context6.next = 2;
+                        return Object(__WEBPACK_IMPORTED_MODULE_1__request__["a" /* authRequest */])('setting/' + id + '/domain');
+
+                    case 2:
+                        return _context6.abrupt('return', _context6.sent);
+
+                    case 3:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, _this);
+    }));
+
+    return function inSetting(_x6) {
+        return _ref6.apply(this, arguments);
+    };
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    create: create,
+    update: update,
+    index: index,
+    show: show,
+    destroy: destroy,
+    inSetting: inSetting
 });
 
 /***/ })

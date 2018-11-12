@@ -37,6 +37,11 @@ const router = {
                         name: 'Domain in xx',
                         component: (resolve) => require(['../components/message-list'], resolve),
                     },
+                    {
+                        path: 'domain',
+                        name: '所有域名',
+                        component: (resolve) => required(['../components/domain'],resolve),
+                    }
 
                 ]
             },

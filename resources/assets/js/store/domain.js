@@ -40,7 +40,6 @@ const domain = {
         destroy({state} , index) {
             state.splice(index , 1)
         }
-
     },
     actions : {
         async create ({ commit , rootGetters } , data) {
@@ -56,7 +55,6 @@ const domain = {
             if (res.status === 200) {
                 commit('create',res.data);
             }
-
             return res;
         },
         async update ( { commit , getters } , data ) {
@@ -68,7 +66,6 @@ const domain = {
                 let index = getters['idOf'](id);
                 index !== -1 && commit('update' , {index , data: res.data});
             }
-
             return res;
         },
         async destroy ({commit , getters } , id) {
@@ -78,7 +75,6 @@ const domain = {
                 let index = getters['idOf'](id);
                 index !== -1 && commit('destroy' , index);
             }
-
             return res;
         },
         async index({commit}) {
@@ -102,8 +98,7 @@ const domain = {
                 commit('create' , res.data);
                 return res.data;
             }
-
-            return null;
+            return res;
         },
     }
 };
