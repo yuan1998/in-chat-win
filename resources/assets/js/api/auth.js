@@ -1,29 +1,7 @@
 import axios                           from 'axios'
 import {saveToken}                     from "../utils/assist";
-import {clearAuthStorage , getStorage} from "../utils/storage";
-
-const { MIX_API_URL , MIX_TOKEN_NAME } = process.env;
-
-const request = async (options) => {
-    if (typeof options === 'stirng') {
-        options = {
-            url: options
-        }
-    }
-    options.url = MIX_API_URL + options.url;
-
-    let response;
-    try {
-        response = await axios(options);
-    }catch (e) {
-        if (e.response) {
-            response = e.response;
-        } else {
-            throw new Error(e);
-        }
-    }
-    return response;
-};
+import {clearAuthStorage } from "../utils/storage";
+import {request , authRequest} from './request'
 
 const login = async (params = {}) => {
 
@@ -57,45 +35,6 @@ const refreshToken = async (accessToken) => {
     return refreshResponse;
 };
 
-const getToken = async () => {
-
-    let token = getStorage(MIX_TOKEN_NAME);
-    let expiredAt = getStorage(MIX_TOKEN_NAME + '_expired_at');
-    if (token && new Date().getTime() > expiredAt) {
-        let tokenResponse = await refreshToken(token);
-
-        if (tokenResponse.status === 200) {
-            token = tokenResponse.data.access_token;
-            saveToken(tokenResponse.data);
-        } else {
-            token = null;
-            clearAuthStorage();
-        }
-    }
-
-    return token;
-};
-
-const authRequest = async (options) => {
-    if (typeof options === 'string') {
-        options = {
-            url: options
-        }
-    }
-
-    let token = await getToken();
-
-    if (!token) {
-        return false;
-    }
-
-    let headers = options.headers || {};
-    headers.Authorization = 'Bearer ' + token;
-    options.headers = headers;
-
-    return await request(options);
-};
-
 const logout = async () => {
 
     let response = await authRequest({
@@ -110,11 +49,13 @@ const logout = async () => {
     return response;
 };
 
+const current = async () => {
+    return await authRequest('auth/current');
+}
+
 export {
     login ,
-    request ,
-    authRequest ,
     refreshToken ,
     logout,
-    getToken,
+    current
 }

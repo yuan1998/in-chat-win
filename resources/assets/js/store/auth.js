@@ -1,4 +1,5 @@
-import {login , logout , authRequest , getToken } from "../api/auth";
+import {login , logout , current} from "../api/auth";
+import {getToken}        from "../api/request";
 
 const auth = {
     namespaced: true ,
@@ -6,11 +7,11 @@ const auth = {
         user: null
     } ,
     getters: {
-        userIsLogin: state => {
-            return !!state.user;
+        userIsLogin({user}) {
+            return !!user;
         } ,
-        gerUserInfo: state => {
-            return state.user;
+        gerUserInfo({user}) {
+            return user;
         }
     } ,
     mutations: {
@@ -42,7 +43,7 @@ const auth = {
             return (res.status === 204);
         } ,
         async show ({commit}) {
-            let res = await authRequest('auth/current');
+            let res = await current();
 
             if (res.status !== 200) {
                 return false;

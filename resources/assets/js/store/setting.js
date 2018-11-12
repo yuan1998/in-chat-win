@@ -1,6 +1,6 @@
-import {authRequest}  from "../api/auth";
 import {params}       from "../utils/assist";
 import {mergeSetting} from "../utils/setting";
+import Setting        from '../api/setting';
 
 const setting = {
     namespaced: true ,
@@ -27,14 +27,12 @@ const setting = {
             return pagination;
         } ,
         current: ({current}) => (id) => {
-            console.log(current ,id);
             return (current && current.id == id) || (id === undefined)
                 ? current
                 : false;
         } ,
         idOf: ({list}) => (id) => {
             let item = list && list.find(each => each.id == id);
-
             return item;
         } ,
         listIndex: ({list}) => (id) => {
@@ -56,36 +54,28 @@ const setting = {
         }
     } ,
     actions: {
-        async getList ({commit , getters} , p = {}) {
-            p = {
-                ...getters['getParameter'] ,
-                ...p
-            };
-            let url = 'setting?' + params(p);
+        async getList ({commit}) {
 
-            let res = await authRequest(url);
+            let res = await Setting.index();
+            console.log(res);
 
-            if (res.status !== 200) {
-                return false;
+            if (res.status === 200) {
+                commit('list' , res.data.data);
             }
-
-            commit('list' , res.data.data);
-            commit('pagination' , res.data.meta.pagination);
 
             return res;
         } ,
-        async settingShow ({ commit , getters} , id) {
+        async settingShow ({commit , getters} , id) {
             let item = getters['idOf'](id);
             if (item) {
                 commit('current' , mergeSetting(item));
                 return {
-                    status: 200,
+                    status: 200 ,
                     data: getters['current']()
                 };
             }
 
-            let url = 'setting/' + id;
-            let res = await authRequest(url);
+            let res = await Setting.show(id);
 
             if (res.status === 200) {
                 commit('current' , mergeSetting(res.data));
@@ -94,25 +84,11 @@ const setting = {
         } ,
         async update ({state , commit , getters} , data) {
             let id = data.id;
-            let url = 'setting/' + id;
 
-            let res = await authRequest({
-                url ,
-                data ,
-                method: "PATCH" ,
-            });
+            let res = await Setting.update(id , data);
 
-            if (res.status !== 200) {
-                return false;
-            }
-
-            id = res.data.id;
-
-            if (state.current && state.current.id === id) {
+            if (res.status === 200) {
                 commit('current' , res.data);
-            }
-
-            if (state.list) {
                 let index = getters['listIndex'](id);
                 index !== -1 && commit('listReplace' , {index , data: res.data});
             }
@@ -125,7 +101,7 @@ const setting = {
                 default_message: id ,
             };
 
-            return await dispatch('update', data);
+            return await dispatch('update' , data);
         }
     }
 };

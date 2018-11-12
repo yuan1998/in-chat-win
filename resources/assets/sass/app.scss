@@ -170,6 +170,10 @@ body {
             display: block;
             height: 100%;
             overflow: scroll;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding-bottom: 18px;
         }
 
         .message-pop_wrap {
@@ -177,6 +181,10 @@ body {
             align-items: stretch;
             justify-items: flex-start;
             margin-bottom: 20px;
+
+            &:last-child {
+                padding-bottom: 50px;
+            }
 
             .message-pop {
                 flex-basis: 85%;
@@ -206,9 +214,11 @@ body {
     .mac-card-footer {
         position: absolute;
         bottom: 0;
-        right: 14px;
+        right: 0;
+        padding-right: 14px;
         left: 0;
         text-align: right;
+        background-color: #fff;
     }
 }
 

@@ -96,6 +96,8 @@ $api->version('v1', [
             ->name('api.domain.index');
         $api->get('/domain/{domian}', 'DomianController@show')
             ->name('api.domain.show');
+        $api->get('/setting/{Settings}/domain' , 'DomianController@settingIndex')
+            ->name('api.domain.settingIndex');
 
     });
 

@@ -51,9 +51,9 @@ class SettingController extends Controller
         $user = $this->user();
 
         $items = Settings::where('user_id' , $user->id)
-            ->paginate(request()->get('paginate' , 20));
+            ->get();
 
-        return $this->response->paginator( $items , new SettingTransformer());
+        return $this->response->collection( $items , new SettingTransformer());
     }
 
     public function show(Settings $settings)

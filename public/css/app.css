@@ -361,6 +361,9 @@ body {
   display: block;
   height: 100%;
   overflow: scroll;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-bottom: 18px;
 }
 
 .el-card.message-card .el-card__body .message-pop_wrap {
@@ -372,6 +375,10 @@ body {
           align-items: stretch;
   justify-items: flex-start;
   margin-bottom: 20px;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap:last-child {
+  padding-bottom: 50px;
 }
 
 .el-card.message-card .el-card__body .message-pop_wrap .message-pop {
@@ -404,9 +411,11 @@ body {
 .el-card.message-card .mac-card-footer {
   position: absolute;
   bottom: 0;
-  right: 14px;
+  right: 0;
+  padding-right: 14px;
   left: 0;
   text-align: right;
+  background-color: #fff;
 }
 
 .message-list_container .message-header {

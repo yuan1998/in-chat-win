@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Domian;
 use App\Http\Requests\DomianRequest;
+use App\Settings;
 use App\Transformers\DomianTransformer;
 use Illuminate\Http\Request;
 
@@ -77,4 +78,13 @@ class DomianController extends Controller
         return $this->response->item($domian , new DomianTransformer());
     }
 
+    public function settingIndex (Settings $settings , Domian $domian) {
+        $user = $this->user();
+
+        if ( !($domian->user_id == $user->id && $domian->setting_id == $settings->id) ) {
+            return $this->response->errorUnauthorized();
+        }
+
+        return $this->response->item($domian , new DomianTransformer());
+    }
 }

@@ -43,7 +43,7 @@
                 let res = await this.$store.dispatch('setting/getList');
 
                 if (res.status !== 200) {
-                    res.$message('Error!');
+                    this.$message('Error!');
                 }
             }
         },

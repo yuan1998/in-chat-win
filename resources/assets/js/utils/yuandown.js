@@ -9,7 +9,7 @@ const escape = (str) => {
 
 /**
  *
- * @type {{breakWord: {regex: RegExp, handle(*): *}, linkLine: {regex: RegExp, handle(*=): *}, colorFont: {regex: RegExp, handle(*=): *}}}
+ * @type {{linkLine: {regex: RegExp, handle(*=): *}, addAttribute: {regex: RegExp, handle(*=): *}, breakWord: {regex: RegExp, handle(*): *}}}
  */
 const rules = {
     linkLine: {
