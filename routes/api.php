@@ -64,6 +64,8 @@ $api->version('v1', [
             ->name('api.setting.index');
         $api->patch('/setting/{settings}', 'SettingController@update')
             ->name('api.setting.update');
+        $api->delete('/setting/{ids}' , 'SettingController@destroy' )
+            ->name('api.setting.destroy');
         $api->get('/setting/{settings}', 'SettingController@show')
             ->name('api.setting.show');
 

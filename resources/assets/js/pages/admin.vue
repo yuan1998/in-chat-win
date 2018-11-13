@@ -75,6 +75,9 @@
                 }
             }
         } ,
+        mounted() {
+            this.getList();
+        },
         methods: {
             handleSelect (index , indexPath) {
                 let {current , tabs} = this;
@@ -95,7 +98,7 @@
                 let res = await this.$store.dispatch('setting/getList');
 
                 if (res.status !== 200) {
-                    res.$message('Error!');
+                    this.$message('Error!');
                 }
             }
         } ,

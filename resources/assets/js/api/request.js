@@ -57,12 +57,12 @@ const authRequest = async (options) => {
     let token = await getToken();
 
     if (!token) {
-        app.$store.commit('auth/clearUser');
-        this.$notify.error({
+        app.$notify.error({
             title: '错误',
             message: '登录超时.请重新登录.'
         });
         app.$router.push('/login');
+        app.$store.commit('auth/clearUser');
         return false;
     }
 

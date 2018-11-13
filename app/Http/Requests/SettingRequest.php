@@ -29,10 +29,9 @@ class SettingRequest extends FormRequest
         {
             case "POST":
                 $rules = [
-                    'type' => 'required',
                     'name' => 'required|string',
                     'setting' => 'required',
-                    'list-type' => 'required|in:white,black'
+                    'list-model' => 'required|in:white,black'
                 ];
                 break;
         }

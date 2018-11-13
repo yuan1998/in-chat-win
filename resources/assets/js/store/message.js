@@ -1,5 +1,19 @@
 import Message from '../api/message'
 
+const defaultMessage = (item) => {
+    return {
+        ...item ,
+        modelShow: false ,
+        deleting: false ,
+    };
+};
+
+const messageList = (arr) => {
+    return arr.map(item => {
+        return defaultMessage(item);
+    })
+};
+
 const message = {
     namespaced: true ,
     state: {
@@ -20,6 +34,9 @@ const message = {
             else {
                 return message.findIndex(item => item.id !== id && item.keyword.toLowerCase() === name.toLowerCase()) !== -1;
             }
+        } ,
+        indexOf: ({message}) => (id) => {
+            return message && message.findIndex(item => item.id == id);
         }
     } ,
     mutations: {
@@ -27,18 +44,16 @@ const message = {
             state.current = id;
         } ,
         message (state , data) {
-            state.message = data;
+            state.message = messageList(data);
         } ,
         addMessage (state , item) {
-            state.message.push(item);
+            state.message.push(defaultMessage(item));
         } ,
-        removeMessage (state , id) {
-            let index = state.message && state.message.findIndex(item => item.id === id);
+        removeMessage (state , index) {
             index !== -1 && state.message.splice(index , 1);
         } ,
-        changeMessage (state , data) {
-            let index = state.message && state.message.findIndex(item => item.id === data.id);
-            index !== -1 && state.message.splice(index , 1 , data);
+        changeMessage (state , {data , index}) {
+            index !== -1 && state.message.splice(index , 1 , defaultMessage(data));
         }
     } ,
     actions: {
@@ -48,12 +63,6 @@ const message = {
             if (res.status === 200) {
                 commit('current' , id);
                 commit('message' , res.data.data);
-            } else {
-                this._vm.$notify({
-                    title: '错误' ,
-                    message: '发生错误,联系管理员:' ,
-                    type: 'error'
-                });
             }
 
             return res;
@@ -73,12 +82,13 @@ const message = {
 
             return res;
         } ,
-        async update ({state , commit} , {id , data}) {
-
-            let res = await Message.update(id,data);
+        async update ({state , commit , getters} , data) {
+            let id = data.id;
+            let res = await Message.update(id , data);
 
             if (res.status === 200) {
-                commit('changeMessage' , res.data);
+                let index = getters['indexOf'](id);
+                commit('changeMessage' , {data: res.data , index});
             }
 
             return res;
@@ -87,13 +97,8 @@ const message = {
             let res = await Message.destroy(id);
 
             if (res.status === 204) {
-                commit('removeMessage' , id);
-            } else {
-                this._vm.$notify({
-                    title: '错误' ,
-                    message: '发送错误,联系管理员' ,
-                    type: 'error'
-                });
+                let index = getters['indexOf'](id);
+                commit('removeMessage' , index);
             }
 
             return res;

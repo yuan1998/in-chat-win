@@ -62,9 +62,9 @@ class DomianController extends Controller
         $user = $this->user();
 
         $items = Domian::where('user_id' , $user->id)
-            ->paginate($request->get('paginate' , 20));
+            ->get();
 
-        return $this->response->paginator($items , new DomianTransformer());
+        return $this->response->collection($items , new DomianTransformer());
     }
 
     public function show(Domian $domian)

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Domian;
 use App\Http\Requests\SettingRequest;
+use Illuminate\Http\Request;
 use App\Settings;
 use App\Transformers\SettingTransformer;
 
@@ -73,6 +75,17 @@ class SettingController extends Controller
             ->select(['id','name','user_id','description' ,'created_at' ,'updated_at'])->get();
 
         return $this->response->collection($items , new SettingTransformer('list'));
+    }
+
+
+    public function pageGetSetting(Request $request) {
+        $i = $request->get('id');
+        $u = $request->get('url');
+        $kw = $request->get('kw');
+
+        $r = Domian::with('setting')->where('user_id' , $i)->where('domain' , $u)->first();
+
+        return $this->response->array($r->toArray());
     }
 
 }

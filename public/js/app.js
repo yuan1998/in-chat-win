@@ -16270,7 +16270,7 @@ module.exports = function normalizeComponent (
 /* unused harmony export install */
 /* unused harmony export mapState */
 /* unused harmony export mapMutations */
-/* unused harmony export mapGetters */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapGetters; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapActions; });
 /* unused harmony export createNamespacedHelpers */
 /**
@@ -66312,37 +66312,31 @@ var router = {
             path: '/admin',
             name: 'admin',
             component: function component(resolve) {
-                return __webpack_require__.e/* require */(3).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(210)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                return __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(210)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
             },
             children: [{
                 path: 'setting',
                 name: '所有配置',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(211)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
-                }
-            }, {
-                path: 'setting/:id',
-                name: '配置',
-                component: function component(resolve) {
-                    return __webpack_require__.e/* require */(2).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(212)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(211)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }, {
                 path: 'message/:id',
                 name: '短句',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(0/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(50)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(9/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(50)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }, {
                 path: 'domain',
                 name: 'Domains',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(0/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(50)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(12).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(247)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }, {
                 path: 'domain/:id',
                 name: 'Domain in xx',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(0/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(50)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(9/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(50)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }]
         }, { path: '/', redirect: '/admin', hidden: true }, { path: '*', redirect: '/404', hidden: true }],
@@ -66372,24 +66366,32 @@ var router = {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_assist__ = __webpack_require__(49);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_setting__ = __webpack_require__(205);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__api_setting__ = __webpack_require__(243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_setting__ = __webpack_require__(243);
 
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 
 
+var defaultSetting = function defaultSetting(item) {
+    return _extends({}, item, {
+        modelShow: false,
+        deleting: false
+    });
+};
 
+var settingList = function settingList(arr) {
+    return arr.map(function (item) {
+        return defaultSetting(item);
+    });
+};
 
 var setting = {
     namespaced: true,
     state: {
         list: null,
-        pagination: null,
-        page: 1,
-        paginate: 20,
         include: [],
         current: null
     },
@@ -66410,20 +66412,15 @@ var setting = {
 
             return list;
         },
-        pagination: function pagination(_ref3) {
-            var pagination = _ref3.pagination;
 
-            return pagination;
-        },
-
-        current: function current(_ref4) {
-            var _current = _ref4.current;
+        current: function current(_ref3) {
+            var _current = _ref3.current;
             return function (id) {
                 return _current && _current.id == id || id === undefined ? _current : false;
             };
         },
-        idOf: function idOf(_ref5) {
-            var list = _ref5.list;
+        idOf: function idOf(_ref4) {
+            var list = _ref4.list;
             return function (id) {
                 var item = list && list.find(function (each) {
                     return each.id == id;
@@ -66431,8 +66428,8 @@ var setting = {
                 return item;
             };
         },
-        listIndex: function listIndex(_ref6) {
-            var list = _ref6.list;
+        listIndex: function listIndex(_ref5) {
+            var list = _ref5.list;
             return function (id) {
                 return list.findIndex(function (item) {
                     return item.id === id;
@@ -66442,46 +66439,48 @@ var setting = {
     },
     mutations: {
         current: function current(state, data) {
-            state.current = data;
+            state.current = defaultSetting(data);
         },
         list: function list(state, data) {
-            state.list = data;
+            state.list = settingList(data);
         },
-        pagination: function pagination(state, data) {
-            state.pagination = data;
-        },
-        listReplace: function listReplace(state, _ref7) {
-            var data = _ref7.data,
-                index = _ref7.index;
+        listReplace: function listReplace(state, _ref6) {
+            var data = _ref6.data,
+                index = _ref6.index;
 
-            state.list.splice(index, 1, data);
+            state.list.splice(index, 1, defaultSetting(data));
+        },
+        addItem: function addItem(state, data) {
+            state.list.push(defaultSetting(data));
+        },
+        removeItem: function removeItem(state, index) {
+            state.list.splice(index, 1);
         }
     },
     actions: {
         getList: function () {
-            var _ref9 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref8) {
-                var commit = _ref8.commit;
+            var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref7) {
+                var commit = _ref7.commit;
                 var res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 _context.next = 2;
-                                return __WEBPACK_IMPORTED_MODULE_3__api_setting__["a" /* default */].index();
+                                return __WEBPACK_IMPORTED_MODULE_1__api_setting__["a" /* default */].index();
 
                             case 2:
                                 res = _context.sent;
 
-                                console.log(res);
 
                                 if (res.status === 200) {
                                     commit('list', res.data.data);
                                 }
 
-                                return _context.abrupt("return", res);
+                                return _context.abrupt('return', res);
 
-                            case 6:
-                            case "end":
+                            case 5:
+                            case 'end':
                                 return _context.stop();
                         }
                     }
@@ -66489,15 +66488,15 @@ var setting = {
             }));
 
             function getList(_x) {
-                return _ref9.apply(this, arguments);
+                return _ref8.apply(this, arguments);
             }
 
             return getList;
         }(),
         settingShow: function () {
-            var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref10, id) {
-                var commit = _ref10.commit,
-                    getters = _ref10.getters;
+            var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref9, id) {
+                var commit = _ref9.commit,
+                    getters = _ref9.getters;
                 var item, res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -66510,27 +66509,27 @@ var setting = {
                                     break;
                                 }
 
-                                commit('current', Object(__WEBPACK_IMPORTED_MODULE_2__utils_setting__["a" /* mergeSetting */])(item));
-                                return _context2.abrupt("return", {
+                                commit('current', item);
+                                return _context2.abrupt('return', {
                                     status: 200,
                                     data: getters['current']()
                                 });
 
                             case 4:
                                 _context2.next = 6;
-                                return __WEBPACK_IMPORTED_MODULE_3__api_setting__["a" /* default */].show(id);
+                                return __WEBPACK_IMPORTED_MODULE_1__api_setting__["a" /* default */].show(id);
 
                             case 6:
                                 res = _context2.sent;
 
 
                                 if (res.status === 200) {
-                                    commit('current', Object(__WEBPACK_IMPORTED_MODULE_2__utils_setting__["a" /* mergeSetting */])(res.data));
+                                    commit('current', res.data);
                                 }
-                                return _context2.abrupt("return", res);
+                                return _context2.abrupt('return', res);
 
                             case 9:
-                            case "end":
+                            case 'end':
                                 return _context2.stop();
                         }
                     }
@@ -66538,27 +66537,101 @@ var setting = {
             }));
 
             function settingShow(_x2, _x3) {
-                return _ref11.apply(this, arguments);
+                return _ref10.apply(this, arguments);
             }
 
             return settingShow;
         }(),
-        update: function () {
-            var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref12, data) {
-                var state = _ref12.state,
-                    commit = _ref12.commit,
-                    getters = _ref12.getters;
-                var id, res, index;
+        create: function () {
+            var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref11, data) {
+                var state = _ref11.state,
+                    commit = _ref11.commit;
+                var res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
+                                _context3.next = 2;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_setting__["a" /* default */].create(data);
+
+                            case 2:
+                                res = _context3.sent;
+
+
+                                if (res.status === 200) {
+                                    commit('addItem', res.data);
+                                }
+
+                                return _context3.abrupt('return', res);
+
+                            case 5:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
+
+            function create(_x4, _x5) {
+                return _ref12.apply(this, arguments);
+            }
+
+            return create;
+        }(),
+        destroy: function () {
+            var _ref14 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref13, id) {
+                var commit = _ref13.commit,
+                    getters = _ref13.getters;
+                var res, index;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                _context4.next = 2;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_setting__["a" /* default */].destroy(id);
+
+                            case 2:
+                                res = _context4.sent;
+
+
+                                if (res.status === 204) {
+                                    index = getters['listIndex'](id);
+
+                                    commit('removeItem', index);
+                                }
+
+                                return _context4.abrupt('return', res);
+
+                            case 5:
+                            case 'end':
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this);
+            }));
+
+            function destroy(_x6, _x7) {
+                return _ref14.apply(this, arguments);
+            }
+
+            return destroy;
+        }(),
+        update: function () {
+            var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref15, data) {
+                var state = _ref15.state,
+                    commit = _ref15.commit,
+                    getters = _ref15.getters;
+                var id, res, index;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                    while (1) {
+                        switch (_context5.prev = _context5.next) {
+                            case 0:
                                 id = data.id;
-                                _context3.next = 3;
-                                return __WEBPACK_IMPORTED_MODULE_3__api_setting__["a" /* default */].update(id, data);
+                                _context5.next = 3;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_setting__["a" /* default */].update(id, data);
 
                             case 3:
-                                res = _context3.sent;
+                                res = _context5.sent;
 
 
                                 if (res.status === 200) {
@@ -66568,52 +66641,52 @@ var setting = {
                                     index !== -1 && commit('listReplace', { index: index, data: res.data });
                                 }
 
-                                return _context3.abrupt("return", res);
+                                return _context5.abrupt('return', res);
 
                             case 6:
-                            case "end":
-                                return _context3.stop();
+                            case 'end':
+                                return _context5.stop();
                         }
                     }
-                }, _callee3, this);
+                }, _callee5, this);
             }));
 
-            function update(_x4, _x5) {
-                return _ref13.apply(this, arguments);
+            function update(_x8, _x9) {
+                return _ref16.apply(this, arguments);
             }
 
             return update;
         }(),
         setDefault: function () {
-            var _ref15 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref14, id) {
-                var state = _ref14.state,
-                    dispatch = _ref14.dispatch,
-                    commit = _ref14.commit;
+            var _ref18 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(_ref17, id) {
+                var state = _ref17.state,
+                    dispatch = _ref17.dispatch,
+                    commit = _ref17.commit;
                 var data;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
                     while (1) {
-                        switch (_context4.prev = _context4.next) {
+                        switch (_context6.prev = _context6.next) {
                             case 0:
                                 data = {
                                     id: state.current.id,
                                     default_message: id
                                 };
-                                _context4.next = 3;
+                                _context6.next = 3;
                                 return dispatch('update', data);
 
                             case 3:
-                                return _context4.abrupt("return", _context4.sent);
+                                return _context6.abrupt('return', _context6.sent);
 
                             case 4:
-                            case "end":
-                                return _context4.stop();
+                            case 'end':
+                                return _context6.stop();
                         }
                     }
-                }, _callee4, this);
+                }, _callee6, this);
             }));
 
-            function setDefault(_x6, _x7) {
-                return _ref15.apply(this, arguments);
+            function setDefault(_x10, _x11) {
+                return _ref18.apply(this, arguments);
             }
 
             return setDefault;
@@ -66624,82 +66697,7 @@ var setting = {
 /* harmony default export */ __webpack_exports__["a"] = (setting);
 
 /***/ }),
-/* 205 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* unused harmony export defaultList */
-/* unused harmony export defaultData */
-/* unused harmony export defaultSetting */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return mergeSetting; });
-var defaultData = {
-    name: 'Yuan',
-    description: 'description..',
-    'list-open': false,
-    'list-model': 'white'
-};
-var defaultSetting = {
-    tag: '6666',
-    waitTime: '3',
-    again: true,
-
-    //
-    name: 'test',
-    messageType: 0,
-    tel: '029-110',
-
-    // main
-    mainColor: '#009EB0',
-    mainColorText: '#fff',
-    bgColor: '#f1f1f1',
-
-    // left
-    lmColor: '#DAF4FE',
-    lmColorText: '#000',
-    lmText: 'Test Something ....',
-    lmName: 'TestName',
-    lmAvatar: '',
-
-    // right
-    rmColor: '#FFFEFF',
-    rmColorText: '#000',
-    rmText: 'Test',
-
-    //footer
-    footerText: 'Test',
-    footerColor: '#F4F3F5',
-    footerColorText: '#DEDDDF',
-
-    // input
-    inputColor: '#F2F2FB',
-    inputWrapColor: '#FFFEFF',
-    inputColorText: '#AAAAAC',
-    inputText: '请输入...',
-
-    //button
-    buttonColor: '#00C400',
-    buttonColorText: '#fff',
-    buttonText: '发送'
-};
-var defaultList = ['yuan'];
-
-var mergeSetting = function mergeSetting() {
-    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    data = Object.assign(defaultData, data);
-    var setting = data['setting'] || {};
-
-    setting = Object.assign(defaultSetting, setting);
-    data.setting = setting;
-
-    if (!data['list-data']) data['list-data'] = defaultList;
-
-    return data;
-};
-
-
-
-/***/ }),
+/* 205 */,
 /* 206 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -66709,9 +66707,24 @@ var mergeSetting = function mergeSetting() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_message__ = __webpack_require__(244);
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 
+
+var defaultMessage = function defaultMessage(item) {
+    return _extends({}, item, {
+        modelShow: false,
+        deleting: false
+    });
+};
+
+var messageList = function messageList(arr) {
+    return arr.map(function (item) {
+        return defaultMessage(item);
+    });
+};
 
 var message = {
     namespaced: true,
@@ -66743,6 +66756,14 @@ var message = {
                     }) !== -1;
                 }
             };
+        },
+        indexOf: function indexOf(_ref4) {
+            var message = _ref4.message;
+            return function (id) {
+                return message && message.findIndex(function (item) {
+                    return item.id == id;
+                });
+            };
         }
     },
     mutations: {
@@ -66750,28 +66771,25 @@ var message = {
             state.current = id;
         },
         message: function message(state, data) {
-            state.message = data;
+            state.message = messageList(data);
         },
         addMessage: function addMessage(state, item) {
-            state.message.push(item);
+            state.message.push(defaultMessage(item));
         },
-        removeMessage: function removeMessage(state, id) {
-            var index = state.message && state.message.findIndex(function (item) {
-                return item.id === id;
-            });
+        removeMessage: function removeMessage(state, index) {
             index !== -1 && state.message.splice(index, 1);
         },
-        changeMessage: function changeMessage(state, data) {
-            var index = state.message && state.message.findIndex(function (item) {
-                return item.id === data.id;
-            });
-            index !== -1 && state.message.splice(index, 1, data);
+        changeMessage: function changeMessage(state, _ref5) {
+            var data = _ref5.data,
+                index = _ref5.index;
+
+            index !== -1 && state.message.splice(index, 1, defaultMessage(data));
         }
     },
     actions: {
         current: function () {
-            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref4, id) {
-                var commit = _ref4.commit;
+            var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref6, id) {
+                var commit = _ref6.commit;
                 var res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
@@ -66787,12 +66805,6 @@ var message = {
                                 if (res.status === 200) {
                                     commit('current', id);
                                     commit('message', res.data.data);
-                                } else {
-                                    this._vm.$notify({
-                                        title: '错误',
-                                        message: '发生错误,联系管理员:',
-                                        type: 'error'
-                                    });
                                 }
 
                                 return _context.abrupt('return', res);
@@ -66806,15 +66818,15 @@ var message = {
             }));
 
             function current(_x, _x2) {
-                return _ref5.apply(this, arguments);
+                return _ref7.apply(this, arguments);
             }
 
             return current;
         }(),
         store: function () {
-            var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref6, data) {
-                var state = _ref6.state,
-                    commit = _ref6.commit;
+            var _ref9 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref8, data) {
+                var state = _ref8.state,
+                    commit = _ref8.commit;
                 var id, res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -66854,36 +66866,38 @@ var message = {
             }));
 
             function store(_x3, _x4) {
-                return _ref7.apply(this, arguments);
+                return _ref9.apply(this, arguments);
             }
 
             return store;
         }(),
         update: function () {
-            var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref8, _ref9) {
-                var state = _ref8.state,
-                    commit = _ref8.commit;
-                var id = _ref9.id,
-                    data = _ref9.data;
-                var res;
+            var _ref11 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref10, data) {
+                var state = _ref10.state,
+                    commit = _ref10.commit,
+                    getters = _ref10.getters;
+                var id, res, index;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                _context3.next = 2;
+                                id = data.id;
+                                _context3.next = 3;
                                 return __WEBPACK_IMPORTED_MODULE_1__api_message__["a" /* default */].update(id, data);
 
-                            case 2:
+                            case 3:
                                 res = _context3.sent;
 
 
                                 if (res.status === 200) {
-                                    commit('changeMessage', res.data);
+                                    index = getters['indexOf'](id);
+
+                                    commit('changeMessage', { data: res.data, index: index });
                                 }
 
                                 return _context3.abrupt('return', res);
 
-                            case 5:
+                            case 6:
                             case 'end':
                                 return _context3.stop();
                         }
@@ -66892,15 +66906,15 @@ var message = {
             }));
 
             function update(_x5, _x6) {
-                return _ref10.apply(this, arguments);
+                return _ref11.apply(this, arguments);
             }
 
             return update;
         }(),
         destroy: function () {
-            var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref11, id) {
-                var commit = _ref11.commit;
-                var res;
+            var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref12, id) {
+                var commit = _ref12.commit;
+                var res, index;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
@@ -66913,13 +66927,9 @@ var message = {
 
 
                                 if (res.status === 204) {
-                                    commit('removeMessage', id);
-                                } else {
-                                    this._vm.$notify({
-                                        title: '错误',
-                                        message: '发送错误,联系管理员',
-                                        type: 'error'
-                                    });
+                                    index = getters['indexOf'](id);
+
+                                    commit('removeMessage', index);
                                 }
 
                                 return _context4.abrupt('return', res);
@@ -66933,7 +66943,7 @@ var message = {
             }));
 
             function destroy(_x7, _x8) {
-                return _ref12.apply(this, arguments);
+                return _ref13.apply(this, arguments);
             }
 
             return destroy;
@@ -67142,12 +67152,12 @@ var authRequest = function () {
                             break;
                         }
 
-                        __WEBPACK_IMPORTED_MODULE_5__app_js__["default"].$store.commit('auth/clearUser');
-                        _this.$notify.error({
+                        __WEBPACK_IMPORTED_MODULE_5__app_js__["default"].$notify.error({
                             title: '错误',
                             message: '登录超时.请重新登录.'
                         });
                         __WEBPACK_IMPORTED_MODULE_5__app_js__["default"].$router.push('/login');
+                        __WEBPACK_IMPORTED_MODULE_5__app_js__["default"].$store.commit('auth/clearUser');
                         return _context3.abrupt("return", false);
 
                     case 9:
@@ -67519,8 +67529,27 @@ var show = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_domain__ = __webpack_require__(246);
 
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+
+
+var defaultDomain = function defaultDomain(item) {
+    return _extends({}, item, {
+        opening: false,
+        modelShow: false,
+        deleting: false,
+        tagText: '',
+        showTagInput: false
+    });
+};
+
+var DomainList = function DomainList(arr) {
+    return arr.map(function (item) {
+        return defaultDomain(item);
+    });
+};
 
 var domain = {
     namespaced: true,
@@ -67567,60 +67596,39 @@ var domain = {
         }
     },
     mutations: {
-        current: function current(_ref6, data) {
-            var state = _ref6.state;
-
+        current: function current(state, data) {
             state.current = data;
         },
-        domains: function domains(_ref7, data) {
-            var state = _ref7.state;
-
-            state.domains = data;
+        domains: function domains(state, data) {
+            state.domains = DomainList(data);
         },
-        create: function create(_ref8, data) {
-            var state = _ref8.state;
-
-            state.domains.push(data);
+        create: function create(state, data) {
+            state.domains.push(defaultDomain(data));
         },
-        update: function update(_ref9, _ref10) {
-            var state = _ref9.state;
-            var data = _ref10.data,
-                index = _ref10.index;
+        update: function update(state, _ref6) {
+            var data = _ref6.data,
+                index = _ref6.index;
 
-            state.splice(index, 1, data);
+            state.domains.splice(index, 1, defaultDomain(data));
         },
-        destroy: function destroy(_ref11, index) {
-            var state = _ref11.state;
-
+        destroy: function destroy(state, index) {
             state.splice(index, 1);
         }
     },
     actions: {
         create: function () {
-            var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref12, data) {
-                var commit = _ref12.commit,
-                    rootGetters = _ref12.rootGetters;
-                var setting, res;
+            var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref7, data) {
+                var commit = _ref7.commit,
+                    rootGetters = _ref7.rootGetters;
+                var res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                setting = rootGetters['setting/current']();
-
-                                if (setting) {
-                                    _context.next = 3;
-                                    break;
-                                }
-
-                                return _context.abrupt('return', false);
-
-                            case 3:
-
-                                data.setting_id = setting.id;
-                                _context.next = 6;
+                                _context.next = 2;
                                 return __WEBPACK_IMPORTED_MODULE_1__api_domain__["a" /* default */].create(data);
 
-                            case 6:
+                            case 2:
                                 res = _context.sent;
 
 
@@ -67629,7 +67637,7 @@ var domain = {
                                 }
                                 return _context.abrupt('return', res);
 
-                            case 9:
+                            case 5:
                             case 'end':
                                 return _context.stop();
                         }
@@ -67638,15 +67646,15 @@ var domain = {
             }));
 
             function create(_x, _x2) {
-                return _ref13.apply(this, arguments);
+                return _ref8.apply(this, arguments);
             }
 
             return create;
         }(),
         update: function () {
-            var _ref15 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref14, data) {
-                var commit = _ref14.commit,
-                    getters = _ref14.getters;
+            var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref9, data) {
+                var commit = _ref9.commit,
+                    getters = _ref9.getters;
                 var id, res, index;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
@@ -67676,15 +67684,15 @@ var domain = {
             }));
 
             function update(_x3, _x4) {
-                return _ref15.apply(this, arguments);
+                return _ref10.apply(this, arguments);
             }
 
             return update;
         }(),
         destroy: function () {
-            var _ref17 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref16, id) {
-                var commit = _ref16.commit,
-                    getters = _ref16.getters;
+            var _ref12 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref11, id) {
+                var commit = _ref11.commit,
+                    getters = _ref11.getters;
                 var res, index;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
@@ -67697,7 +67705,7 @@ var domain = {
                                 res = _context3.sent;
 
 
-                                if (res.status === 200) {
+                                if (res.status === 204) {
                                     index = getters['idOf'](id);
 
                                     index !== -1 && commit('destroy', index);
@@ -67713,14 +67721,14 @@ var domain = {
             }));
 
             function destroy(_x5, _x6) {
-                return _ref17.apply(this, arguments);
+                return _ref12.apply(this, arguments);
             }
 
             return destroy;
         }(),
         index: function () {
-            var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref18) {
-                var commit = _ref18.commit;
+            var _ref14 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref13) {
+                var commit = _ref13.commit;
                 var res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
                     while (1) {
@@ -67732,13 +67740,14 @@ var domain = {
                             case 2:
                                 res = _context4.sent;
 
+                                console.log(res);
 
                                 if (res.status === 200) {
                                     commit('domains', res.data.data);
                                 }
                                 return _context4.abrupt('return', res);
 
-                            case 5:
+                            case 6:
                             case 'end':
                                 return _context4.stop();
                         }
@@ -67747,15 +67756,15 @@ var domain = {
             }));
 
             function index(_x7) {
-                return _ref19.apply(this, arguments);
+                return _ref14.apply(this, arguments);
             }
 
             return index;
         }(),
         show: function () {
-            var _ref21 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref20, id) {
-                var commit = _ref20.commit,
-                    getters = _ref20.getters;
+            var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref15, id) {
+                var commit = _ref15.commit,
+                    getters = _ref15.getters;
                 var item, res;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
                     while (1) {
@@ -67797,7 +67806,7 @@ var domain = {
             }));
 
             function show(_x8, _x9) {
-                return _ref21.apply(this, arguments);
+                return _ref16.apply(this, arguments);
             }
 
             return show;

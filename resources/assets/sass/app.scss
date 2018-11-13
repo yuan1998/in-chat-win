@@ -32,6 +32,10 @@ body {
 .container-admin-page {
     height: 100%;
 
+    .el-checkbox__label {
+        position: static;
+    }
+
     .component-header-title {
         margin: 0 -30px;
         background-color: #f6f8f8;
@@ -57,7 +61,7 @@ body {
 
         .el-menu-vertical-demo:not(.el-menu--collapse) {
             width: 240px;
-            min-height:100%;
+            min-height: 100%;
         }
     }
 
@@ -72,7 +76,7 @@ body {
         }
 
         .collapse-btn {
-            transition:all 500ms;
+            transition: all 500ms;
             transform: none;
 
             &.y-active {
@@ -130,34 +134,25 @@ body {
             box-shadow: 0 0 0 2px #f44, 1.5*14px 0 0 2px #9b3, 3*14px 0 0 2px #fb5;
         }
     }
-}
 
-.el-card.setting-card {
-
-    .el-card__body {
-        height: 80px;
-    }
-
-    .setting-card-footer {
+    .mac-card-footer {
+        position: absolute;
         bottom: 0;
-        right: 14px;
+        right: 0;
+        padding-right: 14px;
         left: 0;
         text-align: right;
-        position: absolute;
-    }
-    &.url-bra .el-card__body::before {
-        display: block;
-        position: absolute;
-        content: "";
-        top: -1.6*14px;
-        left: 5.5*14px;
-        width: calc(100% - 6 * 14px);
-        height: 1.2*14px;
-        border-radius: 2px;
         background-color: #fff;
     }
 }
 
+.el-card.setting-card {
+
+    .setting-card-content {
+        height: 80px;
+    }
+
+}
 
 .el-card.message-card {
 
@@ -166,10 +161,11 @@ body {
         height: 300px;
 
         .message-card_content {
+            position: static;
             width: 100%;
             display: block;
             height: 100%;
-            overflow: scroll;
+            overflow: auto;
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
@@ -211,45 +207,92 @@ body {
         }
     }
 
-    .mac-card-footer {
+}
+
+.el-card.domain-card {
+
+    .domain-card_content {
+        height: 150px;
+        overflow: auto;
+        position: static;
+        padding-bottom: 40px;
+    }
+
+
+    .domain-card_tags {
+        margin-left: -10px;
+        padding-left: 10px;
+
+        .el-tag {
+            margin-bottom: 10px;
+            margin-left: 10px;
+        }
+
+        h1 {
+            font-size: 14px;
+            padding: 10px 5px;
+        }
+    }
+
+    .domain-card_setting-name {
         position: absolute;
+        top: 0;
         bottom: 0;
-        right: 0;
-        padding-right: 14px;
-        left: 0;
-        text-align: right;
+        right: 10px;
+    }
+    .domain-card_url-bar {
+        display: block;
+        position: absolute;
+        top: -22.4px;
+        left: 5.5*14px;
+        width: calc(100% - 90px);
+        height: 1.2*14px;
+        line-height: 1.2*14px;
+        border-radius: 2px;
         background-color: #fff;
+        font-size: 13px;
+        color: #696b6d;
+        padding-left: 5px;
+    }
+
+    .domain-card_open-wrap {
+        background-color: #f8f8f8;
+        border-radius: 2px;
+        color: #1690ff;
+        height: 35px;
+        line-height: 35px;
+        padding: 0 10px;
+
+        .open-label {
+            display: inline-block;
+            margin-right: 20px;
+        }
     }
 }
 
-.message-list_container {
-    .message-header {
-        display: flex;
-        justify-content: space-between;
-        align-content: center;
-        margin: 15px;
+.admin-component-header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    margin: 15px;
 
-        .message-header_filter {
-            flex-basis: 200px;
-            text-align: left;
-        }
+    .admin-header_filter {
+        flex-basis: 200px;
+        flex: none;
+    }
 
-        .message-header_controll {
-            flex: none;
-            margin: 15px;
-            text-align: right;
-        }
-
+    .admin-header_controller {
+        flex: none;
+        text-align: right;
     }
 }
-
 
 .message-value-container {
-    overflow: scroll;
+    overflow: auto;
     max-height: 220px;
 
     .message-value-form-item {
-        .el-form-item__label{
+        .el-form-item__label {
             float: right !important;
             width: 120px;
 
@@ -266,5 +309,27 @@ body {
             margin-right: 120px;
         }
     }
+}
 
+.domain-dialog-container {
+
+    .el-tag + .el-tag {
+        margin-left: 10px;
+    }
+    .button-new-tag {
+        margin-left: 10px;
+        height: 32px;
+        line-height: 30px;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    .input-new-tag {
+        width: 90px;
+        margin-left: 10px;
+        vertical-align: bottom;
+    }
+}
+
+.el-notification__group {
+    position: static !important;
 }

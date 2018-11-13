@@ -4,6 +4,11 @@
  * @date 2018/7/26
 */
 
+* {
+    box-sizing: border-box;
+    position: relative;
+}
+
 html {
     /*标准字体大小设置 14 像素「rem 参照对象」*/
     font-size: 14px;

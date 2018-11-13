@@ -21,8 +21,6 @@ class MessageTransformer extends TransformerAbstract
             'setting_id' => (int) $message->setting_id,
             'is_default' => (boolean) $message->is_default,
             'message'    => $message->message,
-            'model_show' => false,
-            'delete_btn_loading' => false,
             'create_at'  => $message->created_at->toDateTimeString(),
             'updated_at' => $message->updated_at->toDateTimeString(),
         ];

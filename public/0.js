@@ -519,10 +519,10 @@ var render = function() {
     { staticClass: "message-list_container" },
     [
       _vm.filterable
-        ? _c("div", { staticClass: "message-header" }, [
+        ? _c("div", { staticClass: " admin-component-header message-header" }, [
             _c(
               "div",
-              { staticClass: "message-header_filter" },
+              { staticClass: "admin-header_filter" },
               [
                 _c(
                   "el-input",
@@ -559,7 +559,7 @@ var render = function() {
             _vm._v(" "),
             _c(
               "div",
-              { staticClass: "message-header_controller" },
+              { staticClass: "admin-header_controller" },
               [
                 _c(
                   "el-button",

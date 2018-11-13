@@ -16,12 +16,12 @@ class DomianTransformer extends TransformerAbstract
     {
         return [
             'id'          => (int) $domian->id,
-            'description' => (int) $domian->description,
+            'description' => (string) $domian->description,
             'setting_id'  => (int) $domian->setting_id,
             'user_id'     => (int) $domian->user_id,
             'domain'      => (string) $domian->domain,
             'open'        => (boolean) $domian->open,
-            'tags'        => explode(',', $domian->tags),
+            'tags'        => !!$domian->tags ? explode('|', $domian->tags) : [],
             'create_at'   => $domian->created_at->toDateTimeString(),
             'updated_at'  => $domian->updated_at->toDateTimeString(),
         ];

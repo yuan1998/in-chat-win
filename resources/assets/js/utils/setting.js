@@ -1,8 +1,9 @@
 const defaultData = {
-    name: 'Yuan' ,
-    description: 'description..' ,
+    name: '' ,
+    description: '' ,
     'list-open': false ,
     'list-model': 'white' ,
+    type: 0,
 };
 const defaultSetting = {
     tag: '6666' ,
@@ -47,9 +48,7 @@ const defaultSetting = {
     buttonColorText: '#fff' ,
     buttonText: '发送'
 };
-const defaultList = [
-    'yuan'
-];
+const defaultList = [];
 
 const mergeSetting = (data = {}) => {
     data = Object.assign(defaultData,data);
@@ -62,12 +61,18 @@ const mergeSetting = (data = {}) => {
         data['list-data'] = defaultList;
 
     return data;
+};
 
+const defaultForm = {
+    ...defaultData,
+    'list-data': defaultList,
+    setting: defaultSetting,
 };
 
 export {
     defaultList,
     defaultData,
     defaultSetting,
-    mergeSetting
+    mergeSetting,
+    defaultForm
 }

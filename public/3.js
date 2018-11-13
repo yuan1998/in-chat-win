@@ -137,6 +137,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             }
         };
     },
+    mounted: function mounted() {
+        this.getList();
+    },
 
     methods: {
         handleSelect: function handleSelect(index, indexPath) {
@@ -168,7 +171,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
                                 if (res.status !== 200) {
-                                    res.$message('Error!');
+                                    this.$message('Error!');
                                 }
 
                             case 4:

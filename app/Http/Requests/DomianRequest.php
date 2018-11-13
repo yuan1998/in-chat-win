@@ -30,7 +30,7 @@ class DomianRequest extends FormRequest
             case "POST":
                 $rules = [
                     'open'        => 'required',
-                    'domain'      => 'required|unique:domians,domain',
+                    'domain'      => 'required|domain_not_exists',
                     'setting_id'  => 'required|message_setting',
                     'description' => 'string',
                 ];

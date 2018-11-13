@@ -16,7 +16,7 @@ class Domian extends Model
     ];
 
     protected $casts = [
-        'open' => 'boolean'
+        'open' => 'boolean',
     ];
 
     public function user()

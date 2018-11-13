@@ -6,6 +6,12 @@
  * @date 2018/7/26
 */
 
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  position: relative;
+}
+
 html {
   /*标准字体大小设置 14 像素「rem 参照对象」*/
   font-size: 14px;
@@ -231,6 +237,10 @@ body {
   height: 100%;
 }
 
+.container-admin-page .el-checkbox__label {
+  position: static;
+}
+
 .container-admin-page .component-header-title {
   margin: 0 -30px;
   background-color: #f6f8f8;
@@ -327,28 +337,18 @@ body {
   box-shadow: 0 0 0 2px #f44, 21px 0 0 2px #9b3, 42px 0 0 2px #fb5;
 }
 
-.el-card.setting-card .el-card__body {
-  height: 80px;
-}
-
-.el-card.setting-card .setting-card-footer {
+.el-card.mac-card .mac-card-footer {
+  position: absolute;
   bottom: 0;
-  right: 14px;
+  right: 0;
+  padding-right: 14px;
   left: 0;
   text-align: right;
-  position: absolute;
+  background-color: #fff;
 }
 
-.el-card.setting-card.url-bra .el-card__body::before {
-  display: block;
-  position: absolute;
-  content: "";
-  top: -22.4px;
-  left: 77px;
-  width: calc(100% - 6 * 14px);
-  height: 16.8px;
-  border-radius: 2px;
-  background-color: #fff;
+.el-card.setting-card .setting-card-content {
+  height: 80px;
 }
 
 .el-card.message-card .el-card__body {
@@ -357,10 +357,11 @@ body {
 }
 
 .el-card.message-card .el-card__body .message-card_content {
+  position: static;
   width: 100%;
   display: block;
   height: 100%;
-  overflow: scroll;
+  overflow: auto;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding-bottom: 18px;
@@ -408,17 +409,65 @@ body {
   background-color: #daf4fe !important;
 }
 
-.el-card.message-card .mac-card-footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  padding-right: 14px;
-  left: 0;
-  text-align: right;
-  background-color: #fff;
+.el-card.domain-card .domain-card_content {
+  height: 150px;
+  overflow: auto;
+  position: static;
+  padding-bottom: 40px;
 }
 
-.message-list_container .message-header {
+.el-card.domain-card .domain-card_tags {
+  margin-left: -10px;
+  padding-left: 10px;
+}
+
+.el-card.domain-card .domain-card_tags .el-tag {
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.el-card.domain-card .domain-card_tags h1 {
+  font-size: 14px;
+  padding: 10px 5px;
+}
+
+.el-card.domain-card .domain-card_setting-name {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 10px;
+}
+
+.el-card.domain-card .domain-card_url-bar {
+  display: block;
+  position: absolute;
+  top: -22.4px;
+  left: 77px;
+  width: calc(100% - 90px);
+  height: 16.8px;
+  line-height: 16.8px;
+  border-radius: 2px;
+  background-color: #fff;
+  font-size: 13px;
+  color: #696b6d;
+  padding-left: 5px;
+}
+
+.el-card.domain-card .domain-card_open-wrap {
+  background-color: #f8f8f8;
+  border-radius: 2px;
+  color: #1690ff;
+  height: 35px;
+  line-height: 35px;
+  padding: 0 10px;
+}
+
+.el-card.domain-card .domain-card_open-wrap .open-label {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.admin-component-header {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -430,22 +479,23 @@ body {
   margin: 15px;
 }
 
-.message-list_container .message-header .message-header_filter {
+.admin-component-header .admin-header_filter {
   -ms-flex-preferred-size: 200px;
       flex-basis: 200px;
-  text-align: left;
-}
-
-.message-list_container .message-header .message-header_controll {
   -webkit-box-flex: 0;
       -ms-flex: none;
           flex: none;
-  margin: 15px;
+}
+
+.admin-component-header .admin-header_controller {
+  -webkit-box-flex: 0;
+      -ms-flex: none;
+          flex: none;
   text-align: right;
 }
 
 .message-value-container {
-  overflow: scroll;
+  overflow: auto;
   max-height: 220px;
 }
 
@@ -465,5 +515,27 @@ body {
 .message-value-container .message-value-form-item .el-form-item__content {
   margin-left: 0 !important;
   margin-right: 120px;
+}
+
+.domain-dialog-container .el-tag + .el-tag {
+  margin-left: 10px;
+}
+
+.domain-dialog-container .button-new-tag {
+  margin-left: 10px;
+  height: 32px;
+  line-height: 30px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.domain-dialog-container .input-new-tag {
+  width: 90px;
+  margin-left: 10px;
+  vertical-align: bottom;
+}
+
+.el-notification__group {
+  position: static !important;
 }
 
