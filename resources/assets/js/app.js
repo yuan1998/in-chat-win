@@ -8,8 +8,9 @@ import VueRouter from 'vue-router'
 import routes    from './routes'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import App from './app.vue'
-import store from './store'
+import App       from './app.vue'
+import store     from './store'
+import {oneOf}   from "./utils/assist";
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,6 +30,7 @@ Vue.config.productionTip = false;
 
 const whiteList = [
     '/login',
+    '/signup',
     '/welcome',
     '/404',
 ];
@@ -43,7 +45,7 @@ router.beforeEach( async (to, from , next) => {
             next({ ...to , replace:true});
         }
 
-        if (to.path === '/login') {
+        if ( oneOf(to.path , [ '/login' , '/signup' ]) ) {
             next('/welcome');
         }
         else {

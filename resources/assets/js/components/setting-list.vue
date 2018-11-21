@@ -22,7 +22,10 @@
             </div>
             <div class="admin-component-content">
                 <div v-if="!filterable">
-                    Empty....
+                    咋回事啊.叫人
+                </div>
+                <div v-else-if="filterable.length === 0">
+                    没有配置,<el-button type="text" @click="dialogVisible = true">点击添加.</el-button>
                 </div>
                 <el-row v-else :gutter="20">
                     <el-col style="margin-bottom: 20px;" :span="6" v-for="item in filterable" :key="item.id">

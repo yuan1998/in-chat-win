@@ -1,5 +1,5 @@
-import {login , logout , current} from "../api/auth";
-import {getToken}        from "../api/request";
+import {login , logout , current , signup} from "../api/auth";
+import {getToken}                          from "../api/request";
 
 const auth = {
     namespaced: true ,
@@ -23,6 +23,15 @@ const auth = {
         }
     } ,
     actions: {
+        async signup({commit} , form) {
+            let res = await signup(form);
+
+            if (res.status === 201) {
+                commit('saveUser' , res.data);
+            }
+
+            return res ;
+        },
         async login ({commit} , form) {
             let res = await login(form);
             if (res.status !== 201) {
@@ -38,9 +47,11 @@ const auth = {
 
             let res = await logout();
 
-            commit('clearUser');
+            if ( res.status === 204){
+                commit('clearUser');
+            }
 
-            return (res.status === 204);
+            return res;
         } ,
         async show ({commit}) {
             let res = await current();

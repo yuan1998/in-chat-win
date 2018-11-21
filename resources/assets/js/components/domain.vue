@@ -14,17 +14,20 @@
                 </el-input>
             </div>
             <div class="admin-header_controller">
-                <el-button type="primary" @click="dialogVisible = true">
+                <el-button :disabled="gSettings.length === 0" type="primary" @click="dialogVisible = true">
                     新建
                 </el-button>
             </div>
         </div>
 
         <h1 v-if="!filterable">
-            Undefined
+            乍回事啊,叫人
+        </h1>
+        <h1 v-else-if="gSettings.length === 0">
+            缺少配置.不能添加域名 <el-button type="text"> <router-link to="/admin/setting">去添加.</router-link> </el-button>
         </h1>
         <h1 v-else-if="filterable.length === 0">
-            Not Found Data.
+            Not Found Data.<el-button @click="dialogVisible = true" type="text">Add Domain.</el-button>
         </h1>
         <el-row v-else :gutter="20">
             <el-col v-for="item in filterable"
@@ -181,6 +184,7 @@
             }
         } ,
         mounted () {
+            console.log(312);
             if (!this.gDomains) {
                 this.getDomains();
             }

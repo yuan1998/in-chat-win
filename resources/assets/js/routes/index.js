@@ -11,10 +11,15 @@ const routes = [
         component: (resolve) => require(['../pages/welcome'], resolve)
     },
     {
+        path: '/signup' ,
+        name: 'signUp',
+        component: (resolve) => require(['../pages/signup'], resolve)
+    },
+    {
         path: '/404',
         name: '404',
         component: (resolve) => require(['../pages/404'], resolve)
-    }
+    },
 
 ];
 

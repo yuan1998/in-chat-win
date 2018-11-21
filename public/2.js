@@ -1,12 +1,12 @@
 webpackJsonp([2],{
 
-/***/ 212:
+/***/ 216:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(79)
+var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(226)
+var __vue_script__ = __webpack_require__(231)
 /* template */
 var __vue_template__ = __webpack_require__(236)
 /* template functional */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/components/setting.vue"
+Component.options.__file = "resources/assets/js/components/setting-list.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-52d84aee", Component.options)
+    hotAPI.createRecord("data-v-380e8e12", Component.options)
   } else {
-    hotAPI.reload("data-v-52d84aee", Component.options)
+    hotAPI.reload("data-v-380e8e12", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,18 +48,21 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 226:
+/***/ 231:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setting_basis__ = __webpack_require__(227);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__setting_basis___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__setting_basis__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting_template__ = __webpack_require__(233);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__setting_template___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__setting_template__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_setting__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_assist__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_transfer_panel__ = __webpack_require__(233);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_transfer_panel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_transfer_panel__);
 
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -96,224 +99,348 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        settingBasis: __WEBPACK_IMPORTED_MODULE_1__setting_basis___default.a,
-        settingTemplate: __WEBPACK_IMPORTED_MODULE_2__setting_template___default.a
-    },
     data: function data() {
         return {
             loading: false,
-            current: 'basis'
+            query: '',
+            placeholder: 'ADF',
+            inputHover: false,
+            dialogVisible: false,
+            submitting: false,
+            form: Object(__WEBPACK_IMPORTED_MODULE_3__utils_assist__["a" /* cloneOf */])(__WEBPACK_IMPORTED_MODULE_2__utils_setting__["a" /* defaultForm */])
         };
     },
+
+    components: {
+        transferPanel: __WEBPACK_IMPORTED_MODULE_4__components_transfer_panel___default.a
+    },
     mounted: function mounted() {
-        if (!this.settingData) {
-            this.syncSetting(this.$route.params.id);
+        if (!this.gList) {
+            this.getList();
         }
     },
 
-    methods: {
-        syncSetting: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(id) {
-                var res;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                this.loading = true;
-                                _context.next = 3;
-                                return this.$store.dispatch('setting/settingShow', id);
-
-                            case 3:
-                                res = _context.sent;
-
-                                this.loading = false;
-
-                            case 5:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function syncSetting(_x) {
-                return _ref.apply(this, arguments);
-            }
-
-            return syncSetting;
-        }(),
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])({
+        aList: 'setting/getList',
+        aCreate: 'setting/create',
+        aUpdate: 'setting/update',
+        aDelete: 'setting/destroy'
+    }), {
         handleSubmit: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-                var settingData, $store, res;
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(ref) {
+                var _this = this;
+
+                var $refs, $notify, form, aCreate, aUpdate, closeDialog;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
-                                settingData = this.settingData, $store = this.$store;
-                                _context2.next = 3;
-                                return $store.dispatch('setting/update', settingData);
+                                $refs = this.$refs, $notify = this.$notify, form = this.form, aCreate = this.aCreate, aUpdate = this.aUpdate, closeDialog = this.closeDialog;
 
-                            case 3:
-                                res = _context2.sent;
 
-                                console.log(res);
-                                if (res.status === 200) {
-                                    this.$notify({
-                                        title: '恭喜',
-                                        message: '你成功了!🤣',
-                                        type: 'success'
-                                    });
-                                }
+                                $refs[ref].validate(function () {
+                                    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(val) {
+                                        var res;
+                                        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                                            while (1) {
+                                                switch (_context.prev = _context.next) {
+                                                    case 0:
+                                                        if (!val) {
+                                                            _context.next = 17;
+                                                            break;
+                                                        }
 
-                            case 6:
-                            case 'end':
+                                                        _this.submitting = true;
+
+                                                        if (form.id) {
+                                                            _context.next = 8;
+                                                            break;
+                                                        }
+
+                                                        _context.next = 5;
+                                                        return aCreate(form);
+
+                                                    case 5:
+                                                        _context.t0 = _context.sent;
+                                                        _context.next = 11;
+                                                        break;
+
+                                                    case 8:
+                                                        _context.next = 10;
+                                                        return aUpdate(form);
+
+                                                    case 10:
+                                                        _context.t0 = _context.sent;
+
+                                                    case 11:
+                                                        res = _context.t0;
+
+
+                                                        console.log(res);
+
+                                                        if (res.status === 200) {
+                                                            $notify({
+                                                                message: '他诞生了.',
+                                                                title: '恭喜',
+                                                                type: 'success'
+                                                            });
+                                                        } else {
+                                                            $notify.error({
+                                                                message: '发生了位置错误.',
+                                                                title: '警告'
+                                                            });
+                                                        }
+
+                                                        closeDialog();
+                                                        _context.next = 18;
+                                                        break;
+
+                                                    case 17:
+                                                        $notify({
+                                                            message: '看仔细了.',
+                                                            title: '提示',
+                                                            type: 'warning'
+                                                        });
+
+                                                    case 18:
+                                                    case "end":
+                                                        return _context.stop();
+                                                }
+                                            }
+                                        }, _callee, _this);
+                                    }));
+
+                                    return function (_x2) {
+                                        return _ref2.apply(this, arguments);
+                                    };
+                                }());
+
+                            case 2:
+                            case "end":
                                 return _context2.stop();
                         }
                     }
                 }, _callee2, this);
             }));
 
-            function handleSubmit() {
-                return _ref2.apply(this, arguments);
+            function handleSubmit(_x) {
+                return _ref.apply(this, arguments);
             }
 
             return handleSubmit;
-        }()
-    },
-    computed: {
-        settingData: function settingData() {
-            return this.$store.getters['setting/current'](this.$route.params.id);
-        }
-    }
+        }(),
+        getList: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3() {
+                var res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                _context3.next = 2;
+                                return this.aList();
 
-});
+                            case 2:
+                                res = _context3.sent;
 
-/***/ }),
+                                console.log(res);
 
-/***/ 227:
-/***/ (function(module, exports, __webpack_require__) {
+                                if (res.status === 200) {} else {
+                                    this.$message('Error!');
+                                }
 
-var disposed = false
-var normalizeComponent = __webpack_require__(79)
-/* script */
-var __vue_script__ = __webpack_require__(228)
-/* template */
-var __vue_template__ = __webpack_require__(232)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/setting-basis.vue"
+                            case 5:
+                            case "end":
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this);
+            }));
 
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-9e186d0c", Component.options)
-  } else {
-    hotAPI.reload("data-v-9e186d0c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
+            function getList() {
+                return _ref3.apply(this, arguments);
+            }
 
-module.exports = Component.exports
+            return getList;
+        }(),
+        handleUpdate: function handleUpdate(item) {
+            this.form = Object(__WEBPACK_IMPORTED_MODULE_3__utils_assist__["a" /* cloneOf */])(item);
+            this.dialogVisible = true;
+        },
+        handleDelete: function () {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(item) {
+                var res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                    while (1) {
+                        switch (_context4.prev = _context4.next) {
+                            case 0:
+                                _context4.next = 2;
+                                return this.aDelete(item.id);
+
+                            case 2:
+                                res = _context4.sent;
 
 
-/***/ }),
+                                console.log(res);
+                                if (res.status === 204) {
+                                    this.$notify({
+                                        message: '你删除了他.',
+                                        title: '提示',
+                                        type: 'success'
+                                    });
+                                } else {
+                                    this.$notify.error({
+                                        message: '发生了意外情况.',
+                                        title: '警告'
+                                    });
+                                }
 
-/***/ 228:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+                            case 5:
+                            case "end":
+                                return _context4.stop();
+                        }
+                    }
+                }, _callee4, this);
+            }));
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__transfer_panel__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__transfer_panel___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__transfer_panel__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+            function handleDelete(_x3) {
+                return _ref4.apply(this, arguments);
+            }
 
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'settingBasis',
-    componentName: "settingBasis",
-    components: {
-        transferPanel: __WEBPACK_IMPORTED_MODULE_0__transfer_panel___default.a
-    },
-    props: {
-        data: Object
-    },
-    data: function data() {
-        return {};
-    },
-
-    methods: {
+            return handleDelete;
+        }(),
+        clearQuery: function clearQuery() {
+            if (this.inputIcon === 'circle-close') this.query = '';
+        },
+        closeDialog: function closeDialog() {
+            this.submitting = false;
+            this.dialogVisible = false;
+        },
+        closedDialog: function closedDialog() {
+            this.$refs['form'].resetFields();
+        },
+        closeDialogBefore: function closeDialogBefore(done) {
+            if (!this.submitting) {
+                done();
+            }
+        },
         addQuery: function addQuery(query) {
-            var arr = this.data['list-data'];
+            var arr = this.form['list-data'];
             arr.push(query);
             this.$refs['transfer'].clearQuery();
         },
         deleteChecked: function deleteChecked(arr) {
-            var _this = this;
+            var _this2 = this;
 
-            var data = this.data['list-data'];
+            var data = this.form['list-data'];
             arr.forEach(function (each) {
                 var index = data.findIndex(function (v) {
                     return v === each;
@@ -322,28 +449,136 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (index !== -1) {
                     data.splice(index, 1);
                 } else {
-                    _this.$message({
+                    _this2.$message({
                         type: 'warning',
                         message: 'has ' + each + ' on found.'
                     });
                 }
             });
         }
-    }
+    }),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
+        gList: 'setting/list'
+    }), {
+        loaded: function loaded() {
+            return !this.loading && !!this.gList;
+        },
+        filterable: function filterable() {
+            var gList = this.gList,
+                query = this.query;
 
+
+            if (query === '') {
+                return gList;
+            }
+
+            return this.gList && this.gList.filter(function (item) {
+                return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
+            });
+        },
+        inputIcon: function inputIcon() {
+            return this.query.length > 0 && this.inputHover ? 'circle-close' : 'search';
+        }
+    })
 });
 
 /***/ }),
 
-/***/ 229:
+/***/ 232:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export defaultList */
+/* unused harmony export defaultData */
+/* unused harmony export defaultSetting */
+/* unused harmony export mergeSetting */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defaultForm; });
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var defaultData = {
+    name: '',
+    description: '',
+    'list-open': false,
+    'list-model': 'white',
+    type: 0
+};
+var defaultSetting = {
+    tag: '6666',
+    waitTime: '3',
+    again: true,
+
+    //
+    name: 'test',
+    messageType: 0,
+    tel: '029-110',
+
+    // main
+    mainColor: '#009EB0',
+    mainColorText: '#fff',
+    bgColor: '#f1f1f1',
+
+    // left
+    lmColor: '#DAF4FE',
+    lmColorText: '#000',
+    lmText: 'Test Something ....',
+    lmName: 'TestName',
+    lmAvatar: '',
+
+    // right
+    rmColor: '#FFFEFF',
+    rmColorText: '#000',
+    rmText: 'Test',
+
+    //footer
+    footerText: 'Test',
+    footerColor: '#F4F3F5',
+    footerColorText: '#DEDDDF',
+
+    // input
+    inputColor: '#F2F2FB',
+    inputWrapColor: '#FFFEFF',
+    inputColorText: '#AAAAAC',
+    inputText: '请输入...',
+
+    //button
+    buttonColor: '#00C400',
+    buttonColorText: '#fff',
+    buttonText: '发送'
+};
+var defaultList = [];
+
+var mergeSetting = function mergeSetting() {
+    var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    data = Object.assign(defaultData, data);
+    var setting = data['setting'] || {};
+
+    setting = Object.assign(defaultSetting, setting);
+    data.setting = setting;
+
+    if (!data['list-data']) data['list-data'] = defaultList;
+
+    return data;
+};
+
+var defaultForm = _extends({}, defaultData, {
+    'list-data': defaultList,
+    setting: defaultSetting
+});
+
+
+
+/***/ }),
+
+/***/ 233:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(79)
+var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(230)
+var __vue_script__ = __webpack_require__(234)
 /* template */
-var __vue_template__ = __webpack_require__(231)
+var __vue_template__ = __webpack_require__(235)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -383,7 +618,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 230:
+/***/ 234:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -632,7 +867,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 231:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -826,830 +1061,6 @@ if (false) {
 
 /***/ }),
 
-/***/ 232:
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "el-form",
-        {
-          ref: "form",
-          attrs: {
-            "label-position": "right",
-            "label-width": "80px",
-            model: _vm.data
-          }
-        },
-        [
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "名称" } },
-                    [
-                      _c("el-input", {
-                        model: {
-                          value: _vm.data.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.data, "name", $$v)
-                          },
-                          expression: "data.name"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "描述" } },
-                    [
-                      _c("el-input", {
-                        model: {
-                          value: _vm.data.description,
-                          callback: function($$v) {
-                            _vm.$set(_vm.data, "description", $$v)
-                          },
-                          expression: "data.description"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "List Status" } },
-                    [
-                      _c("el-switch", {
-                        model: {
-                          value: _vm.data["list-open"],
-                          callback: function($$v) {
-                            _vm.$set(_vm.data, "list-open", $$v)
-                          },
-                          expression: "data['list-open']"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "List Model" } },
-                    [
-                      _c(
-                        "el-select",
-                        {
-                          attrs: { placeholder: "List Model" },
-                          model: {
-                            value: _vm.data["list-model"],
-                            callback: function($$v) {
-                              _vm.$set(_vm.data, "list-model", $$v)
-                            },
-                            expression: "data['list-model']"
-                          }
-                        },
-                        [
-                          _c("el-option", {
-                            attrs: { label: "黑名单", value: "black" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-option", {
-                            attrs: { label: "白名单", value: "white" }
-                          })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "List Data" } },
-                    [
-                      _c(
-                        "transfer-panel",
-                        {
-                          ref: "transfer",
-                          attrs: {
-                            title: "名单",
-                            filterable: true,
-                            data: _vm.data["list-data"]
-                          },
-                          on: {
-                            "delete-checked": _vm.deleteChecked,
-                            add: _vm.addQuery
-                          }
-                        },
-                        [
-                          _c("el-button", { attrs: { size: "small" } }, [
-                            _vm._v(
-                              "\n                            test\n                        "
-                            )
-                          ])
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-9e186d0c", module.exports)
-  }
-}
-
-/***/ }),
-
-/***/ 233:
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(79)
-/* script */
-var __vue_script__ = __webpack_require__(234)
-/* template */
-var __vue_template__ = __webpack_require__(235)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/setting-template.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-024d0dee", Component.options)
-  } else {
-    hotAPI.reload("data-v-024d0dee", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-
-/***/ 234:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    componentName: 'SettingTemplate',
-    name: 'SettingTemplate',
-    props: {
-        data: Object
-    },
-    data: function data() {
-        return {};
-    },
-
-    methods: {}
-});
-
-/***/ }),
-
-/***/ 235:
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "setting-tab-component" },
-    [
-      _c(
-        "el-form",
-        {
-          ref: "form",
-          attrs: {
-            "label-position": "left",
-            "label-width": "150px",
-            model: _vm.data
-          }
-        },
-        [
-          _c(
-            "el-form-item",
-            { attrs: { label: "再次访问跳转" } },
-            [
-              _c(
-                "el-radio-group",
-                {
-                  model: {
-                    value: _vm.data.again,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "again", $$v)
-                    },
-                    expression: "data.again"
-                  }
-                },
-                [
-                  _c("el-radio", { attrs: { label: true } }, [_vm._v("开启")]),
-                  _vm._v(" "),
-                  _c("el-radio", { attrs: { label: false } }, [_vm._v("关闭")])
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "背景颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.bgColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "bgColor", $$v)
-                  },
-                  expression: "data.bgColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "按钮颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.buttonColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "buttonColor", $$v)
-                  },
-                  expression: "data.buttonColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "按钮文字" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.buttonText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "buttonText", $$v)
-                  },
-                  expression: "data.buttonText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "底部颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.footerColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "footerColor", $$v)
-                  },
-                  expression: "data.footerColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "底部文字颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.footerColorText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "footerColorText", $$v)
-                  },
-                  expression: "data.footerColorText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "底部文字" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.footerText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "footerText", $$v)
-                  },
-                  expression: "data.footerText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "输入框颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.inputColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "inputColor", $$v)
-                  },
-                  expression: "data.inputColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "输入框文字颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.inputColorText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "inputColorText", $$v)
-                  },
-                  expression: "data.inputColorText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "输入框文字" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.inputText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "inputText", $$v)
-                  },
-                  expression: "data.inputText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "输入框(容器)颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.inputWrapColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "inputWrapColor", $$v)
-                  },
-                  expression: "data.inputWrapColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "左侧头像" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.lmAvatar,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "lmAvatar", $$v)
-                  },
-                  expression: "data.lmAvatar"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "左侧气泡颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.lmColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "lmColor", $$v)
-                  },
-                  expression: "data.lmColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "左侧文字颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.lmColorText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "lmColorText", $$v)
-                  },
-                  expression: "data.lmColorText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "左侧名称" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.lmName,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "lmName", $$v)
-                  },
-                  expression: "data.lmName"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "左侧预览文字" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.lmText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "lmText", $$v)
-                  },
-                  expression: "data.lmText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "主题颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.mainColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "mainColor", $$v)
-                  },
-                  expression: "data.mainColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "文字主颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.mainColorText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "mainColorText", $$v)
-                  },
-                  expression: "data.mainColorText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "标题" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.name,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "name", $$v)
-                  },
-                  expression: "data.name"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "右侧颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.rmColor,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "rmColor", $$v)
-                  },
-                  expression: "data.rmColor"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "右侧文字颜色" } },
-            [
-              _c("el-color-picker", {
-                model: {
-                  value: _vm.data.rmColorText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "rmColorText", $$v)
-                  },
-                  expression: "data.rmColorText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "右侧预览文字" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.rmText,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "rmText", $$v)
-                  },
-                  expression: "data.rmText"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "标识码" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.data.tag,
-                  callback: function($$v) {
-                    _vm.$set(_vm.data, "tag", $$v)
-                  },
-                  expression: "data.tag"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "电话" } },
-            [
-              _c(
-                "el-input",
-                {
-                  model: {
-                    value: _vm.data.tel,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "tel", $$v)
-                    },
-                    expression: "data.tel"
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "el-input__icon el-icon-phone",
-                    attrs: { slot: "suffix" },
-                    slot: "suffix"
-                  })
-                ]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "弹出等待时间" } },
-            [
-              _c(
-                "el-input",
-                {
-                  model: {
-                    value: _vm.data.waitTime,
-                    callback: function($$v) {
-                      _vm.$set(_vm.data, "waitTime", $$v)
-                    },
-                    expression: "data.waitTime"
-                  }
-                },
-                [
-                  _c("i", {
-                    staticClass: "el-input__icon el-icon-time",
-                    attrs: { slot: "suffix" },
-                    slot: "suffix"
-                  })
-                ]
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-024d0dee", module.exports)
-  }
-}
-
-/***/ }),
-
 /***/ 236:
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1659,43 +1070,506 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "container-setting-info-component" },
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading.fullscreen.lock",
+          value: !_vm.loaded,
+          expression: "!loaded",
+          modifiers: { fullscreen: true, lock: true }
+        }
+      ],
+      staticClass: "setting-component-container"
+    },
     [
-      _c("div", { staticClass: "component-header-title" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("h1", [
-          _vm._v(
-            "\n            " +
-              _vm._s(!_vm.settingData ? "QAQ" : _vm.settingData.name) +
-              "\n        "
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _vm.settingData
+      _vm.loaded
         ? _c(
             "div",
-            { staticClass: "component-content" },
             [
+              _c("div", { staticClass: "admin-component-header" }, [
+                _c(
+                  "div",
+                  { staticClass: "admin-header_filter message-header_filter" },
+                  [
+                    _c(
+                      "el-input",
+                      {
+                        attrs: { size: "small", placeholder: _vm.placeholder },
+                        nativeOn: {
+                          mouseenter: function($event) {
+                            _vm.inputHover = true
+                          },
+                          mouseleave: function($event) {
+                            _vm.inputHover = false
+                          }
+                        },
+                        model: {
+                          value: _vm.query,
+                          callback: function($$v) {
+                            _vm.query = $$v
+                          },
+                          expression: "query"
+                        }
+                      },
+                      [
+                        _c("i", {
+                          class: ["el-input__icon", "el-icon-" + _vm.inputIcon],
+                          attrs: { slot: "prefix" },
+                          on: { click: _vm.clearQuery },
+                          slot: "prefix"
+                        })
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "admin-header_controller" },
+                  [
+                    _c(
+                      "el-button",
+                      {
+                        attrs: { type: "primary" },
+                        on: {
+                          click: function($event) {
+                            _vm.dialogVisible = true
+                          }
+                        }
+                      },
+                      [_vm._v("\n                    新建\n                ")]
+                    )
+                  ],
+                  1
+                )
+              ]),
+              _vm._v(" "),
               _c(
-                "el-tabs",
-                { attrs: { value: _vm.current } },
+                "div",
+                { staticClass: "admin-component-content" },
+                [
+                  !_vm.filterable
+                    ? _c("div", [
+                        _vm._v("\n                咋回事啊.叫人\n            ")
+                      ])
+                    : _vm.filterable.length === 0
+                    ? _c(
+                        "div",
+                        [
+                          _vm._v("\n                没有配置,"),
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text" },
+                              on: {
+                                click: function($event) {
+                                  _vm.dialogVisible = true
+                                }
+                              }
+                            },
+                            [_vm._v("点击添加.")]
+                          )
+                        ],
+                        1
+                      )
+                    : _c(
+                        "el-row",
+                        { attrs: { gutter: 20 } },
+                        _vm._l(_vm.filterable, function(item) {
+                          return _c(
+                            "el-col",
+                            {
+                              key: item.id,
+                              staticStyle: { "margin-bottom": "20px" },
+                              attrs: { span: 6 }
+                            },
+                            [
+                              _c(
+                                "el-card",
+                                { staticClass: "setting-card mac-card" },
+                                [
+                                  _c(
+                                    "div",
+                                    { staticClass: "setting-card-content" },
+                                    [
+                                      _c("div", [
+                                        _vm._v(
+                                          "\n                                " +
+                                            _vm._s(item.name) +
+                                            "\n                            "
+                                        )
+                                      ]),
+                                      _vm._v(" "),
+                                      _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "setting-card-footer mac-card-footer"
+                                        },
+                                        [
+                                          _c(
+                                            "el-button",
+                                            { attrs: { type: "text" } },
+                                            [
+                                              _c(
+                                                "router-link",
+                                                {
+                                                  attrs: {
+                                                    to: "message/" + item.id
+                                                  }
+                                                },
+                                                [_vm._v("短句")]
+                                              )
+                                            ],
+                                            1
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "el-button",
+                                            {
+                                              staticClass: "setting-card-btn",
+                                              attrs: { type: "text" },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.handleUpdate(item)
+                                                }
+                                              }
+                                            },
+                                            [
+                                              _vm._v(
+                                                "\n                                    变更\n                                "
+                                              )
+                                            ]
+                                          ),
+                                          _vm._v(" "),
+                                          _c(
+                                            "el-popover",
+                                            {
+                                              attrs: {
+                                                placement: "top",
+                                                width: "160"
+                                              },
+                                              model: {
+                                                value: item.model_show,
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    item,
+                                                    "model_show",
+                                                    $$v
+                                                  )
+                                                },
+                                                expression: "item.model_show"
+                                              }
+                                            },
+                                            [
+                                              _c("p", [
+                                                _vm._v(
+                                                  "这是一段内容这是一段内容确定删除吗？"
+                                                )
+                                              ]),
+                                              _vm._v(" "),
+                                              _c(
+                                                "div",
+                                                {
+                                                  staticStyle: {
+                                                    "text-align": "right",
+                                                    margin: "0"
+                                                  }
+                                                },
+                                                [
+                                                  _c(
+                                                    "el-button",
+                                                    {
+                                                      attrs: {
+                                                        size: "mini",
+                                                        type: "text"
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          item.modelShow = false
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                            取消\n                                        "
+                                                      )
+                                                    ]
+                                                  ),
+                                                  _vm._v(" "),
+                                                  _c(
+                                                    "el-button",
+                                                    {
+                                                      attrs: {
+                                                        type: "primary",
+                                                        size: "mini",
+                                                        loading: item.deleting
+                                                      },
+                                                      on: {
+                                                        click: function(
+                                                          $event
+                                                        ) {
+                                                          _vm.handleDelete(item)
+                                                        }
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        "\n                                            确定\n                                        "
+                                                      )
+                                                    ]
+                                                  )
+                                                ],
+                                                1
+                                              ),
+                                              _vm._v(" "),
+                                              _c(
+                                                "el-button",
+                                                {
+                                                  staticClass:
+                                                    "setting-card-btn",
+                                                  attrs: {
+                                                    slot: "reference",
+                                                    type: "text"
+                                                  },
+                                                  slot: "reference"
+                                                },
+                                                [
+                                                  _vm._v(
+                                                    "\n                                        削除\n                                    "
+                                                  )
+                                                ]
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ]
+                                  )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        })
+                      )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-dialog",
+                {
+                  ref: "dialog",
+                  staticClass: "domain-dialog-container",
+                  attrs: {
+                    title: "提示",
+                    visible: _vm.dialogVisible,
+                    width: "50%"
+                  },
+                  on: {
+                    "update:visible": function($event) {
+                      _vm.dialogVisible = $event
+                    },
+                    closed: _vm.closedDialog,
+                    "before-close": _vm.closeDialogBefore
+                  }
+                },
                 [
                   _c(
-                    "el-tab-pane",
-                    { attrs: { label: "基础设置", name: "basis" } },
-                    [_c("setting-basis", { attrs: { data: _vm.settingData } })],
+                    "el-form",
+                    {
+                      ref: "form",
+                      attrs: {
+                        model: _vm.form,
+                        "label-position": "top",
+                        "label-width": "120px"
+                      }
+                    },
+                    [
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            label: "名称",
+                            prop: "name",
+                            rules: {
+                              required: true,
+                              message: "不能为空",
+                              trigger: "blur"
+                            }
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            attrs: { autocomplete: "off" },
+                            model: {
+                              value: _vm.form.name,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "name", $$v)
+                              },
+                              expression: "form.name"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        {
+                          attrs: {
+                            label: "备注",
+                            prop: "description",
+                            rules: {
+                              required: true,
+                              message: "不能为空",
+                              trigger: "blur"
+                            }
+                          }
+                        },
+                        [
+                          _c("el-input", {
+                            model: {
+                              value: _vm.form.description,
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "description", $$v)
+                              },
+                              expression: "form.description"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        { attrs: { label: "启动筛选" } },
+                        [
+                          _c("el-switch", {
+                            model: {
+                              value: _vm.form["list-open"],
+                              callback: function($$v) {
+                                _vm.$set(_vm.form, "list-open", $$v)
+                              },
+                              expression: "form['list-open']"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        { attrs: { label: "筛选模式" } },
+                        [
+                          _c(
+                            "el-select",
+                            {
+                              attrs: { placeholder: "List Model" },
+                              model: {
+                                value: _vm.form["list-model"],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.form, "list-model", $$v)
+                                },
+                                expression: "form['list-model']"
+                              }
+                            },
+                            [
+                              _c("el-option", {
+                                attrs: { label: "黑名单", value: "black" }
+                              }),
+                              _vm._v(" "),
+                              _c("el-option", {
+                                attrs: { label: "白名单", value: "white" }
+                              })
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-form-item",
+                        { attrs: { label: "筛选列表" } },
+                        [
+                          _c(
+                            "transfer-panel",
+                            {
+                              ref: "transfer",
+                              attrs: {
+                                title: "名单",
+                                filterable: true,
+                                data: _vm.form["list-data"]
+                              },
+                              on: {
+                                "delete-checked": _vm.deleteChecked,
+                                add: _vm.addQuery
+                              }
+                            },
+                            [
+                              _c("el-button", { attrs: { size: "small" } }, [
+                                _vm._v(
+                                  "\n                            test\n                        "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ],
                     1
                   ),
                   _vm._v(" "),
                   _c(
-                    "el-tab-pane",
-                    { attrs: { label: "样式配置", name: "second" } },
+                    "span",
+                    {
+                      staticClass: "dialog-footer",
+                      attrs: { slot: "footer" },
+                      slot: "footer"
+                    },
                     [
-                      _c("setting-template", {
-                        attrs: { data: _vm.settingData.setting }
-                      })
+                      _c(
+                        "el-button",
+                        {
+                          on: {
+                            click: function($event) {
+                              _vm.dialogVisible = false
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    取 消\n                "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "el-button",
+                        {
+                          attrs: { loading: _vm.submitting, type: "primary" },
+                          on: {
+                            click: function($event) {
+                              _vm.handleSubmit("form")
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    确 定\n                "
+                          )
+                        ]
+                      )
                     ],
                     1
                   )
@@ -1705,48 +1579,19 @@ var render = function() {
             ],
             1
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "el-button",
-        { attrs: { type: "primary" }, on: { click: _vm.handleSubmit } },
-        [_vm._v("\n        Save\n    ")]
-      ),
-      _vm._v(" "),
-      _vm.loading
-        ? _c("div", [_vm._v("\n        loading..\n    ")])
-        : !_vm.settingData
-        ? _c("div", [_vm._v("\n        Data is Null.\n    ")])
         : _vm._e()
-    ],
-    1
+    ]
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("i", { staticClass: "el-icon y-icon" }, [
-      _c("img", { attrs: { src: __webpack_require__(237), alt: "" } })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-52d84aee", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-380e8e12", module.exports)
   }
 }
-
-/***/ }),
-
-/***/ 237:
-/***/ (function(module, exports) {
-
-module.exports = "/images/back.png?75d95f9aa55c237c7e2b8cb8d15fda0d";
 
 /***/ })
 

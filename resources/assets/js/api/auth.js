@@ -51,11 +51,26 @@ const logout = async () => {
 
 const current = async () => {
     return await authRequest('auth/current');
-}
+};
+
+const signup = async (data) => {
+    let res = await request({
+        method: 'POST',
+        data,
+        url: 'user',
+    });
+
+    if (res.status === 201 ) {
+        saveToken(res.data.meta);
+    }
+
+    return res;
+};
 
 export {
     login ,
     refreshToken ,
     logout,
-    current
+    current,
+    signup
 }

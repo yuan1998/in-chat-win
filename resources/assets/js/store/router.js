@@ -13,6 +13,11 @@ const router = {
                 component: (resolve) => require(['../pages/admin'], resolve),
                 children: [
                     {
+                        path: '',
+                        name: '控制台',
+                        component: (resolve) => require(['../components/admin-controller'], resolve),
+                    },
+                    {
                         path: 'setting',
                         name: '所有配置',
                         component: (resolve) => require(['../components/setting-list'], resolve),

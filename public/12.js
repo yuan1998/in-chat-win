@@ -1,14 +1,14 @@
 webpackJsonp([12],{
 
-/***/ 247:
+/***/ 217:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(79)
+var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(248)
+var __vue_script__ = __webpack_require__(240)
 /* template */
-var __vue_template__ = __webpack_require__(249)
+var __vue_template__ = __webpack_require__(242)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,22 +48,25 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 248:
+/***/ 240:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(80);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_domain__ = __webpack_require__(250);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_assist__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(82);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_domain__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_assist__ = __webpack_require__(27);
 
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
 //
 //
 //
@@ -247,6 +250,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         };
     },
     mounted: function mounted() {
+        console.log(312);
         if (!this.gDomains) {
             this.getDomains();
         }
@@ -550,7 +554,27 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /***/ }),
 
-/***/ 249:
+/***/ 241:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defaultForm; });
+
+var defaultForm = {
+    setting_id: null,
+    open: false,
+    domain: '',
+    description: '',
+    tags: [],
+    tagText: '',
+    showTagInput: false
+};
+
+
+
+/***/ }),
+
+/***/ 242:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -606,7 +630,10 @@ var render = function() {
                 _c(
                   "el-button",
                   {
-                    attrs: { type: "primary" },
+                    attrs: {
+                      disabled: _vm.gSettings.length === 0,
+                      type: "primary"
+                    },
                     on: {
                       click: function($event) {
                         _vm.dialogVisible = true
@@ -621,9 +648,45 @@ var render = function() {
           ]),
           _vm._v(" "),
           !_vm.filterable
-            ? _c("h1", [_vm._v("\n        Undefined\n    ")])
+            ? _c("h1", [_vm._v("\n        乍回事啊,叫人\n    ")])
+            : _vm.gSettings.length === 0
+            ? _c(
+                "h1",
+                [
+                  _vm._v("\n        缺少配置.不能添加域名 "),
+                  _c(
+                    "el-button",
+                    { attrs: { type: "text" } },
+                    [
+                      _c("router-link", { attrs: { to: "/admin/setting" } }, [
+                        _vm._v("去添加.")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             : _vm.filterable.length === 0
-            ? _c("h1", [_vm._v("\n        Not Found Data.\n    ")])
+            ? _c(
+                "h1",
+                [
+                  _vm._v("\n        Not Found Data."),
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { type: "text" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialogVisible = true
+                        }
+                      }
+                    },
+                    [_vm._v("Add Domain.")]
+                  )
+                ],
+                1
+              )
             : _c(
                 "el-row",
                 { attrs: { gutter: 20 } },
@@ -1123,26 +1186,6 @@ if (false) {
     require("vue-hot-reload-api")      .rerender("data-v-3384e8ca", module.exports)
   }
 }
-
-/***/ }),
-
-/***/ 250:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return defaultForm; });
-
-var defaultForm = {
-    setting_id: null,
-    open: false,
-    domain: '',
-    description: '',
-    tags: [],
-    tagText: '',
-    showTagInput: false
-};
-
-
 
 /***/ })
 

@@ -20,6 +20,15 @@ $api->version('v1', [
 
 ], function ($api) {
 
+    $api->group([
+        'middleware' => ['cors']
+    ],function ($api) {
+
+        $api->get('domainSetting' , 'SettingController@pageGetSetting' )
+            ->name('api.setting.pageGetSetting');
+
+    });
+
     $api->group([], function ($api) {
 
 

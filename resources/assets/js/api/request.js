@@ -61,8 +61,8 @@ const authRequest = async (options) => {
             title: '错误',
             message: '登录超时.请重新登录.'
         });
-        app.$router.push('/login');
         app.$store.commit('auth/clearUser');
+        app.$router.push('/login');
         return false;
     }
 

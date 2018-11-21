@@ -1,8 +1,8 @@
 <template>
-    <div class="container-login-page">
-        <el-row>
-            <el-col :span="8">
-                <el-form :model="formInline" ref="form" label-width="100px" class="demo-dynamic">
+    <div class="container-auth-page">
+        <el-row  >
+            <el-col :lg="{span: 8 , offset:8}" :md="{span:12,offset:6}" :sm="{span:24}">
+                <el-form label-position="top" :model="formInline" ref="form" label-width="100px" class="login-form">
                     <el-form-item
                             prop="email"
                             label="邮箱"
@@ -24,6 +24,11 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button :loading="loging" type="primary" @click="handleSubmit('form')">提交</el-button>
+                        <el-button >
+                            <router-link to="/signup">
+                                注册
+                            </router-link>
+                        </el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
