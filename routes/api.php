@@ -110,6 +110,16 @@ $api->version('v1', [
         $api->get('/setting/{Settings}/domain' , 'DomianController@settingIndex')
             ->name('api.domain.settingIndex');
 
+        /**
+         * Template
+         ***********************/
+        $api->post('/setting/{settings}/template' , 'TemplateController@store')
+            ->name('api.template.show');
+        $api->patch('/setting/{settings}/template/{template}' , 'TemplateController@update')
+            ->name('api.template.update');
+        $api->get('/setting/{settings}/template/{template}' , 'TemplateController@show')
+            ->name('name.template.show');
+
     });
 
 });
