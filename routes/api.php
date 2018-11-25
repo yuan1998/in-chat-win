@@ -27,6 +27,9 @@ $api->version('v1', [
         $api->get('domainSetting' , 'SettingController@pageGetSetting' )
             ->name('api.setting.pageGetSetting');
 
+        $api->post('cl' , 'LogController@store')
+            ->name('api.log.store');
+
     });
 
     $api->group([], function ($api) {
