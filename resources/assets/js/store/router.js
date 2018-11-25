@@ -28,6 +28,11 @@ const router = {
                         component: (resolve) => require(['../components/message-list'], resolve),
                     },
                     {
+                        path: 'template/:id',
+                        name: '样式',
+                        component: (resolve) => require(['../components/setting-template'], resolve),
+                    },
+                    {
                         path: 'domain',
                         name: 'Domains',
                         component: (resolve) => require(['../components/domain'], resolve),

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Domian;
 use App\Http\Requests\SettingRequest;
 use App\Message;
+use App\Template;
 use Illuminate\Http\Request;
 use App\Settings;
 use App\Transformers\SettingTransformer;
@@ -144,6 +145,11 @@ class SettingController extends Controller
             }else {
                 return $this->response->errorBadRequest('Not Message.');
             }
+        }
+        $template = Template::where('setting_id' , $setting->id)->first();
+        if ($template) {
+            $r->template = $template->template ?: null;
+//            $r->setting = $template->setting ?: null;
         }
 
         return $this->response->array($r->toArray());

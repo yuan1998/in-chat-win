@@ -38,8 +38,7 @@ const setting = {
                 : false;
         } ,
         idOf: ({list}) => (id) => {
-            let item = list && list.find(each => each.id == id);
-            return item;
+            return list && list.find(each => each.id == id);
         } ,
         listIndex: ({list}) => (id) => {
             return list.findIndex(item => item.id === id);
@@ -78,7 +77,7 @@ const setting = {
                 commit('current' , item);
                 return {
                     status: 200 ,
-                    data: getters['current']()
+                    data: item
                 };
             }
 

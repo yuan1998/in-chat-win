@@ -6,6 +6,7 @@ use App\Http\Requests\TemplateRequest;
 use App\Settings;
 use App\Template;
 use App\Transformers\TemplateTransformer;
+use Hamcrest\Core\Set;
 use Illuminate\Http\Request;
 
 class TemplateController extends Controller
@@ -37,7 +38,7 @@ class TemplateController extends Controller
         $template->fill($data);
         $template->save();
 
-        return $this->response-item($template , new TemplateTransformer());
+        return $this->response->item($template , new TemplateTransformer());
     }
 
     public function show ( Settings $settings , Template $template)
@@ -47,6 +48,20 @@ class TemplateController extends Controller
             return $this->response->errorUnauthorized();
         }
 
+        return $this->response->item($template , new TemplateTransformer());
+    }
+
+    public function one(Settings $settings)
+    {
+        $user = $this->user();
+        if ($settings->user_id !== $user->id){
+            return $this->response->errorUnauthorized();
+        }
+
+        $template = Template::where('setting_id' , $settings->id)->first();
+        if (!$template) {
+            $template = Template::create(['setting_id' => $settings->id , 'user_id' => $user->id , 'template' => [] , 'setting' => [] ]);
+        }
         return $this->response->item($template , new TemplateTransformer());
     }
 

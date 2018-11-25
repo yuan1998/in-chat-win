@@ -36,6 +36,9 @@
                                 </div>
                                 <div class="setting-card-footer mac-card-footer">
                                     <el-button type="text">
+                                        <router-link :to="'template/'+ item.id">样式</router-link>
+                                    </el-button>
+                                    <el-button type="text">
                                         <router-link :to="'message/'+ item.id">短句</router-link>
                                     </el-button>
                                     <el-button

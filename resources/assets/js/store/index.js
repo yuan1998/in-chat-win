@@ -5,6 +5,7 @@ import router from './router'
 import setting from './setting'
 import message from './message'
 import domain from './domain'
+import template from './template'
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ const store = new Vuex.Store({
         setting,
         message,
         domain,
+        template,
     }
 });
 

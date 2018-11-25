@@ -117,6 +117,8 @@ $api->version('v1', [
             ->name('api.template.show');
         $api->patch('/setting/{settings}/template/{template}' , 'TemplateController@update')
             ->name('api.template.update');
+        $api->get('/setting/{settings}/template/one' , 'TemplateController@one')
+            ->name('name.template.one');
         $api->get('/setting/{settings}/template/{template}' , 'TemplateController@show')
             ->name('name.template.show');
 
