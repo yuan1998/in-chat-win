@@ -1,24 +1,24 @@
-import {setStorage} from "./storage";
+import { setStorage } from "./storage";
 
 const { MIX_TOKEN_NAME } = process.env;
 
 const saveToken = (data) => {
-    setStorage(MIX_TOKEN_NAME , data.access_token);
-    setStorage(MIX_TOKEN_NAME + '_expired_at' , new Date().getTime() + data.expires_in * 1000);
+    setStorage(MIX_TOKEN_NAME, data.access_token);
+    setStorage(MIX_TOKEN_NAME + '_expired_at', new Date().getTime() + data.expires_in * 1000);
 };
 
-const oneOf = (key , arr) => {
+const oneOf = (key, arr) => {
     return arr.includes(key);
 };
 
-const removeOf = (key , arr) => {
+const removeOf = (key, arr) => {
     let result = arr.indexOf(key);
 
-    if(result === -1){
+    if (result === -1) {
         return false;
     }
 
-    return !!arr.splice(result , 1);
+    return !!arr.splice(result, 1);
 };
 
 const trim = (s, c) => {
@@ -30,39 +30,56 @@ const trim = (s, c) => {
 };
 
 const params = (obj) => {
-    let str = '';
+    let str = [];
 
-    for(let key in obj) {
-        let item = obj[key];
-        switch (typeof item) {
-            case 'string':
-                str += `${key}=${item}&`;
-                break;
-            case 'object' :
-                if (isArray(item)) {
-                    let t = '';
-                    item.forEach( (each) => {
-                        t += `${each},`;
-                    });
-                    t = trim(t , ',');
-                    str += `${key}=${t}&`;
-                }
-                break;
+    for (let p in obj) {
+        if (obj.hasOwnProperty(p)) {
+            str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[ p ]));
         }
     }
-
-    return trim(str , '&');
+    return str.join("&");
 };
 
 const cloneOf = (obj) => {
     return JSON.parse(JSON.stringify(obj));
 };
 
+const parseTime = (time) => {
+    time = parseInt(time);
+
+    const second = time/ 1000;
+    const minute = second / 60;
+    const hour   = minute / 60;
+    const day    = hour / 24;
+
+    let str = '';
+    if (day > 1) {
+        str += `${Math.floor(day)}天`;
+    }
+    if (hour > 1) {
+        str += `${Math.floor(hour % 24)}小时`;
+    }
+    if (minute > 1) {
+        str += `${Math.floor(minute % 60)}分钟`;
+    }
+    if (second > 0) {
+        let s = Math.floor(second % 60);
+        str += `${s || '小于1'}秒`;
+    }
+
+    if (str === '') {
+        console.log(time , second);
+    }
+
+    return str;
+};
+
 export {
     saveToken,
     oneOf,
     removeOf,
-    params ,
+    params,
     trim,
-    cloneOf
+    cloneOf,
+    parseTime
 }

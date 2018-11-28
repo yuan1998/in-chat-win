@@ -23,6 +23,11 @@ const router = {
                         component: (resolve) => require(['../components/setting-list'], resolve),
                     },
                     {
+                        path: 'logs',
+                        name: '所有日志',
+                        component: (resolve) => require(['../components/logs'], resolve),
+                    },
+                    {
                         path: 'message/:id',
                         name: '短句',
                         component: (resolve) => require(['../components/message-list'], resolve),

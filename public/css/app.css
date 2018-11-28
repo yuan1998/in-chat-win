@@ -406,20 +406,21 @@ template {
           flex: 12;
 }
 
-.y-footer-type-1 .y-footer-form .y-footer-input-wrap input {
-  height: 45px;
-  line-height: 45px;
-  padding: 6.75px;
+.y-footer-type-1 .y-footer-form .y-footer-input-wrap .y-footer-input {
+  height: 29.25px;
+  line-height: 1.3;
+  padding: 0 6.75px;
   border: none;
   display: block;
-  width: 100%;
   font-size: 19.35px;
   color: #555;
   border-bottom: 0.72px solid #d8d8d8;
+  resize: none;
+  width: 100%;
   outline: none;
 }
 
-.y-footer-type-1 .y-footer-form .y-footer-input-wrap textarea {
+.y-footer-type-1 .y-footer-form .y-footer-input-wrap .y-footer-textarea {
   padding: 3.15px 6.75px 3.15px 6.75px;
   color: #555;
   height: 76.5px;

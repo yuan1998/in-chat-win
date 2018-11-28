@@ -17,7 +17,7 @@ class CreateLogsTable extends Migration
             $table->increments('id');
             $table->string('type')->default('web');
             $table->string('ip')->nullable();
-            $table->string('info')->nullable();
+            $table->json('info')->nullable();
             $table->string('time')->nullable();
             $table->string('url')->nullable();
             $table->string('cookie')->nullable();

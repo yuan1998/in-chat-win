@@ -29,6 +29,13 @@
                         </i>
                         <span slot="title">所有域名</span>
                     </el-menu-item>
+                    <el-menu-item index="/admin/logs">
+                        <i class="el-icon y-icon">
+                            <img src="../../images/log.png" alt="">
+                        </i>
+                        <span slot="title">日志</span>
+                    </el-menu-item>
+
 
                 </el-menu>
             </el-aside>

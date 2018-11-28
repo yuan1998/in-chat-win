@@ -1,8 +1,8 @@
-import {authRequest} from "./request";
+import { authRequest } from "./request";
 
-const update = async (id , data) => {
+const update = async (id, data) => {
     let options = {
-        url: 'setting/' + id ,
+        url   : 'setting/' + id,
         data,
         method: 'PATCH',
     };
@@ -12,7 +12,7 @@ const update = async (id , data) => {
 
 const create = async (data) => {
     let options = {
-        url: 'setting',
+        url   : 'setting',
         data,
         method: 'POST'
     };
@@ -22,7 +22,7 @@ const create = async (data) => {
 
 const destroy = async (id) => {
     let options = {
-        url : 'setting/' + id,
+        url   : 'setting/' + id,
         method: 'DELETE',
     };
     return await authRequest(options);

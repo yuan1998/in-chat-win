@@ -1,14 +1,14 @@
 webpackJsonp([2],{
 
-/***/ 218:
+/***/ 220:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(230)
+var __vue_script__ = __webpack_require__(234)
 /* template */
-var __vue_template__ = __webpack_require__(231)
+var __vue_template__ = __webpack_require__(235)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,14 +48,14 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 230:
+/***/ 234:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_assist__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_assist__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(82);
 
 
@@ -63,6 +63,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -254,7 +261,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /***/ }),
 
-/***/ 231:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -290,7 +297,7 @@ var render = function() {
                     _c("i", { staticClass: "el-icon y-icon" }, [
                       _c("img", {
                         attrs: {
-                          src: __webpack_require__(232),
+                          src: __webpack_require__(236),
                           alt: ""
                         }
                       })
@@ -305,7 +312,7 @@ var render = function() {
                     _c("i", { staticClass: "el-icon y-icon" }, [
                       _c("img", {
                         attrs: {
-                          src: __webpack_require__(233),
+                          src: __webpack_require__(237),
                           alt: ""
                         }
                       })
@@ -320,7 +327,7 @@ var render = function() {
                     _c("i", { staticClass: "el-icon y-icon" }, [
                       _c("img", {
                         attrs: {
-                          src: __webpack_require__(234),
+                          src: __webpack_require__(238),
                           alt: ""
                         }
                       })
@@ -328,6 +335,18 @@ var render = function() {
                     _vm._v(" "),
                     _c("span", { attrs: { slot: "title" }, slot: "title" }, [
                       _vm._v("所有域名")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("el-menu-item", { attrs: { index: "/admin/logs" } }, [
+                    _c("i", { staticClass: "el-icon y-icon" }, [
+                      _c("img", {
+                        attrs: { src: __webpack_require__(263), alt: "" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("span", { attrs: { slot: "title" }, slot: "title" }, [
+                      _vm._v("日志")
                     ])
                   ])
                 ],
@@ -364,7 +383,7 @@ var render = function() {
                         [
                           _c("img", {
                             attrs: {
-                              src: __webpack_require__(235),
+                              src: __webpack_require__(239),
                               alt: ""
                             }
                           })
@@ -444,31 +463,38 @@ if (false) {
 
 /***/ }),
 
-/***/ 232:
+/***/ 236:
 /***/ (function(module, exports) {
 
 module.exports = "/images/composer.png?e2603c86789bc9670c2c4f3310a428e6";
 
 /***/ }),
 
-/***/ 233:
+/***/ 237:
 /***/ (function(module, exports) {
 
 module.exports = "/images/stack.png?e097fe8f2c3e41a5f6688c3c5598ee90";
 
 /***/ }),
 
-/***/ 234:
+/***/ 238:
 /***/ (function(module, exports) {
 
 module.exports = "/images/global.png?906895c303af04eedd0059bca3c180ae";
 
 /***/ }),
 
-/***/ 235:
+/***/ 239:
 /***/ (function(module, exports) {
 
 module.exports = "/images/collapse.png?8d1e3cb18f2cce4865e9806b6e0ccc41";
+
+/***/ }),
+
+/***/ 263:
+/***/ (function(module, exports) {
+
+module.exports = "/images/log.png?9a62586221b7a3aaeb6958edd7448c49";
 
 /***/ })
 

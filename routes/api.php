@@ -17,7 +17,6 @@ $api = app('Dingo\Api\Routing\Router');
 $api->version('v1', [
     'namespace'  => 'App\Http\Controllers\Api',
     'middleware' => ["serializer:array", 'bindings'],
-
 ], function ($api) {
 
     $api->group([
@@ -58,10 +57,8 @@ $api->version('v1', [
          *************************/
         $api->get('/auth', 'AuthorizationController@index')
             ->name('api.auth.index');
-
         $api->put('/auth/current', 'AuthorizationController@update')
             ->name('api.auth.update');
-
         $api->delete('/auth/current', 'AuthorizationController@destroy')
             ->name('api.auth.destroy');
         $api->get('/auth/current' , 'AuthorizationController@show')
@@ -125,6 +122,14 @@ $api->version('v1', [
         $api->get('/setting/{settings}/template/{template}' , 'TemplateController@show')
             ->name('name.template.show');
 
+
+        /**
+         * Log
+         ***********************/
+        $api->get('/log','LogController@index')
+            ->name('api.log.index');
+        $api->delete('/log/{ids}' , 'LogController@destroy')
+            ->name('api.log.destroy');
     });
 
 });

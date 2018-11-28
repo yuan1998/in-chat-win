@@ -74,7 +74,7 @@
                             <div class="y-footer-form-wrap" :style="styleList('form')" :class="{ 'active' : current === 'form' }" @click.stop="changeCurrent('form')">
                                 <form class="y-footer-form">
                                     <div class="y-footer-input-wrap" :style="styleList('inputWrap')">
-                                        <component :style="styleList('input')" :is="settingItem('form').elementTagName" class="y-footer-form-value" name="test" :class="'y-footer-' + settingItem('form').elementTagName" :placeholder="settingItem('form').placeholder"></component>
+                                        <textarea :style="styleList('input')"  class="y-footer-form-value" name="test" :class="'y-footer-' + settingItem('form').elementTagName" :placeholder="settingItem('form').placeholder"></textarea>
                                     </div>
                                     <div class="y-footer-button-wrap" :style="styleList('buttonWrap')">
                                         <button :style="styleList('button')" type="submit">{{settingItem('form').btnText}}</button>
@@ -436,7 +436,7 @@
                                 <div class="y-footer-form-wrap" style="${parseStyleToString('form')}">
                                     <form class="y-footer-form">
                                         <div class="y-footer-input-wrap" style="${parseStyleToString('inputWrap')}">
-                                            ${ form.elementTagName === 'input' ? `<input style="${parseStyleToString('input')}" type="text" name="message" placeholder="${form.placeholder}" class="y-footer-form-value y-footer-input">` : `<textarea style="${parseStyleToString('input')}" name="message" placeholder="${form.placeholder}" class="y-footer-form-value y-footer-input"></textarea>` }
+                                            <textarea style="${parseStyleToString('input')}" name="message-value" placeholder="${form.placeholder}" class="y-footer-form-value y-footer-${form.elementTagName}"></textarea>
                                         </div>
                                         <div class="y-footer-button-wrap" style="${parseStyleToString('buttonWrap')}">
                                             <button style="${parseStyleToString('button')}" type="submit">${form.btnText}</button>

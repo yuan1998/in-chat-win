@@ -9,13 +9,16 @@ class Log extends Model
     protected $fillable = [
         'ip',
         'url',
+        'time',
+        'info',
         'type',
         'cookie',
         'data'
     ];
 
     protected $casts = [
-        'data'=> 'json'
+        'data' => 'json',
+        'info' => 'json',
     ];
 
 }
