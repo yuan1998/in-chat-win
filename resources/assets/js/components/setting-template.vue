@@ -21,7 +21,7 @@
                                     {{settingItem('header').title}}
                                 </div>
                             </div>
-                            <a href="#" class="y-header-tel-wrap">
+                            <a class="y-header-tel-wrap">
                                 <span class="y-header-tel-icon y-item-lh">
                                     <svg t="1542942287111" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg" p-id="2905"
@@ -77,7 +77,7 @@
                                         <textarea :style="styleList('input')"  class="y-footer-form-value" name="test" :class="'y-footer-' + settingItem('form').elementTagName" :placeholder="settingItem('form').placeholder"></textarea>
                                     </div>
                                     <div class="y-footer-button-wrap" :style="styleList('buttonWrap')">
-                                        <button :style="styleList('button')" type="submit">{{settingItem('form').btnText}}</button>
+                                        <button :style="styleList('button')" type="button">{{settingItem('form').btnText}}</button>
                                     </div>
                                 </form>
                             </div>

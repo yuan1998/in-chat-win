@@ -18,7 +18,7 @@ class CreateDomiansTable extends Migration
             $table->unsignedInteger('setting_id');
             $table->unsignedInteger('user_id');
             $table->string('description')->nullable();
-            $table->string('domain')->unique();
+            $table->string('domain')->nullable();
             $table->boolean('open')->default(true);
             $table->string('tags')->nullable();
             $table->timestamps();
