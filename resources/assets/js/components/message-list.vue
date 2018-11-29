@@ -310,7 +310,7 @@
                 }
             },
             closeDialog() {
-                this.$refs[ 'form' ].resetFields();
+                this.form = cloneOf(defaultForm);
                 this.submitting    = false;
                 this.dialogVisible = false;
             },
