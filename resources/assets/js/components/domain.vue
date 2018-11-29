@@ -228,7 +228,7 @@
             async handleDelete (item) {
                 let res = this.aDestroy(item.id);
 
-                if (res.status === 200) {
+                if (res.status === 204) {
                     this.$notify({
                         message: '删除了' ,
                         type: 'success' ,
