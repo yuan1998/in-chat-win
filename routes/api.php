@@ -25,12 +25,12 @@ $api->version('v1', [
         'expires' => config('api.rate_limits.access.expires'),
     ],function ($api) {
 
-        $api->get('domainSetting' , 'SettingController@pageGetSetting' )
+        $api->get('/domainSetting' , 'SettingController@pageGetSetting' )
             ->name('api.setting.pageGetSetting');
-        $api->get('message/{message}' , 'MessageController@one')
+        $api->get('/message/{message}' , 'MessageController@one')
             ->name('api.message.one');
 
-        $api->post('cl' , 'LogController@store')
+        $api->post('/cl' , 'LogController@store')
             ->name('api.log.store');
 
     });
