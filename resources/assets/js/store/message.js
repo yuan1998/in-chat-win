@@ -93,7 +93,7 @@ const message = {
 
             return res;
         } ,
-        async destroy ({commit} , id) {
+        async destroy ({commit , getters} , id) {
             let res = await Message.destroy(id);
 
             if (res.status === 204) {
