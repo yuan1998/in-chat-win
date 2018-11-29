@@ -24,7 +24,8 @@
                 数据出错.
             </div>
             <div v-else-if="currentMessage.length === 0">
-                一条都没有<el-button @click="dialogVisible = true" type="text">添加一条吧</el-button>
+                一条都没有
+                <el-button @click="dialogVisible = true" type="text">添加一条吧</el-button>
             </div>
             <el-row v-else :gutter="30">
                 <el-col :span="8" v-for="item in filterable" :key="item.id" style="margin-bottom: 15px;">
@@ -155,38 +156,38 @@
     </div>
 </template>
 <script>
-    import {mapActions , mapGetters} from 'vuex'
-    import {cloneOf}                 from "../utils/assist";
-    import {Yuandown}                from "../utils/yuandown";
+    import { mapActions, mapGetters } from 'vuex'
+    import { cloneOf }                from "../utils/assist";
+    import { Yuandown }               from "../utils/yuandown";
 
     const defaultMessage = {
         value: ''
     };
-    const defaultForm = {
-        keyword: '' ,
+    const defaultForm    = {
+        keyword: '',
         message: [
-            cloneOf(defaultMessage) ,
+            cloneOf(defaultMessage),
         ]
     };
 
     export default {
-        props: {} ,
-        data () {
+        props   : {},
+        data() {
             return {
-                loading: false ,
-                query: '' ,
-                placeholder: '关键字' ,
-                inputHover: false ,
-                dialogVisible: false ,
-                form: cloneOf(defaultForm) ,
-                submitting: false ,
+                loading      : false,
+                query        : '',
+                placeholder  : '关键字',
+                inputHover   : false,
+                dialogVisible: false,
+                form         : cloneOf(defaultForm),
+                submitting   : false,
             }
-        } ,
-        async mounted () {
-            const { $notify ,$route , gSettingCurrent , settingShow , messageCurrent} = this;
-            let id = $route.params.id;
-            let current = gSettingCurrent(id);
-            this.loading = true;
+        },
+        async mounted() {
+            const { $notify, $route, gSettingCurrent, settingShow, messageCurrent } = this;
+            let id                                                                  = $route.params.id;
+            let current                                                             = gSettingCurrent(id);
+            this.loading                                                            = true;
 
             if (!current) {
                 let res = await settingShow(id);
@@ -199,157 +200,158 @@
                 let res = await messageCurrent(id);
                 $notify({
                     message: '加载完成.',
-                    title: '提示',
-                    type: 'success'
+                    title  : '提示',
+                    type   : 'success'
                 })
             }
             else {
                 $notify.error({
                     message: '发生错误',
-                    title: '警告'
+                    title  : '警告'
                 });
                 throw new Error('Error . id error');
             }
 
             this.loading = false;
-        } ,
-        methods: {
+        },
+        methods : {
             ...mapActions({
-                aCreate: 'message/store' ,
-                aUpdate: 'message/update' ,
-                aDelete: 'message/destroy' ,
-                messageCurrent: 'message/current' ,
-                settingShow: 'setting/settingShow' ,
-                settingDefault: 'setting/setDefault' ,
-            }) ,
-            clearQuery () {
+                aCreate       : 'message/store',
+                aUpdate       : 'message/update',
+                aDelete       : 'message/destroy',
+                messageCurrent: 'message/current',
+                settingShow   : 'setting/settingShow',
+                settingDefault: 'setting/setDefault',
+            }),
+            clearQuery() {
                 if (this.inputIcon === 'circle-close')
                     this.query = '';
-            } ,
-            addMessageItem () {
+            },
+            addMessageItem() {
                 this.form.message.push(cloneOf(defaultMessage));
                 this.$nextTick(() => {
                     this.containScrollBottom('contain');
                 })
-            } ,
-            removeMessageItem (index) {
-                this.form.message.splice(index , 1);
-            } ,
-            containScrollBottom (ref) {
-                let el = this.$refs[ref];
+            },
+            removeMessageItem(index) {
+                this.form.message.splice(index, 1);
+            },
+            containScrollBottom(ref) {
+                let el       = this.$refs[ ref ];
                 el.scrollTop = el.scrollHeight;
-            } ,
-            handleUpdate (item) {
-                this.form = cloneOf(item);
+            },
+            handleUpdate(item) {
+                this.form          = cloneOf(item);
                 this.dialogVisible = true;
-            } ,
-            validatorKeyword (rule , value , callback) {
+            },
+            validatorKeyword(rule, value, callback) {
                 if (value === '') {
                     callback(new Error('输入内容!'));
                 }
-                else if (this.gNameExists(value , this.form.id)) {
+                else if (this.gNameExists(value, this.form.id)) {
                     callback(new Error('关键字已存在'));
                 }
                 else {
                     callback();
                 }
-            } ,
-            handleSubmit (ref) {
-                const {$refs , $notify , form , aCreate , aUpdate , closeDialog} = this;
+            },
+            handleSubmit(ref) {
+                const { $refs, $notify, form, aCreate, aUpdate, closeDialog } = this;
 
-                $refs[ref].validate(async (valid) => {
+                $refs[ ref ].validate(async (valid) => {
                     if (valid) {
                         let res = form.id ? await aUpdate(form) : await aCreate(form);
 
                         if (res.status === 200) {
                             $notify({
-                                title: '恭喜' ,
-                                message: '操作成功.' ,
-                                type: 'success'
+                                title  : '恭喜',
+                                message: '操作成功.',
+                                type   : 'success'
                             })
                         }
                         closeDialog();
                     } else {
                         $notify.error({
-                            message: '不行哦，Message is Empty.' ,
-                            title: '提示'
+                            message: '不行哦，Message is Empty.',
+                            title  : '提示'
                         });
                     }
                 });
-            } ,
-            async handleDelete (item) {
+            },
+            async handleDelete(item) {
                 item.deleting = true;
-                let res = await this.aDelete(item.id);
+                let res       = await this.aDelete(item.id);
 
                 if (res.status === 204) {
                     this.$notify({
-                        title: '恭喜' ,
-                        message: '你杀死了' + item.keyword ,
-                        type: 'success'
+                        title  : '恭喜',
+                        message: '你杀死了' + item.keyword,
+                        type   : 'success'
                     });
                 }
                 else {
                     this.$notify.error({
-                        title: '错误' ,
+                        title  : '错误',
                         message: '发生意外',
                     });
                 }
 
 
-            } ,
-            async handleSetDefault (id) {
+            },
+            async handleSetDefault(id) {
                 let res = await this.settingDefault(id);
 
                 if (res.status === 200) {
                     this.$notify({
-                        title: 'Congratulations' ,
-                        message: 'He became king.' ,
-                        type: 'success'
+                        title  : 'Congratulations',
+                        message: 'He became king.',
+                        type   : 'success'
                     });
                 }
-            } ,
-            closeDialog () {
-                this.submitting = false;
+            },
+            closeDialog() {
+                this.$refs[ 'form' ].resetFields();
+                this.submitting    = false;
                 this.dialogVisible = false;
-            } ,
-            closedDialog () {
-                this.$refs['form'].resetFields();
-            } ,
-            closeDialogBefore (done) {
+            },
+            closedDialog() {
+                this.$refs[ 'form' ].resetFields();
+            },
+            closeDialogBefore(done) {
                 if (!this.submitting) {
                     done();
                 }
-            } ,
-            strParse (str) {
+            },
+            strParse(str) {
                 return Yuandown(str);
             }
-        } ,
+        },
         computed: {
             ...mapGetters({
-                gCurrent: 'message/current' ,
-                gSettingCurrent: 'setting/current' ,
-                gList: 'message/message' ,
-                gNameExists: 'message/nameExists' ,
-            }) ,
-            isCurrent () {
+                gCurrent       : 'message/current',
+                gSettingCurrent: 'setting/current',
+                gList          : 'message/message',
+                gNameExists    : 'message/nameExists',
+            }),
+            isCurrent() {
                 return this.gCurrent(this.$route.params.id);
-            } ,
-            loaded () {
+            },
+            loaded() {
                 return !(this.loading || !this.currentMessage);
-            } ,
-            settingCurrent () {
+            },
+            settingCurrent() {
                 return this.gSettingCurrent(this.$route.params.id);
-            } ,
-            currentMessage () {
+            },
+            currentMessage() {
                 return this.isCurrent && this.gList;
-            } ,
-            inputIcon () {
+            },
+            inputIcon() {
                 return this.query.length > 0 && this.inputHover
                     ? 'circle-close'
                     : 'search';
-            } ,
-            filterable () {
-                const {currentMessage , query} = this;
+            },
+            filterable() {
+                const { currentMessage, query } = this;
                 if (!currentMessage)
                     return false;
 
@@ -360,8 +362,8 @@
                 return currentMessage.filter(item => {
                     return item.keyword.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
-            } ,
-            currentDefault () {
+            },
+            currentDefault() {
                 return this.settingCurrent.default_message;
             }
         }
