@@ -412,7 +412,7 @@
                                         ${header.title}
                                     </div>
                                 </div>
-                                <a href="${header.telNumber}" class="y-header-tel-wrap">
+                                <a href="tel:${header.telNumber}" class="y-header-tel-wrap">
                                     <span class="y-header-tel-icon y-item-lh">
                                         <svg t="1542942287111" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                              xmlns="http://www.w3.org/2000/svg" p-id="2905"
