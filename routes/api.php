@@ -20,11 +20,15 @@ $api->version('v1', [
 ], function ($api) {
 
     $api->group([
-        'middleware' => ['cors']
+        'middleware' => ['cors'],
+        'limit' => config('api.rate_limits.access.limit'),
+        'expires' => config('api.rate_limits.access.expires'),
     ],function ($api) {
 
         $api->get('domainSetting' , 'SettingController@pageGetSetting' )
             ->name('api.setting.pageGetSetting');
+        $api->get('message/{message}' , 'MessageController@one')
+            ->name('api.message.one');
 
         $api->post('cl' , 'LogController@store')
             ->name('api.log.store');

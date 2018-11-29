@@ -73,4 +73,9 @@ class MessageController extends Controller
         return $this->response->item($message , new MessageTransformer());
     }
 
+    public function one(Message $message)
+    {
+        return $this->response->item($message , new MessageTransformer());
+    }
+
 }
