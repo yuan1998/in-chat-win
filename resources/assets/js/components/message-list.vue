@@ -15,7 +15,7 @@
                     </el-input>
                 </div>
                 <div class="admin-header_controller">
-                    <el-button type="primary" @click="dialogVisible = true">
+                    <el-button type="primary" @click="handleCreate">
                         新建
                     </el-button>
                 </div>
@@ -223,6 +223,10 @@
                 settingShow   : 'setting/settingShow',
                 settingDefault: 'setting/setDefault',
             }),
+            handleCreate () {
+                this.form          = cloneOf(defaultForm);
+                this.dialogVisible = true;
+            },
             clearQuery() {
                 if (this.inputIcon === 'circle-close')
                     this.query = '';
