@@ -56,7 +56,7 @@ const domain = {
             state.domains.splice(index , 1 , defaultDomain(data));
         } ,
         destroy (state , index) {
-            state.splice(index , 1)
+            state.domains.splice(index , 1)
         }
     } ,
     actions: {
