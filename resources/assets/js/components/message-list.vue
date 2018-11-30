@@ -185,9 +185,10 @@
         },
         async mounted() {
             const { $notify, $route, gSettingCurrent, settingShow, messageCurrent } = this;
-            let id                                                                  = $route.params.id;
-            let current                                                             = gSettingCurrent(id);
-            this.loading                                                            = true;
+
+            let id       = $route.params.id;
+            let current  = gSettingCurrent(id);
+            this.loading = true;
 
             if (!current) {
                 let res = await settingShow(id);
