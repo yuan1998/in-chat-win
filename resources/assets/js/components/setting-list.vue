@@ -25,7 +25,8 @@
                     咋回事啊.叫人
                 </div>
                 <div v-else-if="filterable.length === 0">
-                    没有配置,<el-button type="text" @click="dialogVisible = true">点击添加.</el-button>
+                    没有配置,
+                    <el-button type="text" @click="dialogVisible = true">点击添加.</el-button>
                 </div>
                 <el-row v-else :gutter="20">
                     <el-col style="margin-bottom: 20px;" :span="6" v-for="item in filterable" :key="item.id">
@@ -80,7 +81,6 @@
                     title="提示"
                     class="domain-dialog-container"
                     :visible.sync="dialogVisible"
-                    @closed="closedDialog"
                     @before-close="closeDialogBefore"
                     width="50%">
                 <el-form :model="form" ref="form" label-position="top" label-width="120px">
@@ -137,59 +137,57 @@
     </div>
 </template>
 <script>
-    import {mapGetters , mapActions} from 'vuex'
-    import {defaultForm}             from "../utils/setting";
-    import {cloneOf}                 from "../utils/assist";
-    import transferPanel             from '../components/transfer-panel'
+    import { mapGetters, mapActions } from 'vuex'
+    import { defaultForm }            from "../utils/setting";
+    import { cloneOf }                from "../utils/assist";
+    import transferPanel              from '../components/transfer-panel'
 
     export default {
-        data () {
+        data() {
             return {
-                loading: false ,
-                query: '' ,
-                placeholder: 'ADF' ,
-                inputHover: false ,
-                dialogVisible: false ,
-                submitting: false ,
-                form: cloneOf(defaultForm) ,
+                loading      : false,
+                query        : '',
+                placeholder  : 'ADF',
+                inputHover   : false,
+                dialogVisible: false,
+                submitting   : false,
+                form         : cloneOf(defaultForm),
             }
-        } ,
+        },
         components: {
-            transferPanel ,
-        } ,
-        mounted () {
+            transferPanel,
+        },
+        mounted() {
             if (!this.gList) {
                 this.getList();
             }
-        } ,
-        methods: {
+        },
+        methods   : {
             ...mapActions({
-                aList: 'setting/getList' ,
-                aCreate: 'setting/create' ,
+                aList  : 'setting/getList',
+                aCreate: 'setting/create',
                 aUpdate: 'setting/update',
                 aDelete: 'setting/destroy'
-            }) ,
-            async handleSubmit (ref) {
-                const {$refs , $notify , form , aCreate , aUpdate , closeDialog} = this;
+            }),
+            async handleSubmit(ref) {
+                const { $refs, $notify, form, aCreate, aUpdate, closeDialog } = this;
 
-                $refs[ref].validate(async (val) => {
+                $refs[ ref ].validate(async (val) => {
                     if (val) {
                         this.submitting = true;
-                        let res = !form.id ? await aCreate(form) : await aUpdate(form);
-
-                        console.log(res);
+                        let res         = !form.id ? await aCreate(form) : await aUpdate(form);
 
                         if (res.status === 200) {
                             $notify({
-                                message: '他诞生了.' ,
-                                title: '恭喜' ,
-                                type: 'success'
+                                message: '他诞生了.',
+                                title  : '恭喜',
+                                type   : 'success'
                             });
                         }
                         else {
                             $notify.error({
-                                message: '发生了位置错误.' ,
-                                title: '警告'
+                                message: '发生了位置错误.',
+                                title  : '警告'
                             });
                         }
 
@@ -197,17 +195,17 @@
                     }
                     else {
                         $notify({
-                            message: '看仔细了.' ,
-                            title: '提示' ,
-                            type: 'warning'
+                            message: '看仔细了.',
+                            title  : '提示',
+                            type   : 'warning'
                         })
                     }
 
                 })
 
 
-            } ,
-            async getList () {
+            },
+            async getList() {
                 let res = await this.aList();
                 console.log(res);
 
@@ -217,77 +215,77 @@
                 else {
                     this.$message('Error!');
                 }
-            } ,
+            },
             handleUpdate(item) {
-                this.form = cloneOf(item);
+                this.form          = cloneOf(item);
                 this.dialogVisible = true;
             },
             async handleDelete(item) {
                 let res = await this.aDelete(item.id);
 
-                console.log(res);
                 if (res.status === 204) {
                     this.$notify({
                         message: '你删除了他.',
-                        title: '提示',
-                        type: 'success'
+                        title  : '提示',
+                        type   : 'success'
                     })
                 }
                 else {
                     this.$notify.error({
                         message: '发生了意外情况.',
-                        title: '警告',
+                        title  : '警告',
                     });
                 }
 
             },
-            clearQuery () {
+            clearQuery() {
                 if (this.inputIcon === 'circle-close')
                     this.query = '';
-            } ,
-            closeDialog () {
-                this.submitting = false;
+            },
+            closeDialog() {
+                this.form          = cloneOf(defaultForm);
+                this.submitting    = false;
                 this.dialogVisible = false;
-            } ,
-            closedDialog () {
-                this.$refs['form'].resetFields();
-            } ,
-            closeDialogBefore (done) {
+            },
+            closeDialogBefore(done) {
+                if (this.form && this.form.id) {
+                    this.form = cloneOf(defaultForm);
+                }
                 if (!this.submitting) {
                     done();
                 }
-            } ,
-            addQuery (query) {
-                let arr = this.form['list-data'];
+            },
+            addQuery(query) {
+                let arr = this.form[ 'list-data' ];
                 arr.push(query);
-                this.$refs['transfer'].clearQuery();
-            } ,
-            deleteChecked (arr) {
-                let data = this.form['list-data'];
+                this.$refs[ 'transfer' ].clearQuery();
+            },
+            deleteChecked(arr) {
+                let data = this.form[ 'list-data' ];
                 arr.forEach(each => {
                     let index = data.findIndex(v => v === each);
 
                     if (index !== -1) {
-                        data.splice(index , 1);
+                        data.splice(index, 1);
                     } else {
                         this.$message({
-                            type: 'warning' ,
+                            type   : 'warning',
                             message: 'has ' + each + ' on found.'
                         })
                     }
                 });
-            } ,
+            },
 
-        } ,
-        computed: {
+        },
+        computed  : {
             ...mapGetters({
                 gList: 'setting/list'
-            }) ,
-            loaded () {
+            }),
+            loaded() {
                 return (!this.loading && !!this.gList);
-            } ,
-            filterable () {
-                const {gList , query} = this;
+            },
+            filterable() {
+                const { gList, query } = this;
 
                 if (query === '') {
                     return gList;
@@ -296,12 +294,12 @@
                 return this.gList && this.gList.filter((item) => {
                     return item.name.toLowerCase().indexOf(query.toLowerCase()) !== -1;
                 })
-            } ,
-            inputIcon () {
+            },
+            inputIcon() {
                 return this.query.length > 0 && this.inputHover
                     ? 'circle-close'
                     : 'search';
-            } ,
+            },
         }
     }
 </script>

@@ -12111,23 +12111,32 @@ var request = function () {
 
 var getToken = function () {
     var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2() {
-        var token, expiredAt, tokenResponse;
+        var token, now, expiredAt, twentyMin, less, tokenResponse;
         return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
             while (1) {
                 switch (_context2.prev = _context2.next) {
                     case 0:
                         token = Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage__["b" /* getStorage */])(MIX_TOKEN_NAME);
+                        now = new Date().getTime();
                         expiredAt = Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage__["b" /* getStorage */])(MIX_TOKEN_NAME + '_expired_at');
 
-                        if (!(token && new Date().getTime() > expiredAt)) {
-                            _context2.next = 7;
+                        if (!(token && expiredAt)) {
+                            _context2.next = 13;
                             break;
                         }
 
-                        _context2.next = 5;
+                        twentyMin = 20 * 60 * 1000;
+                        less = expiredAt - twentyMin;
+
+                        if (!(now > less)) {
+                            _context2.next = 11;
+                            break;
+                        }
+
+                        _context2.next = 9;
                         return Object(__WEBPACK_IMPORTED_MODULE_3__auth__["d" /* refreshToken */])(token);
 
-                    case 5:
+                    case 9:
                         tokenResponse = _context2.sent;
 
 
@@ -12139,10 +12148,18 @@ var getToken = function () {
                             Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage__["a" /* clearAuthStorage */])();
                         }
 
-                    case 7:
+                    case 11:
+                        _context2.next = 15;
+                        break;
+
+                    case 13:
+                        token = null;
+                        Object(__WEBPACK_IMPORTED_MODULE_2__utils_storage__["a" /* clearAuthStorage */])();
+
+                    case 15:
                         return _context2.abrupt("return", token);
 
-                    case 8:
+                    case 16:
                     case "end":
                         return _context2.stop();
                 }
@@ -17586,8 +17603,7 @@ var index_esm = {
 
 
 /***/ }),
-/* 83 */,
-/* 84 */
+/* 83 */
 /***/ (function(module, exports) {
 
 /*
@@ -17669,6 +17685,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
+/* 84 */,
 /* 85 */,
 /* 86 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -21354,25 +21371,25 @@ var routes = [{
     path: '/login',
     name: 'login',
     component: function component(resolve) {
-        return __webpack_require__.e/* require */(7).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(217)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        return __webpack_require__.e/* require */(8).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(217)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     }
 }, {
     path: '/welcome',
     name: 'welcome',
     component: function component(resolve) {
-        return __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(83)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        return __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(84)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     }
 }, {
     path: '/signup',
     name: 'signUp',
     component: function component(resolve) {
-        return __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(218)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        return __webpack_require__.e/* require */(7).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(218)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     }
 }, {
     path: '/404',
     name: '404',
     component: function component(resolve) {
-        return __webpack_require__.e/* require */(8).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(219)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+        return __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(219)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     }
 }];
 
@@ -64841,7 +64858,7 @@ if(false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var escape = __webpack_require__(176);
-exports = module.exports = __webpack_require__(84)(false);
+exports = module.exports = __webpack_require__(83)(false);
 // imports
 
 
@@ -66604,7 +66621,7 @@ var router = {
             path: '/test',
             name: 'test',
             component: function component(resolve) {
-                return __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(83)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                return __webpack_require__.e/* require */(1/* duplicate */).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(84)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
             }
         }, {
             path: '/admin',
@@ -66622,13 +66639,13 @@ var router = {
                 path: 'setting',
                 name: '所有配置',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(222)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(222)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }, {
                 path: 'logs',
                 name: '所有日志',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(223)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(4).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(223)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }, {
                 path: 'message/:id',
@@ -66646,7 +66663,7 @@ var router = {
                 path: 'domain',
                 name: 'Domains',
                 component: function component(resolve) {
-                    return __webpack_require__.e/* require */(5).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(225)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+                    return __webpack_require__.e/* require */(6).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(225)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
                 }
             }, {
                 path: 'domain/:id',
@@ -67393,7 +67410,8 @@ var message = {
         }(),
         destroy: function () {
             var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref12, id) {
-                var commit = _ref12.commit;
+                var commit = _ref12.commit,
+                    getters = _ref12.getters;
                 var res, index;
                 return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
                     while (1) {
@@ -67692,7 +67710,7 @@ var domain = {
             state.domains.splice(index, 1, defaultDomain(data));
         },
         destroy: function destroy(state, index) {
-            state.splice(index, 1);
+            state.domains.splice(index, 1);
         }
     },
     actions: {

@@ -137,7 +137,7 @@ class SettingController extends Controller
 
         $list->sortByDesc('keyword_count');
 
-        $r = $list->first();
+        $r = $list->last();
 
         if ($r->keyword_count === 0 ) {
             if ($default) {

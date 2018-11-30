@@ -27,7 +27,7 @@ const rules = {
         handle(str) {
             let stra;
             while ((stra = this.regex.exec(str)) !== null) {
-                str = str.replace(stra[0], '<span ' + stra[2] + '="' + stra[3] +'" >'+ escape(stra[4].trim())+ '</span>').trim();
+                str = str.replace(stra[0], '<span style="' + stra[2] + ':' + stra[3] +'" >'+ escape(stra[4].trim())+ '</span>').trim();
             }
             return str;
         }

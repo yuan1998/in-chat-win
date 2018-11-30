@@ -1,6 +1,6 @@
 webpackJsonp([0],{
 
-/***/ 250:
+/***/ 255:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9,13 +9,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(82);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__utils_assist__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_yuandown__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__utils_yuandown__ = __webpack_require__(256);
 
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
 //
 //
 //
@@ -281,6 +282,10 @@ var defaultForm = {
         settingShow: 'setting/settingShow',
         settingDefault: 'setting/setDefault'
     }), {
+        handleCreate: function handleCreate() {
+            this.form = Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(defaultForm);
+            this.dialogVisible = true;
+        },
         clearQuery: function clearQuery() {
             if (this.inputIcon === 'circle-close') this.query = '';
         },
@@ -331,31 +336,33 @@ var defaultForm = {
                             switch (_context2.prev = _context2.next) {
                                 case 0:
                                     if (!valid) {
-                                        _context2.next = 15;
+                                        _context2.next = 16;
                                         break;
                                     }
+
+                                    _this2.submitting = true;
 
                                     if (!form.id) {
-                                        _context2.next = 7;
+                                        _context2.next = 8;
                                         break;
                                     }
 
-                                    _context2.next = 4;
+                                    _context2.next = 5;
                                     return aUpdate(form);
 
-                                case 4:
+                                case 5:
                                     _context2.t0 = _context2.sent;
-                                    _context2.next = 10;
+                                    _context2.next = 11;
                                     break;
 
-                                case 7:
-                                    _context2.next = 9;
+                                case 8:
+                                    _context2.next = 10;
                                     return aCreate(form);
 
-                                case 9:
+                                case 10:
                                     _context2.t0 = _context2.sent;
 
-                                case 10:
+                                case 11:
                                     res = _context2.t0;
 
 
@@ -367,16 +374,16 @@ var defaultForm = {
                                         });
                                     }
                                     closeDialog();
-                                    _context2.next = 16;
+                                    _context2.next = 17;
                                     break;
 
-                                case 15:
+                                case 16:
                                     $notify.error({
                                         message: '不行哦，Message is Empty.',
                                         title: '提示'
                                     });
 
-                                case 16:
+                                case 17:
                                 case "end":
                                     return _context2.stop();
                             }
@@ -468,6 +475,7 @@ var defaultForm = {
             return handleSetDefault;
         }(),
         closeDialog: function closeDialog() {
+            this.form = Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(defaultForm);
             this.submitting = false;
             this.dialogVisible = false;
         },
@@ -475,6 +483,9 @@ var defaultForm = {
             this.$refs['form'].resetFields();
         },
         closeDialogBefore: function closeDialogBefore(done) {
+            if (this.form && this.form.id) {
+                this.form = Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(defaultForm);
+            }
             if (!this.submitting) {
                 done();
             }
@@ -526,7 +537,7 @@ var defaultForm = {
 
 /***/ }),
 
-/***/ 251:
+/***/ 256:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -561,7 +572,7 @@ var rules = {
         handle: function handle(str) {
             var stra = void 0;
             while ((stra = this.regex.exec(str)) !== null) {
-                str = str.replace(stra[0], '<span ' + stra[2] + '="' + stra[3] + '" >' + escape(stra[4].trim()) + '</span>').trim();
+                str = str.replace(stra[0], '<span style="' + stra[2] + ':' + stra[3] + '" >' + escape(stra[4].trim()) + '</span>').trim();
             }
             return str;
         }
@@ -585,7 +596,7 @@ var Yuandown = function Yuandown(str) {
 
 /***/ }),
 
-/***/ 252:
+/***/ 257:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -666,11 +677,7 @@ var render = function() {
                         "el-button",
                         {
                           attrs: { type: "primary" },
-                          on: {
-                            click: function($event) {
-                              _vm.dialogVisible = true
-                            }
-                          }
+                          on: { click: _vm.handleCreate }
                         },
                         [_vm._v("\n                    新建\n                ")]
                       )
@@ -686,7 +693,7 @@ var render = function() {
                 ? _c(
                     "div",
                     [
-                      _vm._v("\n            一条都没有"),
+                      _vm._v("\n            一条都没有\n            "),
                       _c(
                         "el-button",
                         {
@@ -1173,9 +1180,9 @@ if (false) {
 var disposed = false
 var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(250)
+var __vue_script__ = __webpack_require__(255)
 /* template */
-var __vue_template__ = __webpack_require__(252)
+var __vue_template__ = __webpack_require__(257)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */

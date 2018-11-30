@@ -1,10 +1,10 @@
-import axios                           from "axios/index";
-import {clearAuthStorage , getStorage} from "../utils/storage";
-import {refreshToken}                  from "./auth";
-import {saveToken}                     from "../utils/assist";
-import app                             from '../app.js'
+import axios                            from "axios/index";
+import { clearAuthStorage, getStorage } from "../utils/storage";
+import { refreshToken }                 from "./auth";
+import { saveToken }                    from "../utils/assist";
+import app                              from '../app.js'
 
-const {MIX_API_URL , MIX_TOKEN_NAME} = process.env;
+const { MIX_API_URL, MIX_TOKEN_NAME } = process.env;
 
 const request = async (options) => {
     if (typeof options === 'stirng') {
@@ -27,21 +27,30 @@ const request = async (options) => {
     return response;
 };
 
-
 const getToken = async () => {
-
-    let token = getStorage(MIX_TOKEN_NAME);
+    let token     = getStorage(MIX_TOKEN_NAME);
+    let now       = new Date().getTime();
     let expiredAt = getStorage(MIX_TOKEN_NAME + '_expired_at');
-    if (token && new Date().getTime() > expiredAt) {
-        let tokenResponse = await refreshToken(token);
 
-        if (tokenResponse.status === 200) {
-            token = tokenResponse.data.access_token;
-            saveToken(tokenResponse.data);
-        } else {
-            token = null;
-            clearAuthStorage();
+    if (token && expiredAt) {
+        let twentyMin = 20 * 60 * 1000;
+        let less      = expiredAt - twentyMin;
+
+        if (now > less) {
+            let tokenResponse = await refreshToken(token);
+
+            if (tokenResponse.status === 200) {
+                token = tokenResponse.data.access_token;
+                saveToken(tokenResponse.data);
+            } else {
+                token = null;
+                clearAuthStorage();
+            }
         }
+    }
+    else {
+        token = null;
+        clearAuthStorage();
     }
 
     return token;
@@ -58,7 +67,7 @@ const authRequest = async (options) => {
 
     if (!token) {
         app.$notify.error({
-            title: '错误',
+            title  : '错误',
             message: '登录超时.请重新登录.'
         });
         app.$store.commit('auth/clearUser');
@@ -66,15 +75,15 @@ const authRequest = async (options) => {
         return false;
     }
 
-    let headers = options.headers || {};
+    let headers           = options.headers || {};
     headers.Authorization = 'Bearer ' + token;
-    options.headers = headers;
+    options.headers       = headers;
 
     return await request(options);
 };
 
 export {
-    authRequest ,
-    request ,
+    authRequest,
+    request,
     getToken
 }

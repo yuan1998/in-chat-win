@@ -6,13 +6,13 @@ webpackJsonp([3],{
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(253)
+  __webpack_require__(258)
 }
 var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(257)
+var __vue_script__ = __webpack_require__(260)
 /* template */
-var __vue_template__ = __webpack_require__(258)
+var __vue_template__ = __webpack_require__(261)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,49 +52,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 253:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(254);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(255)("2aa1b4d5", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-024d0dee\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./setting-template.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-024d0dee\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./setting-template.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 254:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(84)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.setting-template-wrapper[data-v-024d0dee] {\n  padding-top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.setting-template-wrapper .preview-container[data-v-024d0dee] {\n    width: 450px;\n    height: 700px;\n    background-color: #fff;\n    -webkit-box-flex: 0;\n        -ms-flex: none;\n            flex: none;\n}\n.setting-template-wrapper .edit-container[data-v-024d0dee] {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding-left: 20px;\n}\n.setting-template-wrapper .edit-wrapper[data-v-024d0dee] {\n    max-width: 450px;\n    min-height: 700px;\n    height: auto;\n    padding: 10px;\n    width: 100%;\n    display: block;\n    border-radius: 2px;\n    border: 1px solid rgba(0, 0, 0, 0.1);\n}\n.setting-template-wrapper .edit-null[data-v-024d0dee] {\n    position: absolute;\n    top: 50%;\n    left: 0;\n    right: 0;\n    font-size: 27px;\n    display: block;\n    width: 100%;\n    text-align: center;\n    color: #777777;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n}\n.setting-template-wrapper .label-input-color .label-input[data-v-024d0dee] {\n    display: inline-block;\n    width: 80%;\n}\n.setting-template-wrapper .label-input-color .label-input-right[data-v-024d0dee] {\n    position: absolute;\n    left: 84%;\n}\n.edit-form[data-v-024d0dee] {\n  position: static;\n}\n.form-footer[data-v-024d0dee] {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  text-align: right;\n  padding: 10px;\n}\n.active[data-v-024d0dee]::before {\n  position: absolute;\n  content: '';\n  display: inline-block;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 0;\n  border: 3px dashed #000;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 255:
+/***/ 226:
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -113,7 +71,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(256)
+var listToStyles = __webpack_require__(227)
 
 /*
 type StyleObject = {
@@ -323,7 +281,7 @@ function applyToTag (styleElement, obj) {
 
 /***/ }),
 
-/***/ 256:
+/***/ 227:
 /***/ (function(module, exports) {
 
 /**
@@ -357,7 +315,49 @@ module.exports = function listToStyles (parentId, list) {
 
 /***/ }),
 
-/***/ 257:
+/***/ 258:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(259);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(226)("2aa1b4d5", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-024d0dee\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./setting-template.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-024d0dee\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/sass-loader/lib/loader.js!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./setting-template.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 259:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(83)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.setting-template-wrapper[data-v-024d0dee] {\n  padding-top: 20px;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n}\n.setting-template-wrapper .preview-container[data-v-024d0dee] {\n    width: 450px;\n    height: 700px;\n    background-color: #fff;\n    -webkit-box-flex: 0;\n        -ms-flex: none;\n            flex: none;\n}\n.setting-template-wrapper .edit-container[data-v-024d0dee] {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n    padding-left: 20px;\n}\n.setting-template-wrapper .edit-wrapper[data-v-024d0dee] {\n    max-width: 450px;\n    min-height: 700px;\n    height: auto;\n    padding: 10px;\n    width: 100%;\n    display: block;\n    border-radius: 2px;\n    border: 1px solid rgba(0, 0, 0, 0.1);\n}\n.setting-template-wrapper .edit-null[data-v-024d0dee] {\n    position: absolute;\n    top: 50%;\n    left: 0;\n    right: 0;\n    font-size: 27px;\n    display: block;\n    width: 100%;\n    text-align: center;\n    color: #777777;\n    -webkit-transform: translateY(-50%);\n            transform: translateY(-50%);\n}\n.setting-template-wrapper .label-input-color .label-input[data-v-024d0dee] {\n    display: inline-block;\n    width: 80%;\n}\n.setting-template-wrapper .label-input-color .label-input-right[data-v-024d0dee] {\n    position: absolute;\n    left: 84%;\n}\n.edit-form[data-v-024d0dee] {\n  position: static;\n}\n.form-footer[data-v-024d0dee] {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  text-align: right;\n  padding: 10px;\n}\n.active[data-v-024d0dee]::before {\n  position: absolute;\n  content: '';\n  display: inline-block;\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n  z-index: 0;\n  border: 3px dashed #000;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 260:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -371,6 +371,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -763,36 +786,36 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
             var list = {
                 header: {
-                    backgroundColor: header.backgroundColor,
+                    'background-color': header.backgroundColor,
                     color: header.color
                 },
                 main: {
-                    backgroundColor: main.backgroundColor
+                    'background-color': main.backgroundColor
                 },
                 leftText: {
-                    backgroundColor: left.backgroundColor,
+                    'background-color': left.backgroundColor,
                     color: left.color
                 },
                 leftAvatar: {
-                    backgroundImage: !!left.avatar ? 'url(' + left.avatar + ')' : ''
+                    'background-image': !!left.avatar ? 'url(' + left.avatar + ')' : ''
                 },
                 rightText: {
-                    backgroundColor: right.backgroundColor,
+                    'background-color': right.backgroundColor,
                     color: right.color
                 },
                 rightAvatar: {
-                    backgroundImage: !!right.avatar ? 'url(' + right.avatar + ')' : ''
+                    'background-image': !!right.avatar ? 'url(' + right.avatar + ')' : ''
                 },
                 input: {
                     color: form.color,
-                    backgroundColor: form.backgroundColor
+                    'background-color': form.backgroundColor
                 },
                 form: {
-                    backgroundColor: form.wrapBackgroundColor
+                    'background-color': form.wrapBackgroundColor
                 },
                 button: {
                     color: form.btnColor,
-                    backgroundColor: form.btnBackgroundColor
+                    'background-color': form.btnBackgroundColor
                 },
                 inputWrap: {
                     flex: form.inputSpan
@@ -801,8 +824,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     flex: form.buttonSpan
                 },
                 footer: {
-                    borderColor: footer.borderColor,
-                    backgroundColor: footer.backgroundColor,
+                    'border-color': footer.borderColor,
+                    'background-color': footer.backgroundColor,
                     color: footer.color
                 }
             };
@@ -820,7 +843,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var parseStyleToString = this.parseStyleToString;
 
             return {
-                header: '\n                    <div id="y-chat-header" >\n                        <div class="y-header-wrapper y-header-type-1" style="' + parseStyleToString('header') + '">\n                            <div class="y-header-back-icon y-item-lh">\n                                <svg t="1542941432445" class="icon" viewBox="0 0 1024 1024" version="1.1"\n                                     xmlns="http://www.w3.org/2000/svg" p-id="1943"\n                                     xmlns:xlink="http://www.w3.org/1999/xlink"\n                                     width="80" height="80">\n                                    <defs>\n                                    </defs>\n                                    <path d="M780.738722 92.147922 358.435523 512.007105 780.738722 931.866287C801.939138 952.953029 801.939138 987.140831 780.738722 1008.227572 759.538306 1029.285895 725.151571 1029.285895 703.951155 1008.227572L243.254173 550.173538C222.053757 529.115215 222.053757 494.927413 243.254173 473.840672L703.951155 15.815056C725.151571-5.271685 759.538306-5.271685 780.738722 15.815056 801.939138 36.901797 801.939138 71.0896 780.738722 92.147922Z"\n                                          p-id="1944" fill="' + header.backIconColor + '"></path>\n                                </svg>\n                            </div>\n                            <div class="y-header-text-wrap">\n                                <div>\n                                    ' + header.title + '\n                                </div>\n                            </div>\n                            <a href="' + header.telNumber + '" class="y-header-tel-wrap">\n                                <span class="y-header-tel-icon y-item-lh">\n                                    <svg t="1542942287111" class="icon" viewBox="0 0 1024 1024" version="1.1"\n                                         xmlns="http://www.w3.org/2000/svg" p-id="2905"\n                                         xmlns:xlink="http://www.w3.org/1999/xlink"\n                                         width="80" height="80">\n                                        <defs>\n                                        </defs>\n                                        <path d="M4 270.312c8.16-31.028 13.994-62.914 25.056-92.876 13.72-37.148 40.66-62.254 80.35-72.862A1085.464 1085.464 0 0 0 196.14 77.46c28.49-10.234 52.55-3.62 70.594 18.58 52.982 65.18 83.392 139.28 83.3 224.43-0.024 26.734-11.494 44.416-36.714 56.08-48.64 22.488-56.586 52.3-20.842 93.232 51.516 58.978 106.052 115.42 161.068 171.206 32.23 32.684 66.78 63.35 102.31 92.45 43.346 35.492 70.972 28.612 94.918-22.172 11.26-23.874 29.184-35.59 54.152-35.3 86.98 1.012 163.382 30.834 229.196 87.496 18.49 15.92 23.17 36.656 16.592 59.84-5.992 21.112-12.02 42.208-18.79 63.088-33.104 102.08-106.354 149.524-213.04 128.51-57.772-11.368-116.376-29.678-168.53-56.604-247.202-127.668-428.24-316.764-522.886-582.306-6.294-17.646-11.164-35.99-14.64-54.398-3.082-16.344-3.306-33.222-4.79-49.868L4 270.312zM547.552 11.038c256.354 8.448 466.844 221.256 472.22 477.414 0.84 39.988-14.176 59.94-46.088 61.218-34.7 1.382-50.94-16.626-52.646-58.388-8.6-210.15-173.7-373.312-386.286-381.76-40.866-1.624-62.68-19.208-62.458-50.328 0.242-32.92 23.64-50.2 65.868-48.646 3.132 0.116 6.258 0.332 9.39 0.49z" fill="' + header.telIconColor + '" p-id="2906"></path>\n                                        <path d="M511.584 203.04c170.714 4.654 315.598 150.64 314.34 316.738-0.276 36.186-16.672 56.456-46.848 57.924-30.278 1.466-49.22-18.42-51.592-54.164-8.274-124.724-96.226-212.66-221.528-221.488-39.304-2.764-62.09-22.92-60.2-53.238 1.95-31.188 24.536-46.894 65.828-45.772z" fill="' + header.telIconColor + '" p-id="2907"></path>\n                                    </svg>\n                                </span>\n                                ' + (header.showTelNumber && '<span class="y-header-tel-text">' + header.telNumber + '</span>') + '\n                            </a>\n                        </div>\n                    </div>\n                ',
+                header: '\n                    <div id="y-chat-header" >\n                        <div class="y-header-wrapper y-header-type-1" style="' + parseStyleToString('header') + '">\n                            <div class="y-header-back-icon y-item-lh">\n                                <svg t="1542941432445" class="icon" viewBox="0 0 1024 1024" version="1.1"\n                                     xmlns="http://www.w3.org/2000/svg" p-id="1943"\n                                     xmlns:xlink="http://www.w3.org/1999/xlink"\n                                     width="80" height="80">\n                                    <defs>\n                                    </defs>\n                                    <path d="M780.738722 92.147922 358.435523 512.007105 780.738722 931.866287C801.939138 952.953029 801.939138 987.140831 780.738722 1008.227572 759.538306 1029.285895 725.151571 1029.285895 703.951155 1008.227572L243.254173 550.173538C222.053757 529.115215 222.053757 494.927413 243.254173 473.840672L703.951155 15.815056C725.151571-5.271685 759.538306-5.271685 780.738722 15.815056 801.939138 36.901797 801.939138 71.0896 780.738722 92.147922Z"\n                                          p-id="1944" fill="' + header.backIconColor + '"></path>\n                                </svg>\n                            </div>\n                            <div class="y-header-text-wrap">\n                                <div>\n                                    ' + header.title + '\n                                </div>\n                            </div>\n                            <a href="tel:' + header.telNumber + '" class="y-header-tel-wrap">\n                                <span class="y-header-tel-icon y-item-lh">\n                                    <svg t="1542942287111" class="icon" viewBox="0 0 1024 1024" version="1.1"\n                                         xmlns="http://www.w3.org/2000/svg" p-id="2905"\n                                         xmlns:xlink="http://www.w3.org/1999/xlink"\n                                         width="80" height="80">\n                                        <defs>\n                                        </defs>\n                                        <path d="M4 270.312c8.16-31.028 13.994-62.914 25.056-92.876 13.72-37.148 40.66-62.254 80.35-72.862A1085.464 1085.464 0 0 0 196.14 77.46c28.49-10.234 52.55-3.62 70.594 18.58 52.982 65.18 83.392 139.28 83.3 224.43-0.024 26.734-11.494 44.416-36.714 56.08-48.64 22.488-56.586 52.3-20.842 93.232 51.516 58.978 106.052 115.42 161.068 171.206 32.23 32.684 66.78 63.35 102.31 92.45 43.346 35.492 70.972 28.612 94.918-22.172 11.26-23.874 29.184-35.59 54.152-35.3 86.98 1.012 163.382 30.834 229.196 87.496 18.49 15.92 23.17 36.656 16.592 59.84-5.992 21.112-12.02 42.208-18.79 63.088-33.104 102.08-106.354 149.524-213.04 128.51-57.772-11.368-116.376-29.678-168.53-56.604-247.202-127.668-428.24-316.764-522.886-582.306-6.294-17.646-11.164-35.99-14.64-54.398-3.082-16.344-3.306-33.222-4.79-49.868L4 270.312zM547.552 11.038c256.354 8.448 466.844 221.256 472.22 477.414 0.84 39.988-14.176 59.94-46.088 61.218-34.7 1.382-50.94-16.626-52.646-58.388-8.6-210.15-173.7-373.312-386.286-381.76-40.866-1.624-62.68-19.208-62.458-50.328 0.242-32.92 23.64-50.2 65.868-48.646 3.132 0.116 6.258 0.332 9.39 0.49z" fill="' + header.telIconColor + '" p-id="2906"></path>\n                                        <path d="M511.584 203.04c170.714 4.654 315.598 150.64 314.34 316.738-0.276 36.186-16.672 56.456-46.848 57.924-30.278 1.466-49.22-18.42-51.592-54.164-8.274-124.724-96.226-212.66-221.528-221.488-39.304-2.764-62.09-22.92-60.2-53.238 1.95-31.188 24.536-46.894 65.828-45.772z" fill="' + header.telIconColor + '" p-id="2907"></path>\n                                    </svg>\n                                </span>\n                                ' + (header.showTelNumber && '<span class="y-header-tel-text">' + header.telNumber + '</span>') + '\n                            </a>\n                        </div>\n                    </div>\n                ',
                 main: '\n                    <div id="y-chat-main" style="' + parseStyleToString('main') + '">\n                        <div class="y-main-wrapper" >\n                        </div>\n                    </div>\n                ',
                 left: '\n                    <div class="y-pop-wrap y-pop-left" >\n                        ' + (left.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('leftAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (left.showName ? '<div class="y-pop-name">' + left.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('leftText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
                 right: '\n                    <div class="y-pop-wrap y-pop-right" >\n                        ' + (right.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('rightAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (right.showName ? '<div class="y-pop-name">' + right.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('rightText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
@@ -832,7 +855,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 /***/ }),
 
-/***/ 258:
+/***/ 261:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -918,73 +941,63 @@ var render = function() {
                         ])
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "a",
-                        {
-                          staticClass: "y-header-tel-wrap",
-                          attrs: { href: "#" }
-                        },
-                        [
-                          _c(
-                            "span",
-                            { staticClass: "y-header-tel-icon y-item-lh" },
-                            [
-                              _c(
-                                "svg",
-                                {
-                                  staticClass: "icon",
+                      _c("a", { staticClass: "y-header-tel-wrap" }, [
+                        _c(
+                          "span",
+                          { staticClass: "y-header-tel-icon y-item-lh" },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "icon",
+                                attrs: {
+                                  t: "1542942287111",
+                                  viewBox: "0 0 1024 1024",
+                                  version: "1.1",
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  "p-id": "2905",
+                                  "xmlns:xlink": "http://www.w3.org/1999/xlink",
+                                  width: "80",
+                                  height: "80"
+                                }
+                              },
+                              [
+                                _c("defs"),
+                                _vm._v(" "),
+                                _c("path", {
                                   attrs: {
-                                    t: "1542942287111",
-                                    viewBox: "0 0 1024 1024",
-                                    version: "1.1",
-                                    xmlns: "http://www.w3.org/2000/svg",
-                                    "p-id": "2905",
-                                    "xmlns:xlink":
-                                      "http://www.w3.org/1999/xlink",
-                                    width: "80",
-                                    height: "80"
+                                    d:
+                                      "M4 270.312c8.16-31.028 13.994-62.914 25.056-92.876 13.72-37.148 40.66-62.254 80.35-72.862A1085.464 1085.464 0 0 0 196.14 77.46c28.49-10.234 52.55-3.62 70.594 18.58 52.982 65.18 83.392 139.28 83.3 224.43-0.024 26.734-11.494 44.416-36.714 56.08-48.64 22.488-56.586 52.3-20.842 93.232 51.516 58.978 106.052 115.42 161.068 171.206 32.23 32.684 66.78 63.35 102.31 92.45 43.346 35.492 70.972 28.612 94.918-22.172 11.26-23.874 29.184-35.59 54.152-35.3 86.98 1.012 163.382 30.834 229.196 87.496 18.49 15.92 23.17 36.656 16.592 59.84-5.992 21.112-12.02 42.208-18.79 63.088-33.104 102.08-106.354 149.524-213.04 128.51-57.772-11.368-116.376-29.678-168.53-56.604-247.202-127.668-428.24-316.764-522.886-582.306-6.294-17.646-11.164-35.99-14.64-54.398-3.082-16.344-3.306-33.222-4.79-49.868L4 270.312zM547.552 11.038c256.354 8.448 466.844 221.256 472.22 477.414 0.84 39.988-14.176 59.94-46.088 61.218-34.7 1.382-50.94-16.626-52.646-58.388-8.6-210.15-173.7-373.312-386.286-381.76-40.866-1.624-62.68-19.208-62.458-50.328 0.242-32.92 23.64-50.2 65.868-48.646 3.132 0.116 6.258 0.332 9.39 0.49z",
+                                    fill: _vm.settingItem("header")
+                                      .telIconColor,
+                                    "p-id": "2906"
                                   }
-                                },
-                                [
-                                  _c("defs"),
-                                  _vm._v(" "),
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M4 270.312c8.16-31.028 13.994-62.914 25.056-92.876 13.72-37.148 40.66-62.254 80.35-72.862A1085.464 1085.464 0 0 0 196.14 77.46c28.49-10.234 52.55-3.62 70.594 18.58 52.982 65.18 83.392 139.28 83.3 224.43-0.024 26.734-11.494 44.416-36.714 56.08-48.64 22.488-56.586 52.3-20.842 93.232 51.516 58.978 106.052 115.42 161.068 171.206 32.23 32.684 66.78 63.35 102.31 92.45 43.346 35.492 70.972 28.612 94.918-22.172 11.26-23.874 29.184-35.59 54.152-35.3 86.98 1.012 163.382 30.834 229.196 87.496 18.49 15.92 23.17 36.656 16.592 59.84-5.992 21.112-12.02 42.208-18.79 63.088-33.104 102.08-106.354 149.524-213.04 128.51-57.772-11.368-116.376-29.678-168.53-56.604-247.202-127.668-428.24-316.764-522.886-582.306-6.294-17.646-11.164-35.99-14.64-54.398-3.082-16.344-3.306-33.222-4.79-49.868L4 270.312zM547.552 11.038c256.354 8.448 466.844 221.256 472.22 477.414 0.84 39.988-14.176 59.94-46.088 61.218-34.7 1.382-50.94-16.626-52.646-58.388-8.6-210.15-173.7-373.312-386.286-381.76-40.866-1.624-62.68-19.208-62.458-50.328 0.242-32.92 23.64-50.2 65.868-48.646 3.132 0.116 6.258 0.332 9.39 0.49z",
-                                      fill: _vm.settingItem("header")
-                                        .telIconColor,
-                                      "p-id": "2906"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("path", {
-                                    attrs: {
-                                      d:
-                                        "M511.584 203.04c170.714 4.654 315.598 150.64 314.34 316.738-0.276 36.186-16.672 56.456-46.848 57.924-30.278 1.466-49.22-18.42-51.592-54.164-8.274-124.724-96.226-212.66-221.528-221.488-39.304-2.764-62.09-22.92-60.2-53.238 1.95-31.188 24.536-46.894 65.828-45.772z",
-                                      fill: _vm.settingItem("header")
-                                        .telIconColor,
-                                      "p-id": "2907"
-                                    }
-                                  })
-                                ]
+                                }),
+                                _vm._v(" "),
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M511.584 203.04c170.714 4.654 315.598 150.64 314.34 316.738-0.276 36.186-16.672 56.456-46.848 57.924-30.278 1.466-49.22-18.42-51.592-54.164-8.274-124.724-96.226-212.66-221.528-221.488-39.304-2.764-62.09-22.92-60.2-53.238 1.95-31.188 24.536-46.894 65.828-45.772z",
+                                    fill: _vm.settingItem("header")
+                                      .telIconColor,
+                                    "p-id": "2907"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _vm.settingItem("header").showTelNumber
+                          ? _c("span", { staticClass: "y-header-tel-text" }, [
+                              _vm._v(
+                                "\n                                " +
+                                  _vm._s(_vm.settingItem("header").telNumber) +
+                                  "\n                            "
                               )
-                            ]
-                          ),
-                          _vm._v(" "),
-                          _vm.settingItem("header").showTelNumber
-                            ? _c("span", { staticClass: "y-header-tel-text" }, [
-                                _vm._v(
-                                  "\n                                " +
-                                    _vm._s(
-                                      _vm.settingItem("header").telNumber
-                                    ) +
-                                    "\n                            "
-                                )
-                              ])
-                            : _vm._e()
-                        ]
-                      )
+                            ])
+                          : _vm._e()
+                      ])
                     ]
                   )
                 ]),
@@ -1144,11 +1157,15 @@ var render = function() {
                                   "button",
                                   {
                                     style: _vm.styleList("button"),
-                                    attrs: { type: "submit" }
+                                    attrs: { type: "button" }
                                   },
                                   [
                                     _vm._v(
-                                      _vm._s(_vm.settingItem("form").btnText)
+                                      "\n                                        " +
+                                        _vm._s(
+                                          _vm.settingItem("form").btnText
+                                        ) +
+                                        "\n                                    "
                                     )
                                   ]
                                 )

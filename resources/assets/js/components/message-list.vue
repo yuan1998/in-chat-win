@@ -223,7 +223,7 @@
                 settingShow   : 'setting/settingShow',
                 settingDefault: 'setting/setDefault',
             }),
-            handleCreate () {
+            handleCreate() {
                 this.form          = cloneOf(defaultForm);
                 this.dialogVisible = true;
             },
@@ -264,7 +264,8 @@
 
                 $refs[ ref ].validate(async (valid) => {
                     if (valid) {
-                        let res = form.id ? await aUpdate(form) : await aCreate(form);
+                        this.submitting = true;
+                        let res         = form.id ? await aUpdate(form) : await aCreate(form);
 
                         if (res.status === 200) {
                             $notify({
@@ -314,7 +315,7 @@
                 }
             },
             closeDialog() {
-                this.form = cloneOf(defaultForm);
+                this.form          = cloneOf(defaultForm);
                 this.submitting    = false;
                 this.dialogVisible = false;
             },
@@ -322,6 +323,9 @@
                 this.$refs[ 'form' ].resetFields();
             },
             closeDialogBefore(done) {
+                if (this.form && this.form.id) {
+                    this.form = cloneOf(defaultForm);
+                }
                 if (!this.submitting) {
                     done();
                 }

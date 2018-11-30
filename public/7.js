@@ -1,14 +1,14 @@
 webpackJsonp([7],{
 
-/***/ 217:
+/***/ 218:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(81)
 /* script */
-var __vue_script__ = __webpack_require__(226)
+var __vue_script__ = __webpack_require__(232)
 /* template */
-var __vue_template__ = __webpack_require__(227)
+var __vue_template__ = __webpack_require__(233)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/assets/js/pages/login.vue"
+Component.options.__file = "resources/assets/js/pages/signup.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-37b6a9c8", Component.options)
+    hotAPI.createRecord("data-v-266ab516", Component.options)
   } else {
-    hotAPI.reload("data-v-37b6a9c8", Component.options)
+    hotAPI.reload("data-v-266ab516", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 226:
+/***/ 232:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,95 +100,124 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            loging: false,
+            submitting: false,
             formInline: {
                 email: '',
-                password: ''
-            },
-            ruleInline: {
-                email: [{ required: true, message: 'Please fill in the user name', trigger: 'blur' }],
-                password: [{ required: true, message: 'Please fill in the password.', trigger: 'blur' }, { type: 'string', min: 6, message: 'The password length cannot be less than 6 bits', trigger: 'blur' }]
+                name: '',
+                password: '',
+                confirmPassword: ''
             }
         };
     },
 
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])({
-        _login: 'auth/login'
+        aSignup: 'auth/signup'
     }), {
-        login: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var res;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                this.loging = true;
-                                _context.next = 3;
-                                return this._login(this.formInline);
-
-                            case 3:
-                                res = _context.sent;
-
-                                if (res === true) {
-                                    this.$message({
-                                        message: 'Success!',
-                                        type: 'success'
-                                    });
-                                    this.$router.push('/');
-                                } else {
-                                    this.$message({
-                                        message: res.data.message,
-                                        type: 'error'
-                                    });
-                                }
-                                this.loging = false;
-
-                            case 6:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function login() {
-                return _ref.apply(this, arguments);
+        validateConfirmPassword: function validateConfirmPassword(rule, value, callback) {
+            if (value === '') {
+                callback(new Error('请再次输入密码'));
+            } else if (value !== this.formInline.password) {
+                callback(new Error('两次输入密码不一致!'));
+            } else {
+                callback();
             }
-
-            return login;
-        }(),
-        handleSubmit: function handleSubmit(name) {
+        },
+        handleSubmit: function handleSubmit(ref) {
             var _this = this;
 
-            this.$refs[name].validate(function (valid) {
-                if (valid) {
-                    _this.login();
-                } else {
-                    _this.$message({
-                        message: 'Fail!',
-                        type: 'error'
-                    });
-                }
-            });
-        }
-    }),
-    computed: {
-        isLogin: function isLogin() {
-            return this.$store.getters['auth/gerUserInfo'];
-        }
-    }
+            var $refs = this.$refs,
+                formInline = this.formInline,
+                $notify = this.$notify,
+                $router = this.$router,
+                aSignup = this.aSignup;
 
+
+            $refs[ref].validate(function () {
+                var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(value) {
+                    var res;
+                    return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                        while (1) {
+                            switch (_context.prev = _context.next) {
+                                case 0:
+                                    if (!value) {
+                                        _context.next = 8;
+                                        break;
+                                    }
+
+                                    _this.submitting = true;
+                                    _context.next = 4;
+                                    return aSignup(formInline);
+
+                                case 4:
+                                    res = _context.sent;
+
+
+                                    if (res.status === 201) {
+                                        $notify({
+                                            message: '注册成功',
+                                            title: '恭喜',
+                                            type: 'success'
+                                        });
+                                        $router.push('/admin');
+                                    } else {
+                                        $notify.error({
+                                            message: '发生错误.',
+                                            title: '糟糕'
+                                        });
+                                    }
+
+                                    _context.next = 8;
+                                    break;
+
+                                case 8:
+                                case 'end':
+                                    return _context.stop();
+                            }
+                        }
+                    }, _callee, _this);
+                }));
+
+                return function (_x) {
+                    return _ref.apply(this, arguments);
+                };
+            }());
+        }
+    })
 });
 
 /***/ }),
 
-/***/ 227:
+/***/ 233:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -263,13 +292,48 @@ var render = function() {
                     "el-form-item",
                     {
                       attrs: {
-                        label: "密码",
-                        prop: "password",
+                        prop: "name",
+                        label: "用户名",
                         rules: {
                           required: true,
-                          message: "请输入密码",
+                          message: "请输入用户名",
                           trigger: "blur"
                         }
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { name: "name" },
+                        model: {
+                          value: _vm.formInline.name,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formInline, "name", $$v)
+                          },
+                          expression: "formInline.name"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "密码",
+                        prop: "password",
+                        rules: [
+                          {
+                            required: true,
+                            message: "请输入密码",
+                            trigger: "blur"
+                          },
+                          {
+                            min: 8,
+                            message: "长度不能少于 8 字符",
+                            trigger: "blur"
+                          }
+                        ]
                       }
                     },
                     [
@@ -289,11 +353,45 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "el-form-item",
+                    {
+                      attrs: {
+                        label: "确认密码",
+                        prop: "confirmPassword",
+                        rules: [
+                          {
+                            required: true,
+                            message: "请输入密码",
+                            trigger: "blur"
+                          },
+                          {
+                            validator: _vm.validateConfirmPassword,
+                            trigger: "blur"
+                          }
+                        ]
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { name: "confirmPassword", type: "password" },
+                        model: {
+                          value: _vm.formInline.confirmPassword,
+                          callback: function($$v) {
+                            _vm.$set(_vm.formInline, "confirmPassword", $$v)
+                          },
+                          expression: "formInline.confirmPassword"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-form-item",
                     [
                       _c(
                         "el-button",
                         {
-                          attrs: { loading: _vm.loging, type: "primary" },
+                          attrs: { loading: _vm.submitting, type: "primary" },
                           on: {
                             click: function($event) {
                               _vm.handleSubmit("form")
@@ -301,18 +399,6 @@ var render = function() {
                           }
                         },
                         [_vm._v("提交")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-button",
-                        [
-                          _c("router-link", { attrs: { to: "/signup" } }, [
-                            _vm._v(
-                              "\n                            注册\n                        "
-                            )
-                          ])
-                        ],
-                        1
                       )
                     ],
                     1
@@ -336,7 +422,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-37b6a9c8", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-266ab516", module.exports)
   }
 }
 

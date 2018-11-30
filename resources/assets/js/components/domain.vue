@@ -24,10 +24,14 @@
             乍回事啊,叫人
         </h1>
         <h1 v-else-if="gSettings.length === 0">
-            缺少配置.不能添加域名 <el-button type="text"> <router-link to="/admin/setting">去添加.</router-link> </el-button>
+            缺少配置.不能添加域名
+            <el-button type="text">
+                <router-link to="/admin/setting">去添加.</router-link>
+            </el-button>
         </h1>
         <h1 v-else-if="filterable.length === 0">
-            Not Found Data.<el-button @click="dialogVisible = true" type="text">Add Domain.</el-button>
+            Not Found Data.
+            <el-button @click="dialogVisible = true" type="text">Add Domain.</el-button>
         </h1>
         <el-row v-else :gutter="20">
             <el-col v-for="item in filterable"
@@ -45,13 +49,13 @@
                             </div>
                             <el-switch v-model="item.open" @change="handleOpen(item)">
                             </el-switch>
-                            <span class="domain-card_setting-name" >{{settingOf(item.setting_id).name}}</span>
+                            <span class="domain-card_setting-name">{{settingOf(item.setting_id).name}}</span>
                         </div>
                         <div class="domain-card_tags">
                             <h1>
                                 标签:
                             </h1>
-                            <div v-if="item.tags.length === 0" >
+                            <div v-if="item.tags.length === 0">
                                 没有标签.
                             </div>
                             <el-tag v-else v-for="(val , index) in item.tags" :key="index">{{val}}</el-tag>
@@ -167,92 +171,92 @@
     </div>
 </template>
 <script>
-    import { mapGetters , mapActions } from 'vuex'
-    import { defaultForm }             from '../utils/domain'
-    import { cloneOf }                 from "../utils/assist";
+    import { mapGetters, mapActions } from 'vuex'
+    import { defaultForm }            from '../utils/domain'
+    import { cloneOf }                from "../utils/assist";
 
     export default {
-        data () {
+        data() {
             return {
-                query: '' ,
-                inputHover: false ,
-                dialogVisible: false ,
-                submitting: false ,
-                placeholder: '请' ,
-                form: cloneOf(defaultForm) ,
-                loading: false,
+                query        : '',
+                inputHover   : false,
+                dialogVisible: false,
+                submitting   : false,
+                placeholder  : '请',
+                form         : cloneOf(defaultForm),
+                loading      : false,
             }
-        } ,
-        mounted () {
+        },
+        mounted() {
             console.log(312);
             if (!this.gDomains) {
                 this.getDomains();
             }
-        } ,
-        methods: {
+        },
+        methods : {
             ...mapActions({
-                aDomains: 'domain/index' ,
-                aUpdate: 'domain/update' ,
-                aDestroy: 'domain/destroy' ,
-                aCreate: 'domain/create' ,
-            }) ,
-            async getDomains () {
+                aDomains: 'domain/index',
+                aUpdate : 'domain/update',
+                aDestroy: 'domain/destroy',
+                aCreate : 'domain/create',
+            }),
+            async getDomains() {
                 let res = await this.aDomains();
-            } ,
-            async handleOpen (item) {
+            },
+            async handleOpen(item) {
                 item.opening = true;
 
                 let res = await this.aUpdate({
-                    id: item.id ,
-                    open: item.open ,
+                    id  : item.id,
+                    open: item.open,
                 });
 
                 if (res.status === 200) {
                     this.$notify({
-                        title: '成功' ,
-                        message: '你' + (item.open ? '打开' : '封印') + '了他.' ,
-                        type: 'success'
+                        title  : '成功',
+                        message: '你' + (item.open ? '打开' : '封印') + '了他.',
+                        type   : 'success'
                     });
                 }
                 else {
                     item.open = !item.open;
                     this.$notify({
-                        title: '警告' ,
-                        message: '发送了非常轻微的错误.' ,
-                        type: 'warning'
+                        title  : '警告',
+                        message: '发送了非常轻微的错误.',
+                        type   : 'warning'
                     });
                 }
 
                 item.opening = false;
-            } ,
-            async handleDelete (item) {
+            },
+            async handleDelete(item) {
                 let res = this.aDestroy(item.id);
 
                 if (res.status === 204) {
                     this.$notify({
-                        message: '删除了' ,
-                        type: 'success' ,
-                        title: '恭喜'
+                        message: '删除了',
+                        type   : 'success',
+                        title  : '恭喜'
                     })
                 }
                 else {
                     this.$notify.error({
-                        message: '出错了' ,
-                        title: '警告'
+                        message: '出错了',
+                        title  : '警告'
                     })
                 }
-            } ,
-            handleUpdateBtn (item) {
-                this.form = cloneOf(item);
+            },
+            handleUpdateBtn(item) {
+                this.form          = cloneOf(item);
                 this.dialogVisible = true;
-            } ,
-            handleSubmit (ref) {
-                const {$refs , $message , form , $notify , aCreate , aUpdate , closeDialog} = this;
+            },
+            handleSubmit(ref) {
+                const { $refs, $message, form, $notify, aCreate, aUpdate, closeDialog } = this;
 
-                $refs[ref].validate(async (value) => {
+                $refs[ ref ].validate(async (value) => {
                     if (!value) {
                         $message({
-                            type: 'warning' ,
+                            type   : 'warning',
                             message: '看仔细一点.'
                         })
                     }
@@ -265,18 +269,18 @@
 
                         console.log(res);
 
-                        if ( res && res.status === 200) {
+                        if (res && res.status === 200) {
                             $notify({
-                                message: '操作成功' ,
-                                title: '恭喜' ,
-                                type: 'success'
+                                message: '操作成功',
+                                title  : '恭喜',
+                                type   : 'success'
                             })
                         }
                         else {
                             $notify({
-                                message: '发生了一点小意外' ,
-                                title: '提示' ,
-                                type: 'warning'
+                                message: '发生了一点小意外',
+                                title  : '提示',
+                                type   : 'warning'
                             })
                         }
 
@@ -284,25 +288,30 @@
                     }
 
                 });
-            } ,
-            clearQuery () {
+            },
+            clearQuery() {
                 if (this.inputIcon === 'circle-close')
                     this.query = '';
-            } ,
-            closeDialog () {
-                this.submitting = false;
+            },
+            closeDialog() {
+                this.form          = cloneOf(defaultForm);
+                this.submitting    = false;
                 this.dialogVisible = false;
-            } ,
-            closedDialog () {
-                this.$refs['form'].resetFields();
-            } ,
-            closeDialogBefore (done) {
+            },
+            closedDialog() {
+                this.$refs[ 'form' ].resetFields();
+            },
+            closeDialogBefore(done) {
+                if (this.form && this.form.id) {
+                    this.form = cloneOf(defaultForm);
+                }
+
                 if (!this.submitting) {
                     done();
                 }
-            } ,
-            validatorDomain (rule , value , callback) {
-                const {form , gDomains} = this;
+            },
+            validatorDomain(rule, value, callback) {
+                const { form, gDomains } = this;
                 if (value === '') {
                     callback(new Error('输入内容!'));
                 }
@@ -314,8 +323,8 @@
                 else {
                     callback();
                 }
-            } ,
-            handleAddTag (text) {
+            },
+            handleAddTag(text) {
                 if (text !== '') {
                     let tags = this.form.tags;
 
@@ -327,26 +336,26 @@
                 }
 
                 this.form.showTagInput = false;
-                this.form.tagText = '';
-            } ,
-            handleCloseTag (index) {
-                index >= 0 && this.form.tags.splice(index , 1);
-            } ,
-            showInput () {
+                this.form.tagText      = '';
+            },
+            handleCloseTag(index) {
+                index >= 0 && this.form.tags.splice(index, 1);
+            },
+            showInput() {
                 this.form.showTagInput = true;
                 this.$nextTick(() => {
                     this.$refs.saveTagInput.$refs.input.focus();
                 });
-            } ,
-        } ,
+            },
+        },
         computed: {
             ...mapGetters({
-                gDomains: 'domain/domains' ,
-                settingOf: 'setting/idOf' ,
+                gDomains : 'domain/domains',
+                settingOf: 'setting/idOf',
                 gSettings: 'setting/list'
-            }) ,
-            filterable () {
-                const {gDomains , query} = this;
+            }),
+            filterable() {
+                const { gDomains, query } = this;
                 if (!gDomains)
                     return false;
 
@@ -357,13 +366,13 @@
                 return gDomains.filter(item => {
                     return item.domain.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
-            } ,
-            inputIcon () {
+            },
+            inputIcon() {
                 return this.query.length > 0 && this.inputHover
                     ? 'circle-close'
                     : 'search';
-            } ,
-            loaded(){
+            },
+            loaded() {
                 return !(this.loading || !this.gSettings || !this.gDomains);
             }
 
