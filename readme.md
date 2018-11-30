@@ -98,6 +98,7 @@
   * 域名开关
   
 ### install
+> 先配置根目录的 .env 文件 , 参照.env.example
 ```
 $ npm i
 $ comporse install
