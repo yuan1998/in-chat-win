@@ -34,7 +34,7 @@
                             label="位置"
                             width="150">
                         <template slot-scope="scope">
-                            <span>{{ scope.row.info.city }}</span>
+                           ` <span>{{ scope.row.info.city }}</span>
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -55,7 +55,7 @@
                             label="发送对话"
                             width="150">
                         <template slot-scope="scope">
-                            <span>{{ parseDataKey(scope.row.data , 'jumpMessage') }}</span>
+                            <span>{{ parseDataKey(scope.row.data , 'sendMessage') }}</span>
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -128,7 +128,6 @@
                     })
                 }
 
-                console.log(res);
             },
             setPage(page) {
                 this.changeCurrent(page);
