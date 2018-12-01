@@ -306,8 +306,8 @@
                 const { templateData, $notify, update } = this;
 
                 this.submitting       = true;
-                let res               = await update(templateData);
                 templateData.template = this.parseToString;
+                let res               = await update(templateData);
                 if (res.status === 200) {
                     $notify({
                         message: '操作成功',
