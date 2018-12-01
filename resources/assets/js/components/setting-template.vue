@@ -73,6 +73,10 @@
                                     </p>
                                 </div>
                             </div>
+                            <div class="y-pop-wrap y-pop-tip" :class="{ 'active' : current === 'tip' }"
+                                 @click.stop="changeCurrent('tip')">
+                                <div :style="styleList('tip')" class="y-tip">呜呜呜呜呜,我哭了你呢</div>
+                            </div>
                         </div>
                     </div>
                     <div id="y-chat-footer">
@@ -160,6 +164,14 @@
                                     <el-color-picker v-model="getSetting.left.backgroundColor"></el-color-picker>
                                 </el-form-item>
                             </template>
+                            <template v-else-if="current === 'tip'">
+                                <el-form-item class="label-input-color" label="文字颜色">
+                                    <el-color-picker v-model="getSetting.tip.color"></el-color-picker>
+                                </el-form-item>
+                                <el-form-item class="label-input-color" label="背景颜色">
+                                    <el-color-picker v-model="getSetting.tip.backgroundColor"></el-color-picker>
+                                </el-form-item>
+                            </template>
                             <template v-else-if="current === 'right'">
                                 <h1>
                                     Right
@@ -241,7 +253,6 @@
                         </div>
                     </el-form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -293,9 +304,10 @@
             },
             async handleSubmit() {
                 const { templateData, $notify, update } = this;
-                this.submitting                         = true;
-                templateData.template                   = this.parseToString;
-                let res                                 = await update(templateData);
+
+                this.submitting       = true;
+                let res               = await update(templateData);
+                templateData.template = this.parseToString;
                 if (res.status === 200) {
                     $notify({
                         message: '操作成功',
@@ -339,8 +351,9 @@
                 }
             },
             styleList() {
-                const { header, main, left, right, form, footer } = this.getSetting;
-                const list                                        = {
+                const { header, main, left, right, form, footer, tip } = this.getSetting;
+
+                const list = {
                     header     : {
                         'background-color': header.backgroundColor,
                         color             : header.color
@@ -362,6 +375,10 @@
                     rightAvatar: {
                         'background-image': !!right.avatar ? `url(${right.avatar})` : '',
                     },
+                    tip        : {
+                        'background-color': tip.backgroundColor,
+                        color             : tip.color
+                    },
                     input      : {
                         color             : form.color,
                         'background-color': form.backgroundColor,
@@ -380,7 +397,7 @@
                         flex: form.buttonSpan
                     },
                     footer     : {
-                        'border-color'       : footer.borderColor,
+                        'border-color'    : footer.borderColor,
                         'background-color': footer.backgroundColor,
                         color             : footer.color,
                     }
@@ -396,7 +413,7 @@
                     header: `
                         <div id="y-chat-header" >
                             <div class="y-header-wrapper y-header-type-1" style="${parseStyleToString('header')}">
-                                <div class="y-header-back-icon y-item-lh">
+                                <a href="javascript:history.go(-1)" class="y-header-back-icon y-item-lh">
                                     <svg t="1542941432445" class="icon" viewBox="0 0 1024 1024" version="1.1"
                                          xmlns="http://www.w3.org/2000/svg" p-id="1943"
                                          xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -406,7 +423,7 @@
                                         <path d="M780.738722 92.147922 358.435523 512.007105 780.738722 931.866287C801.939138 952.953029 801.939138 987.140831 780.738722 1008.227572 759.538306 1029.285895 725.151571 1029.285895 703.951155 1008.227572L243.254173 550.173538C222.053757 529.115215 222.053757 494.927413 243.254173 473.840672L703.951155 15.815056C725.151571-5.271685 759.538306-5.271685 780.738722 15.815056 801.939138 36.901797 801.939138 71.0896 780.738722 92.147922Z"
                                               p-id="1944" fill="${header.backIconColor}"></path>
                                     </svg>
-                                </div>
+                                </a>
                                 <div class="y-header-text-wrap">
                                     <div>
                                         ${header.title}
@@ -453,8 +470,7 @@
                             </div>
                         </div>
                     `,
-                    footer: `
-                        <div id="y-chat-footer">
+                    footer: `<div id="y-chat-footer">
                             <div class="y-footer-wrapper y-footer-type-1">
                                 <div class="y-footer-form-wrap" style="${parseStyleToString('form')}">
                                     <form class="y-footer-form">
@@ -470,8 +486,7 @@
                                     ${footer.text}
                                 </div>
                             </div>
-                        </div>
-                    `
+                        </div>`
                 };
 
             },

@@ -68410,6 +68410,11 @@ var defaultRightPop = {
     backgroundColor: '#cce5ff'
 };
 
+var defaultTipPop = {
+    backgroundColor: '#f3f3f3',
+    color: '#9d9d9e'
+};
+
 var defaultForm = {
     placeholder: 'please enter',
     wrapBackgroundColor: '#fff',
@@ -68443,11 +68448,12 @@ var defaultSetting = function defaultSetting() {
 
 var mergeSetting = function mergeSetting(setting) {
     return {
+        tip: setting.tip ? Object.assign(defaultTipPop, setting.tip) : defaultTipPop,
         form: setting.form ? Object.assign(defaultForm, setting.form) : defaultForm,
-        footer: setting.footer ? Object.assign(defaultFooter, setting.footer) : defaultFooter,
-        right: setting.right ? Object.assign(defaultRightPop, setting.right) : defaultRightPop,
         left: setting.left ? Object.assign(defaultLeftPop, setting.left) : defaultLeftPop,
         main: setting.main ? Object.assign(defaultMain, setting.main) : defaultMain,
+        right: setting.right ? Object.assign(defaultRightPop, setting.right) : defaultRightPop,
+        footer: setting.footer ? Object.assign(defaultFooter, setting.footer) : defaultFooter,
         header: setting.header ? Object.assign(defaultHeader, setting.header) : defaultHeader
     };
 };

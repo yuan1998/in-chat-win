@@ -330,6 +330,23 @@ template {
   word-break: break-all;
 }
 
+.y-main-wrapper .y-pop-wrap.y-pop-tip {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  text-align: center;
+}
+
+.y-main-wrapper .y-pop-wrap.y-pop-tip .y-tip {
+  display: inline-block;
+  padding: 0 9px;
+  background-color: #f3f3f3;
+  color: #9d9d9e;
+  border-radius: 4.5px;
+  font-size: 15.75px;
+  line-height: 27px;
+}
+
 .y-main-wrapper .y-pop-wrap .y-pop-text {
   -ms-flex-preferred-size: 72%;
       flex-basis: 72%;

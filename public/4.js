@@ -534,9 +534,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                                     });
                                 }
 
-                                console.log(res);
-
-                            case 8:
+                            case 7:
                             case 'end':
                                 return _context2.stop();
                         }
@@ -665,6 +663,7 @@ var render = function() {
                           key: "default",
                           fn: function(scope) {
                             return [
+                              _vm._v("\n                       ` "),
                               _c("span", [_vm._v(_vm._s(scope.row.info.city))])
                             ]
                           }
@@ -723,7 +722,7 @@ var render = function() {
                                   _vm._s(
                                     _vm.parseDataKey(
                                       scope.row.data,
-                                      "jumpMessage"
+                                      "sendMessage"
                                     )
                                   )
                                 )

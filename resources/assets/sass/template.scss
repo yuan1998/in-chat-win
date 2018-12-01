@@ -95,16 +95,28 @@
         &.y-pop-right {
             flex-direction: row-reverse;
             text-align: right;
-
             .y-pop-text p {
                 background-color: #cce6ff;
                 word-break: break-all;
             }
         }
 
+        &.y-pop-tip {
+            justify-content: center;
+            text-align: center;
+            .y-tip {
+                display: inline-block;
+                padding: 0 .2*45px;
+                background-color: #f3f3f3;
+                color: #9d9d9e;
+                border-radius: .1*45px;
+                font-size: .35*45px;
+                line-height: .6*45px;
+            }
+        }
+
         .y-pop-text {
             flex-basis: 72%;
-            //padding-top: .17*45px;
             .y-pop-name {
                 color: #a1a2a6;
                 font-size: .33*45px;
@@ -189,7 +201,7 @@
                 border-radius: .1*45px;
                 resize: none;
                 width: 100%;
-                border:none;
+                border: none;
                 outline: none;
             }
         }

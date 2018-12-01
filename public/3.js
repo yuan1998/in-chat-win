@@ -619,6 +619,17 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -782,7 +793,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 left = _getSetting.left,
                 right = _getSetting.right,
                 form = _getSetting.form,
-                footer = _getSetting.footer;
+                footer = _getSetting.footer,
+                tip = _getSetting.tip;
+
 
             var list = {
                 header: {
@@ -805,6 +818,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 },
                 rightAvatar: {
                     'background-image': !!right.avatar ? 'url(' + right.avatar + ')' : ''
+                },
+                tip: {
+                    'background-color': tip.backgroundColor,
+                    color: tip.color
                 },
                 input: {
                     color: form.color,
@@ -847,7 +864,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 main: '\n                    <div id="y-chat-main" style="' + parseStyleToString('main') + '">\n                        <div class="y-main-wrapper" >\n                        </div>\n                    </div>\n                ',
                 left: '\n                    <div class="y-pop-wrap y-pop-left" >\n                        ' + (left.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('leftAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (left.showName ? '<div class="y-pop-name">' + left.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('leftText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
                 right: '\n                    <div class="y-pop-wrap y-pop-right" >\n                        ' + (right.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('rightAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (right.showName ? '<div class="y-pop-name">' + right.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('rightText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
-                footer: '\n                    <div id="y-chat-footer">\n                        <div class="y-footer-wrapper y-footer-type-1">\n                            <div class="y-footer-form-wrap" style="' + parseStyleToString('form') + '">\n                                <form class="y-footer-form">\n                                    <div class="y-footer-input-wrap" style="' + parseStyleToString('inputWrap') + '">\n                                        <textarea style="' + parseStyleToString('input') + '" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-' + form.elementTagName + '"></textarea>\n                                    </div>\n                                    <div class="y-footer-button-wrap" style="' + parseStyleToString('buttonWrap') + '">\n                                        <button style="' + parseStyleToString('button') + '" type="submit">' + form.btnText + '</button>\n                                    </div>\n                                </form>\n                            </div>\n                            <div class="y-footer-recode-wrap" style="' + parseStyleToString('footer') + '">\n                                ' + footer.text + '\n                            </div>\n                        </div>\n                    </div>\n                '
+                footer: '<div id="y-chat-footer">\n                        <div class="y-footer-wrapper y-footer-type-1">\n                            <div class="y-footer-form-wrap" style="' + parseStyleToString('form') + '">\n                                <form class="y-footer-form">\n                                    <div class="y-footer-input-wrap" style="' + parseStyleToString('inputWrap') + '">\n                                        <textarea style="' + parseStyleToString('input') + '" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-' + form.elementTagName + '"></textarea>\n                                    </div>\n                                    <div class="y-footer-button-wrap" style="' + parseStyleToString('buttonWrap') + '">\n                                        <button style="' + parseStyleToString('button') + '" type="submit">' + form.btnText + '</button>\n                                    </div>\n                                </form>\n                            </div>\n                            <div class="y-footer-recode-wrap" style="' + parseStyleToString('footer') + '">\n                                ' + footer.text + '\n                            </div>\n                        </div>\n                    </div>'
             };
         }
     })
@@ -1098,6 +1115,30 @@ var render = function() {
                               )
                             ])
                           ])
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "y-pop-wrap y-pop-tip",
+                          class: { active: _vm.current === "tip" },
+                          on: {
+                            click: function($event) {
+                              $event.stopPropagation()
+                              _vm.changeCurrent("tip")
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "y-tip",
+                              style: _vm.styleList("tip")
+                            },
+                            [_vm._v("呜呜呜呜呜,我哭了你呢")]
+                          )
                         ]
                       )
                     ])
@@ -1584,6 +1625,59 @@ var render = function() {
                                             },
                                             expression:
                                               "getSetting.left.backgroundColor"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                : _vm.current === "tip"
+                                ? [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        staticClass: "label-input-color",
+                                        attrs: { label: "文字颜色" }
+                                      },
+                                      [
+                                        _c("el-color-picker", {
+                                          model: {
+                                            value: _vm.getSetting.tip.color,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.getSetting.tip,
+                                                "color",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "getSetting.tip.color"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        staticClass: "label-input-color",
+                                        attrs: { label: "背景颜色" }
+                                      },
+                                      [
+                                        _c("el-color-picker", {
+                                          model: {
+                                            value:
+                                              _vm.getSetting.tip
+                                                .backgroundColor,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.getSetting.tip,
+                                                "backgroundColor",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "getSetting.tip.backgroundColor"
                                           }
                                         })
                                       ],
