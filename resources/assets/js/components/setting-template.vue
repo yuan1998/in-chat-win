@@ -461,6 +461,7 @@
                             </div>
                         </div>
                     `,
+                    tip: `<div class="y-pop-wrap y-pop-tip"><div style="${parseStyleToString('tip')}" class="y-tip text-content"></div></div>`,
                     right : `
                         <div class="y-pop-wrap y-pop-right" >
                             ${right.showAvatar ? `<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="${parseStyleToString('rightAvatar')}"></div></div>` : '' }
