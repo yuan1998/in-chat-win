@@ -1,13 +1,15 @@
 ## 升话宝 Pro
->仿照升话宝,在已有功能上添加了新的功能.
+>在升话宝已有功能上添加了新的功能.
 
 ### 开发环境
-
-* vue2.5
-* es6
-* sass
-* webpack-mix
-* laravel
+- 前端
+    * vue2.5
+    * es6
+    * sass
+    * webpack-mix
+- 后端
+    * PHP >= 7.0.0
+    * laravel 5.5
 
 ### 浏览器兼容
 

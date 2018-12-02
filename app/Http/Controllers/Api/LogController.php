@@ -23,7 +23,7 @@ class LogController extends Controller
 
         $data['ip']   = $request->ip();
         $data['info'] = geoip($data['ip'])->toArray();
-        $data['url']  = $request->server('HTTP_REFERER');
+        $data['url']  = $request->server('HTTP_REFERER' , 'http://chat.test/');
 
         Log::create($data);
         return $this->response->noContent();

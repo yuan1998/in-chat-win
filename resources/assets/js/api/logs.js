@@ -6,6 +6,15 @@ const index = async (param) => {
     return await authRequest('log?' + param);
 };
 
+const destroy = async (id) => {
+    let options = {
+        url   : 'log/' + id,
+        method: 'DELETE',
+    };
+    return await authRequest(options);
+};
+
 export default {
     index,
+    destroy
 }

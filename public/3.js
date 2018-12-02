@@ -723,13 +723,13 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
                                 this.submitting = true;
-                                _context2.next = 4;
+                                templateData.template = this.parseToString;
+                                _context2.next = 5;
                                 return update(templateData);
 
-                            case 4:
+                            case 5:
                                 res = _context2.sent;
 
-                                templateData.template = this.parseToString;
                                 if (res.status === 200) {
                                     $notify({
                                         message: '操作成功',

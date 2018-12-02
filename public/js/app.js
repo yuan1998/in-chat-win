@@ -68563,8 +68563,37 @@ var logs = {
 
             return data;
         }(),
-        setWhere: function setWhere(_ref7, where) {
-            var commit = _ref7.commit;
+        destroy: function () {
+            var _ref8 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref7, id) {
+                var commit = _ref7.commit;
+                var res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                    while (1) {
+                        switch (_context2.prev = _context2.next) {
+                            case 0:
+                                _context2.next = 2;
+                                return __WEBPACK_IMPORTED_MODULE_1__api_logs__["a" /* default */].destroy(id);
+
+                            case 2:
+                                res = _context2.sent;
+                                return _context2.abrupt('return', res);
+
+                            case 4:
+                            case 'end':
+                                return _context2.stop();
+                        }
+                    }
+                }, _callee2, this);
+            }));
+
+            function destroy(_x2, _x3) {
+                return _ref8.apply(this, arguments);
+            }
+
+            return destroy;
+        }(),
+        setWhere: function setWhere(_ref9, where) {
+            var commit = _ref9.commit;
 
             commit('where', where);
             return true;
@@ -68619,8 +68648,39 @@ var index = function () {
     };
 }();
 
+var destroy = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(id) {
+        var options;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        options = {
+                            url: 'log/' + id,
+                            method: 'DELETE'
+                        };
+                        _context2.next = 3;
+                        return Object(__WEBPACK_IMPORTED_MODULE_2__request__["a" /* authRequest */])(options);
+
+                    case 3:
+                        return _context2.abrupt('return', _context2.sent);
+
+                    case 4:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, _this);
+    }));
+
+    return function destroy(_x2) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
 /* harmony default export */ __webpack_exports__["a"] = ({
-    index: index
+    index: index,
+    destroy: destroy
 });
 
 /***/ }),

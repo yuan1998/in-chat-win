@@ -1,5 +1,5 @@
 <template>
-    <div class="load-component-container" v-loading.fullscreen.lock="!loaded" >
+    <div class="load-component-container" v-loading.fullscreen.lock="!loaded">
         <div v-if="loaded">
             <h1>
                 Logs.
@@ -34,7 +34,7 @@
                             label="位置"
                             width="150">
                         <template slot-scope="scope">
-                           ` <span>{{ scope.row.info.city }}</span>
+                            ` <span>{{ scope.row.info.city }}</span>
                         </template>
                     </el-table-column>
                     <el-table-column
@@ -63,6 +63,15 @@
                             label="url"
                             width="350">
                     </el-table-column>
+                    <el-table-column
+                            v-if="userInfo.id && userInfo.id == 1"
+                            label="操作"
+                            width="150">
+                        <template slot-scope="scope">
+                            <el-button size="small" type="warning" @click="handleDelete(scope.row.id)">删除</el-button>
+                        </template>
+                    </el-table-column>
+
                 </el-table>
                 <div class="logs-pagination-container" style="text-align: center;">
                     <el-pagination
@@ -103,6 +112,7 @@
             ...mapActions({
                 list    : 'logs/data',
                 setWhere: 'logs/setWhere',
+                destroy : 'logs/destroy'
             }),
             ...mapMutations({
                 changeCurrent  : 'logs/current',
@@ -146,11 +156,46 @@
                 this.setPage(val);
                 this.getList();
             },
+            async handleDelete(id) {
+                if (!id) return;
+
+                let confirmResult;
+                try {
+                    confirmResult = await this.$confirm('此操作将永久从地球上删除该数据!', '提示', {
+                        confirmButtonText: '确定',
+                        cancelButtonText : '取消',
+                        type             : 'warning'
+                    });
+                }
+                catch (e) {
+                    confirmResult = e;
+                }
+                if (confirmResult === 'cancel') {
+                    return;
+                }
+                let res = await this.destroy(id);
+
+                if (res.status === 204) {
+                    this.$notify({
+                        message: '删除成功,重新加载列表...',
+                        title  : '成功',
+                    });
+                    this.getList();
+                }
+                else {
+                    this.$notify.error({
+                        message: '发生未知错误',
+                        title  : '警告',
+                    });
+                    console.log(res);
+                }
+            }
         },
         computed: {
             ...mapGetters({
                 data      : 'logs/data',
-                pagination: 'logs/pagination'
+                pagination: 'logs/pagination',
+                userInfo  : 'auth/gerUserInfo'
             }),
             loaded() {
                 return (!this.firstLoading && this.data);

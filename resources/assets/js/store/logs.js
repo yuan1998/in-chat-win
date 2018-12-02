@@ -55,6 +55,10 @@ const logs = {
             }
             return res;
         },
+        async destroy({commit} , id) {
+            let res  = await api.destroy(id);
+            return res;
+        },
         setWhere({ commit }, where) {
             commit('where', where);
             return true;

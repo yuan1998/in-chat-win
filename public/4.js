@@ -453,6 +453,15 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -498,7 +507,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapActions */])({
         list: 'logs/data',
-        setWhere: 'logs/setWhere'
+        setWhere: 'logs/setWhere',
+        destroy: 'logs/destroy'
     }), Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["d" /* mapMutations */])({
         changeCurrent: 'logs/current',
         changePageCount: 'logs/pageCount'
@@ -564,11 +574,91 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         handleCurrentChange: function handleCurrentChange(val) {
             this.setPage(val);
             this.getList();
-        }
+        },
+        handleDelete: function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(id) {
+                var confirmResult, res;
+                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                    while (1) {
+                        switch (_context3.prev = _context3.next) {
+                            case 0:
+                                if (id) {
+                                    _context3.next = 2;
+                                    break;
+                                }
+
+                                return _context3.abrupt('return');
+
+                            case 2:
+                                confirmResult = void 0;
+                                _context3.prev = 3;
+                                _context3.next = 6;
+                                return this.$confirm('此操作将永久从地球上删除该数据!', '提示', {
+                                    confirmButtonText: '确定',
+                                    cancelButtonText: '取消',
+                                    type: 'warning'
+                                });
+
+                            case 6:
+                                confirmResult = _context3.sent;
+                                _context3.next = 12;
+                                break;
+
+                            case 9:
+                                _context3.prev = 9;
+                                _context3.t0 = _context3['catch'](3);
+
+                                confirmResult = _context3.t0;
+
+                            case 12:
+                                if (!(confirmResult === 'cancel')) {
+                                    _context3.next = 14;
+                                    break;
+                                }
+
+                                return _context3.abrupt('return');
+
+                            case 14:
+                                _context3.next = 16;
+                                return this.destroy(id);
+
+                            case 16:
+                                res = _context3.sent;
+
+
+                                if (res.status === 204) {
+                                    this.$notify({
+                                        message: '删除成功,重新加载列表...',
+                                        title: '成功'
+                                    });
+                                    this.getList();
+                                } else {
+                                    this.$notify.error({
+                                        message: '发生未知错误',
+                                        title: '警告'
+                                    });
+                                    console.log(res);
+                                }
+
+                            case 18:
+                            case 'end':
+                                return _context3.stop();
+                        }
+                    }
+                }, _callee3, this, [[3, 9]]);
+            }));
+
+            function handleDelete(_x) {
+                return _ref3.apply(this, arguments);
+            }
+
+            return handleDelete;
+        }()
     }),
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
         data: 'logs/data',
-        pagination: 'logs/pagination'
+        pagination: 'logs/pagination',
+        userInfo: 'auth/gerUserInfo'
     }), {
         loaded: function loaded() {
             return !this.firstLoading && this.data;
@@ -663,7 +753,7 @@ var render = function() {
                           key: "default",
                           fn: function(scope) {
                             return [
-                              _vm._v("\n                       ` "),
+                              _vm._v("\n                        ` "),
                               _c("span", [_vm._v(_vm._s(scope.row.info.city))])
                             ]
                           }
@@ -735,7 +825,34 @@ var render = function() {
                     _vm._v(" "),
                     _c("el-table-column", {
                       attrs: { prop: "url", label: "url", width: "350" }
-                    })
+                    }),
+                    _vm._v(" "),
+                    _vm.userInfo.id && _vm.userInfo.id == 1
+                      ? _c("el-table-column", {
+                          attrs: { label: "操作", width: "150" },
+                          scopedSlots: _vm._u([
+                            {
+                              key: "default",
+                              fn: function(scope) {
+                                return [
+                                  _c(
+                                    "el-button",
+                                    {
+                                      attrs: { size: "small", type: "warning" },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.handleDelete(scope.row.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("删除")]
+                                  )
+                                ]
+                              }
+                            }
+                          ])
+                        })
+                      : _vm._e()
                   ],
                   1
                 ),
