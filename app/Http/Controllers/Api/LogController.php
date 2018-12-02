@@ -13,6 +13,14 @@ class LogController extends Controller
     {
         $data = $request->all();
 
+        if ( !$request->get('time' , false)) {
+            return $this->response->errorBadRequest('time is not defined');
+        }
+
+        if ( $request->get('limit' , false) && $data['limit'] > $data['time'] ) {
+            return $this->response->errorBadRequest('limit is not defined');
+        }
+
         $data['ip']   = $request->ip();
         $data['info'] = geoip($data['ip'])->toArray();
         $data['url']  = $request->server('HTTP_REFERER');
