@@ -9,7 +9,14 @@
     * webpack-mix
 - 后端
     * PHP >= 7.0.0
+    * MySql >= 5.7.8
     * laravel 5.5
+
+### 工具
+- 前端
+    * npm
+- 后端
+    * composer
 
 ### 浏览器兼容
 
