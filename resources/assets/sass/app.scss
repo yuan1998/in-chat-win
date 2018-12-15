@@ -160,8 +160,23 @@ svg {
     .setting-card-content {
         height: 80px;
     }
-
 }
+
+.card-url-bar {
+    display: block;
+    position: absolute;
+    top: -22.4px;
+    left: 5.5*14px;
+    width: calc(100% - 90px);
+    height: 1.2*14px;
+    line-height: 1.2*14px;
+    border-radius: 2px;
+    background-color: #fff;
+    font-size: 13px;
+    color: #696b6d;
+    padding-left: 5px;
+}
+
 
 .el-card.message-card {
 
@@ -213,6 +228,15 @@ svg {
                     background-color: #daf4fe !important;
                 }
             }
+
+            &.message-pop_center {
+                text-align: center;
+                justify-content: center;
+                .message-pop_text {
+                    padding: 5px 10px;
+                    font-size: 14px;
+                }
+            }
         }
     }
 
@@ -249,20 +273,6 @@ svg {
         bottom: 0;
         right: 10px;
     }
-    .domain-card_url-bar {
-        display: block;
-        position: absolute;
-        top: -22.4px;
-        left: 5.5*14px;
-        width: calc(100% - 90px);
-        height: 1.2*14px;
-        line-height: 1.2*14px;
-        border-radius: 2px;
-        background-color: #fff;
-        font-size: 13px;
-        color: #696b6d;
-        padding-left: 5px;
-    }
 
     .domain-card_open-wrap {
         background-color: #f8f8f8;
@@ -296,9 +306,13 @@ svg {
     }
 }
 
+.message-item-attribute-inline {
+    display: inline-block;
+    margin-bottom: 10px;
+}
 .message-value-container {
     overflow: auto;
-    max-height: 220px;
+    max-height: 420px;
 
     .message-value-form-item {
         .el-form-item__label {
@@ -309,13 +323,13 @@ svg {
                 display: none !important;
             }
         }
+
         .message-value-label {
             padding-left: 15px;
         }
 
         .el-form-item__content {
             margin-left: 0 !important;
-            margin-right: 120px;
         }
     }
 }

@@ -12377,11 +12377,9 @@ var oneOf = function oneOf(key, arr) {
 
 var removeOf = function removeOf(key, arr) {
     var result = arr.indexOf(key);
-
     if (result === -1) {
         return false;
     }
-
     return !!arr.splice(result, 1);
 };
 

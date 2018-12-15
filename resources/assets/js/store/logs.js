@@ -63,7 +63,6 @@ const logs = {
             commit('where', where);
             return true;
         },
-
     },
 
 

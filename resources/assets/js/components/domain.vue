@@ -40,7 +40,7 @@
                     :span="8">
                 <el-card class="domain-card mac-card">
                     <div class="domain-card_content">
-                        <div class="domain-card_url-bar">
+                        <div class="domain-card_url-bar card-url-bar">
                             {{item.domain}}
                         </div>
                         <div class="domain-card_open-wrap" v-loading="item.opening">

@@ -173,13 +173,53 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 var defaultMessage = {
-    value: ''
+    value: '',
+    type: 'left',
+    duration: 0
 };
 var defaultForm = {
     keyword: '',
@@ -289,6 +329,14 @@ var defaultForm = {
         clearQuery: function clearQuery() {
             if (this.inputIcon === 'circle-close') this.query = '';
         },
+        addMessageTo: function addMessageTo(position, index) {
+            console.log("index :", index >= this.form.message.length);
+            if (index >= this.form.message.length) {
+                this.addMessageItem();
+            } else {
+                this.form.message.splice(index, 0, Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(defaultMessage));
+            }
+        },
         addMessageItem: function addMessageItem() {
             var _this = this;
 
@@ -305,8 +353,21 @@ var defaultForm = {
             el.scrollTop = el.scrollHeight;
         },
         handleUpdate: function handleUpdate(item) {
-            this.form = Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(item);
+            this.form = this.checkUpdateMessage(Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(item));
             this.dialogVisible = true;
+        },
+        checkUpdateMessage: function checkUpdateMessage(data) {
+            var message = data.message || [];
+            message = message.map(function (item) {
+                if (item.value && !item.type) {
+                    var c = Object(__WEBPACK_IMPORTED_MODULE_2__utils_assist__["a" /* cloneOf */])(defaultMessage);
+                    c.value = item.value;
+                    item = c;
+                }
+                return item;
+            });
+            data.message = message;
+            return data;
         },
         validatorKeyword: function validatorKeyword(rule, value, callback) {
             if (value === '') {
@@ -733,25 +794,13 @@ var render = function() {
                                     "div",
                                     {
                                       staticClass:
-                                        "message-pop_wrap message-pop_right"
+                                        "message-card_url-bar card-url-bar"
                                     },
                                     [
-                                      _c(
-                                        "div",
-                                        { staticClass: "message-pop" },
-                                        [
-                                          _c(
-                                            "p",
-                                            { staticClass: "message-pop_text" },
-                                            [
-                                              _vm._v(
-                                                "\n                                    " +
-                                                  _vm._s(item.keyword) +
-                                                  "\n                                "
-                                              )
-                                            ]
-                                          )
-                                        ]
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(item.keyword) +
+                                          "\n                        "
                                       )
                                     ]
                                   ),
@@ -761,8 +810,9 @@ var render = function() {
                                       "div",
                                       {
                                         key: index,
-                                        staticClass:
-                                          "message-pop_wrap message-pop_left"
+                                        class:
+                                          "message-pop_wrap message-pop_" +
+                                          each.type
                                       },
                                       [
                                         _c(
@@ -945,7 +995,7 @@ var render = function() {
                   attrs: {
                     title: "提示",
                     visible: _vm.dialogVisible,
-                    width: "50%"
+                    width: "700px"
                   },
                   on: {
                     "update:visible": function($event) {
@@ -971,7 +1021,7 @@ var render = function() {
                         "el-form-item",
                         {
                           attrs: {
-                            label: "活动名称",
+                            label: "关键词",
                             prop: "keyword",
                             rules: [
                               {
@@ -1029,28 +1079,156 @@ var render = function() {
                         },
                         _vm._l(_vm.form.message, function(item, index) {
                           return _c(
-                            "el-form-item",
-                            {
-                              key: index,
-                              staticClass: "message-value-form-item",
-                              attrs: {
-                                rules: {
-                                  required: true,
-                                  message: "不行哦",
-                                  trigger: "blur"
-                                },
-                                prop: "message." + index + ".value"
-                              }
-                            },
+                            "div",
+                            { key: index, staticClass: "message-list-item" },
                             [
                               _c(
-                                "div",
+                                "el-form-item",
                                 {
-                                  staticClass: "message-value-label",
-                                  attrs: { slot: "label" },
-                                  slot: "label"
+                                  staticClass: "message-value-form-item",
+                                  attrs: {
+                                    rules: {
+                                      required: true,
+                                      message: "不行哦",
+                                      trigger: "blur"
+                                    },
+                                    prop: "message." + index + ".value"
+                                  }
                                 },
                                 [
+                                  _c("el-input", {
+                                    attrs: {
+                                      placeholder: "输入内容..",
+                                      type: "textarea",
+                                      autosize: { minRows: 2, maxRows: 4 },
+                                      resize: "none"
+                                    },
+                                    model: {
+                                      value: item.value,
+                                      callback: function($$v) {
+                                        _vm.$set(item, "value", $$v)
+                                      },
+                                      expression: "item.value"
+                                    }
+                                  })
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "message-value-attribute" },
+                                [
+                                  _c(
+                                    "el-form-item",
+                                    {
+                                      staticClass:
+                                        "message-item-attribute-inline"
+                                    },
+                                    [
+                                      _c(
+                                        "el-select",
+                                        {
+                                          attrs: {
+                                            size: "mini",
+                                            placeholder: "信息位置"
+                                          },
+                                          model: {
+                                            value: item.type,
+                                            callback: function($$v) {
+                                              _vm.$set(item, "type", $$v)
+                                            },
+                                            expression: "item.type"
+                                          }
+                                        },
+                                        _vm._l(
+                                          [
+                                            { value: "left", label: "左侧" },
+                                            { value: "right", label: "右侧" },
+                                            { value: "center", label: "中间" }
+                                          ],
+                                          function(each) {
+                                            return _c("el-option", {
+                                              key: each.value,
+                                              attrs: {
+                                                "controls-position": "right",
+                                                label: each.label,
+                                                value: each.value
+                                              }
+                                            })
+                                          }
+                                        )
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "el-form-item",
+                                    {
+                                      staticClass:
+                                        "message-item-attribute-inline"
+                                    },
+                                    [
+                                      _c("el-input-number", {
+                                        attrs: {
+                                          size: "mini",
+                                          min: 0,
+                                          max: 3000,
+                                          label: "延迟"
+                                        },
+                                        model: {
+                                          value: item.duration,
+                                          callback: function($$v) {
+                                            _vm.$set(item, "duration", $$v)
+                                          },
+                                          expression: "item.duration"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "el-button",
+                                    {
+                                      attrs: {
+                                        icon: "el-icon-caret-top",
+                                        type: "text"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addMessageTo("before", index)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                在上方插入一行\n                            "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "el-button",
+                                    {
+                                      attrs: {
+                                        icon: "el-icon-caret-bottom",
+                                        type: "text"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.addMessageTo("after", index + 1)
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                                在下方插入一行\n                            "
+                                      )
+                                    ]
+                                  ),
+                                  _vm._v(" "),
                                   _c(
                                     "el-button",
                                     {
@@ -1083,23 +1261,7 @@ var render = function() {
                                   )
                                 ],
                                 1
-                              ),
-                              _vm._v(" "),
-                              _c("el-input", {
-                                attrs: {
-                                  placeholder: "输入内容..",
-                                  type: "textarea",
-                                  autosize: { minRows: 2, maxRows: 4 },
-                                  resize: "none"
-                                },
-                                model: {
-                                  value: item.value,
-                                  callback: function($$v) {
-                                    _vm.$set(item, "value", $$v)
-                                  },
-                                  expression: "item.value"
-                                }
-                              })
+                              )
                             ],
                             1
                           )

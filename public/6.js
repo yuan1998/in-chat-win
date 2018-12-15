@@ -710,13 +710,17 @@ var render = function() {
                     [
                       _c("el-card", { staticClass: "domain-card mac-card" }, [
                         _c("div", { staticClass: "domain-card_content" }, [
-                          _c("div", { staticClass: "domain-card_url-bar" }, [
-                            _vm._v(
-                              "\n                        " +
-                                _vm._s(item.domain) +
-                                "\n                    "
-                            )
-                          ]),
+                          _c(
+                            "div",
+                            { staticClass: "domain-card_url-bar card-url-bar" },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(item.domain) +
+                                  "\n                    "
+                              )
+                            ]
+                          ),
                           _vm._v(" "),
                           _c(
                             "div",

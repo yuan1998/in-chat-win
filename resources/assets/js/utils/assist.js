@@ -13,11 +13,9 @@ const oneOf = (key, arr) => {
 
 const removeOf = (key, arr) => {
     let result = arr.indexOf(key);
-
     if (result === -1) {
         return false;
     }
-
     return !!arr.splice(result, 1);
 };
 

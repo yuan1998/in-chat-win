@@ -31,15 +31,12 @@
                 <el-col :span="8" v-for="item in filterable" :key="item.id" style="margin-bottom: 15px;">
                     <el-card class="message-card mac-card">
                         <div class="message-card_content">
-                            <div class="message-pop_wrap message-pop_right">
-                                <div class="message-pop">
-                                    <p class="message-pop_text">
-                                        {{item.keyword}}
-                                    </p>
-                                </div>
+                            <div class="message-card_url-bar card-url-bar">
+                                {{item.keyword}}
                             </div>
-                            <div class="message-pop_wrap message-pop_left"
-                                 v-for="(each , index) in item.message " :key="index">
+                            <div
+                                 v-for="(each , index) in item.message " :key="index"
+                                    :class="'message-pop_wrap message-pop_' + each.type">
                                 <div class="message-pop">
                                     <p class="message-pop_text" v-html="strParse(each.value)">
                                     </p>
@@ -86,10 +83,10 @@
                     :visible.sync="dialogVisible"
                     @closed="closedDialog"
                     @before-close="closeDialogBefore"
-                    width="50%">
+                    width="700px">
                 <el-form :model="form" ref="form" label-position="top" label-width="120px">
                     <el-form-item
-                            label="活动名称"
+                            label="关键词"
                             prop="keyword"
                             :rules="[
                                 {
@@ -112,16 +109,62 @@
                     </h1>
                     <div ref="contain"
                          class="message-value-container">
-                        <el-form-item
-                                class="message-value-form-item"
-                                v-for="(item , index) in form.message"
-                                :rules="{
-                                    required: true, message: '不行哦', trigger: 'blur'
-                                }"
-                                :prop="'message.' + index + '.value'"
-                                :key="index">
-                            <div slot="label"
-                                 class="message-value-label">
+                        <div class="message-list-item"
+                             v-for="(item , index) in form.message"
+                             :key="index">
+                            <el-form-item
+                                    class="message-value-form-item"
+                                    :rules="{
+                                        required: true, message: '不行哦', trigger: 'blur'
+                                    }"
+                                    :prop="'message.' + index + '.value'">
+                                <el-input
+                                        v-model="item.value"
+                                        placeholder="输入内容.."
+                                        type="textarea"
+                                        :autosize="{ minRows: 2, maxRows: 4}"
+                                        resize="none">
+                                </el-input>
+                            </el-form-item>
+                            <div class="message-value-attribute">
+                                <el-form-item
+                                        class="message-item-attribute-inline">
+                                    <el-select
+                                            size="mini"
+                                            v-model="item.type"
+                                            placeholder="信息位置">
+                                        <el-option
+                                                controls-position="right"
+                                                v-for="each in [{value:'left' , label: '左侧'},{value:'right' , label: '右侧'},{value:'center' , label: '中间'},]"
+                                                :key="each.value"
+                                                :label="each.label"
+                                                :value="each.value">
+                                        </el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item
+                                        class="message-item-attribute-inline">
+                                    <el-input-number
+
+                                            size="mini"
+                                            v-model="item.duration"
+                                            :min="0"
+                                            :max="3000"
+                                            label="延迟">
+                                    </el-input-number>
+                                </el-form-item>
+                                <el-button
+                                        @click="addMessageTo('before' , index )"
+                                        icon="el-icon-caret-top"
+                                        type="text">
+                                    在上方插入一行
+                                </el-button>
+                                <el-button
+                                        @click="addMessageTo('after' , index + 1 )"
+                                        icon="el-icon-caret-bottom"
+                                        type="text">
+                                    在下方插入一行
+                                </el-button>
                                 <el-button
                                         v-show="form.message && form.message.length > 1"
                                         @click="removeMessageItem(index)"
@@ -129,15 +172,10 @@
                                         type="text">
                                     削除
                                 </el-button>
+
                             </div>
-                            <el-input
-                                    v-model="item.value"
-                                    placeholder="输入内容.."
-                                    type="textarea"
-                                    :autosize="{ minRows: 2, maxRows: 4}"
-                                    resize="none">
-                            </el-input>
-                        </el-form-item>
+                        </div>
+
                     </div>
                 </el-form>
                 <span slot="footer" class="dialog-footer">
@@ -161,7 +199,9 @@
     import { Yuandown }               from "../utils/yuandown";
 
     const defaultMessage = {
-        value: ''
+        value   : '',
+        type    : 'left',
+        duration: 0
     };
     const defaultForm    = {
         keyword: '',
@@ -232,6 +272,15 @@
                 if (this.inputIcon === 'circle-close')
                     this.query = '';
             },
+            addMessageTo(position, index) {
+                console.log("index :",index >= this.form.message.length);
+                if (index >= this.form.message.length) {
+                    this.addMessageItem();
+                }
+                else {
+                    this.form.message.splice(index, 0, cloneOf(defaultMessage));
+                }
+            },
             addMessageItem() {
                 this.form.message.push(cloneOf(defaultMessage));
                 this.$nextTick(() => {
@@ -246,8 +295,21 @@
                 el.scrollTop = el.scrollHeight;
             },
             handleUpdate(item) {
-                this.form          = cloneOf(item);
+                this.form          = this.checkUpdateMessage(cloneOf(item));
                 this.dialogVisible = true;
+            },
+            checkUpdateMessage(data) {
+                let message  = data.message || [];
+                message      = message.map((item) => {
+                    if (item.value && !item.type) {
+                        let c   = cloneOf(defaultMessage);
+                        c.value = item.value;
+                        item    = c;
+                    }
+                    return item;
+                });
+                data.message = message;
+                return data;
             },
             validatorKeyword(rule, value, callback) {
                 if (value === '') {
