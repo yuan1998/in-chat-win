@@ -7,7 +7,8 @@ const defaultHeader = {
     telNumber      : '120-120',
     showTelNumber  : false,
     backgroundColor: '#4185f4',
-    color          : '#fff'
+    color          : '#fff',
+    display        : true
 };
 
 const defaultMain = {
@@ -55,6 +56,7 @@ const defaultFooter = {
     backgroundColor: '#fff',
     text           : '我是啊老哥.',
     color          : '#e4e4e6',
+    display        : true
 };
 
 const defaultSetting = () => {

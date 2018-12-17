@@ -85,7 +85,13 @@
                                  :class="{ 'active' : current === 'form' }" @click.stop="changeCurrent('form')">
                                 <form class="y-footer-form">
                                     <div class="y-footer-input-wrap" :style="styleList('inputWrap')">
-                                        <textarea :style="styleList('input')" class="y-footer-form-value" name="test"
+                                        <input type="text" :style="styleList('input')"
+                                               :placeholder="settingItem('form').placeholder" name="test"
+                                               placeholder="please enter"
+                                               class="y-footer-form-value y-footer-input-border"
+                                               v-if="settingItem('form').elementTagName === 'input-border'">
+                                        <textarea v-else :style="styleList('input')" class="y-footer-form-value"
+                                                  name="test"
                                                   :class="'y-footer-' + settingItem('form').elementTagName"
                                                   :placeholder="settingItem('form').placeholder"></textarea>
                                     </div>
@@ -115,6 +121,9 @@
                                 <h1>
                                     Header
                                 </h1>
+                                <el-form-item class="label-input-color" label="显示">
+                                    <el-switch v-model="getSetting.header.display"></el-switch>
+                                </el-form-item>
                                 <el-form-item class="label-input-color" label="标题">
                                     <el-input class="label-input" v-model="getSetting.header.title"></el-input>
                                     <el-color-picker class="label-input-right"
@@ -201,6 +210,7 @@
                                 <el-form-item label="输入框样式">
                                     <el-radio-group v-model="getSetting.form.elementTagName">
                                         <el-radio label="input">Input</el-radio>
+                                        <el-radio label="input-border">Input-Border</el-radio>
                                         <el-radio label="textarea">Textarea</el-radio>
                                     </el-radio-group>
                                 </el-form-item>
@@ -235,6 +245,9 @@
                                 </el-form-item>
                             </template>
                             <template v-else-if="current === 'footer'">
+                                <el-form-item class="label-input-color" label="显示">
+                                    <el-switch v-model="getSetting.footer.display"></el-switch>
+                                </el-form-item>
                                 <el-form-item class="label-input-color" label="文字">
                                     <el-input class="label-input" v-model="getSetting.footer.text"></el-input>
                                     <el-color-picker class="label-input-right"
@@ -326,7 +339,7 @@
             },
             parseStyleToString(text) {
                 const { styleList } = this;
-                let obj             = styleList(text);
+                let obj             = styleList(text,true);
                 let str             = "";
 
                 for (let key in obj) {
@@ -334,29 +347,16 @@
                     !!item && (str += `${key}:${item};`);
                 }
                 return str;
-            }
-        },
-        computed: {
-            ...mapGetters({
-                currentSetting: 'setting/current',
-                templateData  : 'template/data',
-                getSetting    : 'template/getSetting',
-            }),
-            loaded() {
-                return (!this.loading && this.templateData && this.currentSetting);
             },
-            settingItem() {
-                return (text) => {
-                    return this.getSetting[ text ];
-                }
-            },
-            styleList() {
+            styleList(text, model) {
                 const { header, main, left, right, form, footer, tip } = this.getSetting;
 
                 const list = {
                     header     : {
                         'background-color': header.backgroundColor,
-                        color             : header.color
+                        color             : header.color,
+                        opacity           : header.display ? 1 : .4
+
                     },
                     main       : {
                         'background-color': main.backgroundColor,
@@ -400,10 +400,30 @@
                         'border-color'    : footer.borderColor,
                         'background-color': footer.backgroundColor,
                         color             : footer.color,
+                        opacity           : footer.display ? 1 : .4
                     }
                 };
+
+                if (model) {
+                    list.footer.display = footer.display ? 'block' : 'none';
+                    list.header.display = header.display ? 'block' : 'none';
+                }
+
+                return list[ text ];
+            },
+        },
+        computed: {
+            ...mapGetters({
+                currentSetting: 'setting/current',
+                templateData  : 'template/data',
+                getSetting    : 'template/getSetting',
+            }),
+            loaded() {
+                return (!this.loading && this.templateData && this.currentSetting);
+            },
+            settingItem() {
                 return (text) => {
-                    return list[ text ];
+                    return this.getSetting[ text ];
                 }
             },
             parseToString() {
@@ -461,7 +481,7 @@
                             </div>
                         </div>
                     `,
-                    tip: `<div class="y-pop-wrap y-pop-tip"><div style="${parseStyleToString('tip')}" class="y-tip text-content"></div></div>`,
+                    tip   : `<div class="y-pop-wrap y-pop-tip"><div style="${parseStyleToString('tip')}" class="y-tip text-content"></div></div>`,
                     right : `
                         <div class="y-pop-wrap y-pop-right" >
                             ${right.showAvatar ? `<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="${parseStyleToString('rightAvatar')}"></div></div>` : '' }
@@ -476,7 +496,11 @@
                                 <div class="y-footer-form-wrap" style="${parseStyleToString('form')}">
                                     <form class="y-footer-form">
                                         <div class="y-footer-input-wrap" style="${parseStyleToString('inputWrap')}">
-                                            <textarea style="${parseStyleToString('input')}" name="message-value" placeholder="${form.placeholder}" class="y-footer-form-value y-footer-${form.elementTagName}"></textarea>
+                                            ${
+                        form.elementTagName === 'input-border'
+                            ? `<input type="text" style="${parseStyleToString('input')}" :placeholder="settingItem('form').placeholder" name="message-value" placeholder="${form.placeholder}" class="y-footer-form-value y-footer-input-border">`
+                            : `<textarea style="${parseStyleToString('input')}" name="message-value" placeholder="${form.placeholder}" class="y-footer-form-value y-footer-${form.elementTagName}"></textarea>`
+                        }
                                         </div>
                                         <div class="y-footer-button-wrap" style="${parseStyleToString('buttonWrap')}">
                                             <button style="${parseStyleToString('button')}" type="submit">${form.btnText}</button>

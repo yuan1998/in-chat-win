@@ -439,6 +439,21 @@ template {
   outline: none;
 }
 
+.y-footer-type-1 .y-footer-form .y-footer-input-wrap .y-footer-input-border {
+  height: 36px;
+  line-height: 36px;
+  padding: 0 13.5px;
+  border: none;
+  display: block;
+  font-size: 19.35px;
+  color: #555;
+  border-radius: 36px;
+  background-color: #fff;
+  resize: none;
+  width: 100%;
+  outline: none;
+}
+
 .y-footer-type-1 .y-footer-form .y-footer-input-wrap .y-footer-textarea {
   padding: 3.15px 6.75px 3.15px 6.75px;
   color: #555;

@@ -192,6 +192,21 @@
                 outline: none;
             }
 
+            .y-footer-input-border {
+                height: 0.8*45px;
+                line-height: 0.8*45px;
+                padding: 0 .3*45px;
+                border: none;
+                display: block;
+                font-size: .43*45px;
+                color: #555;
+                border-radius: .8*45px;
+                background-color: #fff;
+                resize: none;
+                width: 100%;
+                outline: none;
+            }
+
             .y-footer-textarea {
                 padding: .07*45px .15*45px .07*45px .15*45px;
                 color: #555;

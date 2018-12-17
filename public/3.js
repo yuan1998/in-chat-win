@@ -630,6 +630,19 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -762,7 +775,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         parseStyleToString: function parseStyleToString(text) {
             var styleList = this.styleList;
 
-            var obj = styleList(text);
+            var obj = styleList(text, true);
             var str = "";
 
             for (var key in obj) {
@@ -770,24 +783,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 !!item && (str += key + ':' + item + ';');
             }
             return str;
-        }
-    }),
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
-        currentSetting: 'setting/current',
-        templateData: 'template/data',
-        getSetting: 'template/getSetting'
-    }), {
-        loaded: function loaded() {
-            return !this.loading && this.templateData && this.currentSetting;
         },
-        settingItem: function settingItem() {
-            var _this = this;
-
-            return function (text) {
-                return _this.getSetting[text];
-            };
-        },
-        styleList: function styleList() {
+        styleList: function styleList(text, model) {
             var _getSetting = this.getSetting,
                 header = _getSetting.header,
                 main = _getSetting.main,
@@ -801,7 +798,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
             var list = {
                 header: {
                     'background-color': header.backgroundColor,
-                    color: header.color
+                    color: header.color,
+                    opacity: header.display ? 1 : .4
+
                 },
                 main: {
                     'background-color': main.backgroundColor
@@ -844,11 +843,32 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 footer: {
                     'border-color': footer.borderColor,
                     'background-color': footer.backgroundColor,
-                    color: footer.color
+                    color: footer.color,
+                    opacity: footer.display ? 1 : .4
                 }
             };
+
+            if (model) {
+                list.footer.display = footer.display ? 'block' : 'none';
+                list.header.display = header.display ? 'block' : 'none';
+            }
+
+            return list[text];
+        }
+    }),
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapGetters */])({
+        currentSetting: 'setting/current',
+        templateData: 'template/data',
+        getSetting: 'template/getSetting'
+    }), {
+        loaded: function loaded() {
+            return !this.loading && this.templateData && this.currentSetting;
+        },
+        settingItem: function settingItem() {
+            var _this = this;
+
             return function (text) {
-                return list[text];
+                return _this.getSetting[text];
             };
         },
         parseToString: function parseToString() {
@@ -866,7 +886,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 left: '\n                    <div class="y-pop-wrap y-pop-left" >\n                        ' + (left.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('leftAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (left.showName ? '<div class="y-pop-name">' + left.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('leftText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
                 tip: '<div class="y-pop-wrap y-pop-tip"><div style="' + parseStyleToString('tip') + '" class="y-tip text-content"></div></div>',
                 right: '\n                    <div class="y-pop-wrap y-pop-right" >\n                        ' + (right.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('rightAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (right.showName ? '<div class="y-pop-name">' + right.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('rightText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
-                footer: '<div id="y-chat-footer">\n                        <div class="y-footer-wrapper y-footer-type-1">\n                            <div class="y-footer-form-wrap" style="' + parseStyleToString('form') + '">\n                                <form class="y-footer-form">\n                                    <div class="y-footer-input-wrap" style="' + parseStyleToString('inputWrap') + '">\n                                        <textarea style="' + parseStyleToString('input') + '" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-' + form.elementTagName + '"></textarea>\n                                    </div>\n                                    <div class="y-footer-button-wrap" style="' + parseStyleToString('buttonWrap') + '">\n                                        <button style="' + parseStyleToString('button') + '" type="submit">' + form.btnText + '</button>\n                                    </div>\n                                </form>\n                            </div>\n                            <div class="y-footer-recode-wrap" style="' + parseStyleToString('footer') + '">\n                                ' + footer.text + '\n                            </div>\n                        </div>\n                    </div>'
+                footer: '<div id="y-chat-footer">\n                        <div class="y-footer-wrapper y-footer-type-1">\n                            <div class="y-footer-form-wrap" style="' + parseStyleToString('form') + '">\n                                <form class="y-footer-form">\n                                    <div class="y-footer-input-wrap" style="' + parseStyleToString('inputWrap') + '">\n                                        ' + (form.elementTagName === 'input-border' ? '<input type="text" style="' + parseStyleToString('input') + '" :placeholder="settingItem(\'form\').placeholder" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-input-border">' : '<textarea style="' + parseStyleToString('input') + '" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-' + form.elementTagName + '"></textarea>') + '\n                                    </div>\n                                    <div class="y-footer-button-wrap" style="' + parseStyleToString('buttonWrap') + '">\n                                        <button style="' + parseStyleToString('button') + '" type="submit">' + form.btnText + '</button>\n                                    </div>\n                                </form>\n                            </div>\n                            <div class="y-footer-recode-wrap" style="' + parseStyleToString('footer') + '">\n                                ' + footer.text + '\n                            </div>\n                        </div>\n                    </div>'
             };
         }
     })
@@ -1174,18 +1194,32 @@ var render = function() {
                                 style: _vm.styleList("inputWrap")
                               },
                               [
-                                _c("textarea", {
-                                  staticClass: "y-footer-form-value",
-                                  class:
-                                    "y-footer-" +
-                                    _vm.settingItem("form").elementTagName,
-                                  style: _vm.styleList("input"),
-                                  attrs: {
-                                    name: "test",
-                                    placeholder: _vm.settingItem("form")
-                                      .placeholder
-                                  }
-                                })
+                                _vm.settingItem("form").elementTagName ===
+                                "input-border"
+                                  ? _c("input", {
+                                      staticClass:
+                                        "y-footer-form-value y-footer-input-border",
+                                      style: _vm.styleList("input"),
+                                      attrs: {
+                                        type: "text",
+                                        placeholder: _vm.settingItem("form")
+                                          .placeholder,
+                                        name: "test",
+                                        placeholder: "please enter"
+                                      }
+                                    })
+                                  : _c("textarea", {
+                                      staticClass: "y-footer-form-value",
+                                      class:
+                                        "y-footer-" +
+                                        _vm.settingItem("form").elementTagName,
+                                      style: _vm.styleList("input"),
+                                      attrs: {
+                                        name: "test",
+                                        placeholder: _vm.settingItem("form")
+                                          .placeholder
+                                      }
+                                    })
                               ]
                             ),
                             _vm._v(" "),
@@ -1284,6 +1318,32 @@ var render = function() {
                                         "\n                                Header\n                            "
                                       )
                                     ]),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        staticClass: "label-input-color",
+                                        attrs: { label: "显示" }
+                                      },
+                                      [
+                                        _c("el-switch", {
+                                          model: {
+                                            value:
+                                              _vm.getSetting.header.display,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.getSetting.header,
+                                                "display",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "getSetting.header.display"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
                                     _vm._v(" "),
                                     _c(
                                       "el-form-item",
@@ -1872,6 +1932,14 @@ var render = function() {
                                             _vm._v(" "),
                                             _c(
                                               "el-radio",
+                                              {
+                                                attrs: { label: "input-border" }
+                                              },
+                                              [_vm._v("Input-Border")]
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "el-radio",
                                               { attrs: { label: "textarea" } },
                                               [_vm._v("Textarea")]
                                             )
@@ -2112,6 +2180,32 @@ var render = function() {
                                   ]
                                 : _vm.current === "footer"
                                 ? [
+                                    _c(
+                                      "el-form-item",
+                                      {
+                                        staticClass: "label-input-color",
+                                        attrs: { label: "显示" }
+                                      },
+                                      [
+                                        _c("el-switch", {
+                                          model: {
+                                            value:
+                                              _vm.getSetting.footer.display,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.getSetting.footer,
+                                                "display",
+                                                $$v
+                                              )
+                                            },
+                                            expression:
+                                              "getSetting.footer.display"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
                                     _c(
                                       "el-form-item",
                                       {

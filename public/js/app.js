@@ -68383,7 +68383,8 @@ var defaultHeader = {
     telNumber: '120-120',
     showTelNumber: false,
     backgroundColor: '#4185f4',
-    color: '#fff'
+    color: '#fff',
+    display: true
 };
 
 var defaultMain = {
@@ -68430,7 +68431,8 @@ var defaultFooter = {
     borderColor: '#f6f5f7',
     backgroundColor: '#fff',
     text: '我是啊老哥.',
-    color: '#e4e4e6'
+    color: '#e4e4e6',
+    display: true
 };
 
 var defaultSetting = function defaultSetting() {
