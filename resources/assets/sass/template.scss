@@ -92,6 +92,35 @@
         display: flex;
         align-items: flex-start;
         padding: 9px;
+
+        &.y-pop-custom {
+            .y-pop-border-box {
+                display: block;
+                padding: .2*45px;
+                width: 100%;
+                border-radius: .14*45px;
+                text-align: left;
+                background-color: #fff;
+                box-shadow: 1px 2px 6px 0 #E7E5E7;
+                font-size: .4*45px;
+            }
+
+            .y-ad-cover {
+                margin-bottom: .2*45px;
+            }
+
+            .y-ad-info {
+                color: #444;
+                .y-ad-title {
+                    font-size: .47*45px;
+                }
+                .y-ad-text {
+                    padding-top: .1*45px;
+                    font-size: .39*45px;
+                }
+            }
+        }
+
         &.y-pop-right {
             flex-direction: row-reverse;
             text-align: right;

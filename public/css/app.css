@@ -317,6 +317,35 @@ template {
   padding: 9px;
 }
 
+.y-main-wrapper .y-pop-wrap.y-pop-custom .y-pop-border-box {
+  display: block;
+  padding: 9px;
+  width: 100%;
+  border-radius: 6.3px;
+  text-align: left;
+  background-color: #fff;
+  -webkit-box-shadow: 1px 2px 6px 0 #E7E5E7;
+          box-shadow: 1px 2px 6px 0 #E7E5E7;
+  font-size: 18px;
+}
+
+.y-main-wrapper .y-pop-wrap.y-pop-custom .y-ad-cover {
+  margin-bottom: 9px;
+}
+
+.y-main-wrapper .y-pop-wrap.y-pop-custom .y-ad-info {
+  color: #444;
+}
+
+.y-main-wrapper .y-pop-wrap.y-pop-custom .y-ad-info .y-ad-title {
+  font-size: 21.15px;
+}
+
+.y-main-wrapper .y-pop-wrap.y-pop-custom .y-ad-info .y-ad-text {
+  padding-top: 4.5px;
+  font-size: 17.55px;
+}
+
 .y-main-wrapper .y-pop-wrap.y-pop-right {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
@@ -495,6 +524,13 @@ body {
 svg {
   max-width: 100%;
   height: auto;
+}
+
+.mc-img {
+  max-width: 100%;
+  display: inline-block;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .container-auth-page {
@@ -725,6 +761,37 @@ svg {
 .el-card.message-card .el-card__body .message-pop_wrap.message-pop_center .message-pop_text {
   padding: 5px 10px;
   font-size: 14px;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_custom {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_custom .y-pop-border-box {
+  display: block;
+  padding: 9px;
+  width: 100%;
+  border-radius: 5px;
+  text-align: left;
+  background-color: #f3f3f3;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_custom .y-ad-cover {
+  margin-bottom: 9px;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_custom .y-ad-info {
+  color: #444;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_custom .y-ad-info .y-ad-title {
+  font-size: 20px;
+}
+
+.el-card.message-card .el-card__body .message-pop_wrap.message-pop_custom .y-ad-info .y-ad-text {
+  padding-top: 5px;
+  font-size: 16px;
 }
 
 .el-card.domain-card .domain-card_content {

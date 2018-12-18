@@ -211,6 +211,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
@@ -815,20 +817,27 @@ var render = function() {
                                           each.type
                                       },
                                       [
-                                        _c(
-                                          "div",
-                                          { staticClass: "message-pop" },
-                                          [
-                                            _c("p", {
-                                              staticClass: "message-pop_text",
+                                        each.type === "custom"
+                                          ? _c("div", {
                                               domProps: {
-                                                innerHTML: _vm._s(
-                                                  _vm.strParse(each.value)
-                                                )
+                                                innerHTML: _vm._s(each.value)
                                               }
                                             })
-                                          ]
-                                        )
+                                          : _c(
+                                              "div",
+                                              { staticClass: "message-pop" },
+                                              [
+                                                _c("p", {
+                                                  staticClass:
+                                                    "message-pop_text",
+                                                  domProps: {
+                                                    innerHTML: _vm._s(
+                                                      _vm.strParse(each.value)
+                                                    )
+                                                  }
+                                                })
+                                              ]
+                                            )
                                       ]
                                     )
                                   }),
@@ -1145,7 +1154,11 @@ var render = function() {
                                           [
                                             { value: "left", label: "左侧" },
                                             { value: "right", label: "右侧" },
-                                            { value: "center", label: "中间" }
+                                            { value: "center", label: "中间" },
+                                            {
+                                              value: "custom",
+                                              label: "自定义内容"
+                                            }
                                           ],
                                           function(each) {
                                             return _c("el-option", {

@@ -643,6 +643,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
@@ -885,6 +887,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 main: '\n                    <div id="y-chat-main" style="' + parseStyleToString('main') + '">\n                        <div class="y-main-wrapper" >\n                        </div>\n                    </div>\n                ',
                 left: '\n                    <div class="y-pop-wrap y-pop-left" >\n                        ' + (left.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('leftAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (left.showName ? '<div class="y-pop-name">' + left.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('leftText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
                 tip: '<div class="y-pop-wrap y-pop-tip"><div style="' + parseStyleToString('tip') + '" class="y-tip text-content"></div></div>',
+                custom: '<div class="y-pop-wrap y-pop-custom text-content"></div>',
                 right: '\n                    <div class="y-pop-wrap y-pop-right" >\n                        ' + (right.showAvatar ? '<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="' + parseStyleToString('rightAvatar') + '"></div></div>' : '') + '\n                        <div class="y-pop-text">\n                            ' + (right.showName ? '<div class="y-pop-name">' + right.name + '</div>' : '') + '\n                            <p style="' + parseStyleToString('rightText') + '" class="text-content"></p>\n                        </div>\n                    </div>\n                ',
                 footer: '<div id="y-chat-footer">\n                        <div class="y-footer-wrapper y-footer-type-1">\n                            <div class="y-footer-form-wrap" style="' + parseStyleToString('form') + '">\n                                <form class="y-footer-form">\n                                    <div class="y-footer-input-wrap" style="' + parseStyleToString('inputWrap') + '">\n                                        ' + (form.elementTagName === 'input-border' ? '<input type="text" style="' + parseStyleToString('input') + '" :placeholder="settingItem(\'form\').placeholder" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-input-border">' : '<textarea style="' + parseStyleToString('input') + '" name="message-value" placeholder="' + form.placeholder + '" class="y-footer-form-value y-footer-' + form.elementTagName + '"></textarea>') + '\n                                    </div>\n                                    <div class="y-footer-button-wrap" style="' + parseStyleToString('buttonWrap') + '">\n                                        <button style="' + parseStyleToString('button') + '" type="submit">' + form.btnText + '</button>\n                                    </div>\n                                </form>\n                            </div>\n                            <div class="y-footer-recode-wrap" style="' + parseStyleToString('footer') + '">\n                                ' + footer.text + '\n                            </div>\n                        </div>\n                    </div>'
             };
@@ -1202,10 +1205,9 @@ var render = function() {
                                       style: _vm.styleList("input"),
                                       attrs: {
                                         type: "text",
-                                        placeholder: _vm.settingItem("form")
-                                          .placeholder,
                                         name: "test",
-                                        placeholder: "please enter"
+                                        placeholder: _vm.settingItem("form")
+                                          .placeholder
                                       }
                                     })
                                   : _c("textarea", {

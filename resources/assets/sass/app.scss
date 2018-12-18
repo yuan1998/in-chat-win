@@ -12,6 +12,12 @@ svg {
     height: auto;
 }
 
+.mc-img {
+    max-width: 100%;
+    display: inline-block;
+    object-fit: cover;
+}
+
 .container-auth-page {
     height: 100%;
     display: block;
@@ -235,6 +241,33 @@ svg {
                 .message-pop_text {
                     padding: 5px 10px;
                     font-size: 14px;
+                }
+            }
+
+            &.message-pop_custom {
+                flex-basis: 100%;
+                .y-pop-border-box {
+                    display: block;
+                    padding: 9px;
+                    width: 100%;
+                    border-radius: 5px;
+                    text-align: left;
+                    background-color: #f3f3f3;
+                }
+
+                .y-ad-cover {
+                    margin-bottom: 9px;
+                }
+
+                .y-ad-info {
+                    color: #444;
+                    .y-ad-title {
+                        font-size: 20px;
+                    }
+                    .y-ad-text {
+                        padding-top: 5px;
+                        font-size: 16px;
+                    }
                 }
             }
         }

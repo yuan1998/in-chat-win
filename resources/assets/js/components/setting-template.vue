@@ -94,7 +94,8 @@
                                         <textarea v-else :style="styleList('input')" class="y-footer-form-value"
                                                   name="test"
                                                   :class="'y-footer-' + settingItem('form').elementTagName"
-                                                  :placeholder="settingItem('form').placeholder"></textarea>
+                                                  :placeholder="settingItem('form').placeholder">
+                                        </textarea>
                                     </div>
                                     <div class="y-footer-button-wrap" :style="styleList('buttonWrap')">
                                         <button :style="styleList('button')" type="button">
@@ -483,6 +484,7 @@
                         </div>
                     `,
                     tip   : `<div class="y-pop-wrap y-pop-tip"><div style="${parseStyleToString('tip')}" class="y-tip text-content"></div></div>`,
+                    custom: `<div class="y-pop-wrap y-pop-custom text-content"></div>`,
                     right : `
                         <div class="y-pop-wrap y-pop-right" >
                             ${right.showAvatar ? `<div class="y-pop-avatar" ><div class="y-pop-avatar-img" style="${parseStyleToString('rightAvatar')}"></div></div>` : '' }

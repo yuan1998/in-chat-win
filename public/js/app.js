@@ -68409,6 +68409,10 @@ var defaultRightPop = {
     backgroundColor: '#cce5ff'
 };
 
+var defaultCustomPop = {
+    backgroundColor: '#33383f'
+};
+
 var defaultTipPop = {
     backgroundColor: '#f3f3f3',
     color: '#9d9d9e'
@@ -68448,13 +68452,14 @@ var defaultSetting = function defaultSetting() {
 
 var mergeSetting = function mergeSetting(setting) {
     return {
-        tip: setting.tip ? Object.assign(defaultTipPop, setting.tip) : defaultTipPop,
-        form: setting.form ? Object.assign(defaultForm, setting.form) : defaultForm,
-        left: setting.left ? Object.assign(defaultLeftPop, setting.left) : defaultLeftPop,
-        main: setting.main ? Object.assign(defaultMain, setting.main) : defaultMain,
-        right: setting.right ? Object.assign(defaultRightPop, setting.right) : defaultRightPop,
-        footer: setting.footer ? Object.assign(defaultFooter, setting.footer) : defaultFooter,
-        header: setting.header ? Object.assign(defaultHeader, setting.header) : defaultHeader
+        tip: setting.tip ? Object.assign({}, defaultTipPop, setting.tip) : defaultTipPop,
+        form: setting.form ? Object.assign({}, defaultForm, setting.form) : defaultForm,
+        left: setting.left ? Object.assign({}, defaultLeftPop, setting.left) : defaultLeftPop,
+        main: setting.main ? Object.assign({}, defaultMain, setting.main) : defaultMain,
+        right: setting.right ? Object.assign({}, defaultRightPop, setting.right) : defaultRightPop,
+        custom: setting.custom ? Object.assign({}, defaultRightPop, setting.custom) : defaultCustomPop,
+        footer: setting.footer ? Object.assign({}, defaultFooter, setting.footer) : defaultFooter,
+        header: setting.header ? Object.assign({}, defaultHeader, setting.header) : defaultHeader
     };
 };
 

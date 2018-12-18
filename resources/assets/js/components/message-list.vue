@@ -34,14 +34,16 @@
                             <div class="message-card_url-bar card-url-bar">
                                 {{item.keyword}}
                             </div>
-                            <div
-                                 v-for="(each , index) in item.message " :key="index"
-                                    :class="'message-pop_wrap message-pop_' + each.type">
-                                <div class="message-pop">
+                            <div v-for="(each , index) in item.message "
+                                 :key="index"
+                                 :class="'message-pop_wrap message-pop_' + each.type">
+                                <div v-if="each.type === 'custom'" v-html="each.value"></div>
+                                <div v-else class="message-pop">
                                     <p class="message-pop_text" v-html="strParse(each.value)">
                                     </p>
                                 </div>
                             </div>
+
                             <div class="message-card-footer mac-card-footer">
                                 <el-button
                                         :disabled="currentDefault === item.id"
@@ -135,7 +137,7 @@
                                             placeholder="信息位置">
                                         <el-option
                                                 controls-position="right"
-                                                v-for="each in [{value:'left' , label: '左侧'},{value:'right' , label: '右侧'},{value:'center' , label: '中间'},]"
+                                                v-for="each in [{value:'left' , label: '左侧'},{value:'right' , label: '右侧'},{value:'center' , label: '中间'},{value:'custom' , label: '自定义内容'},]"
                                                 :key="each.value"
                                                 :label="each.label"
                                                 :value="each.value">
