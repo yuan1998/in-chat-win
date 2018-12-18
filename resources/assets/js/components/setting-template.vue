@@ -85,9 +85,10 @@
                                  :class="{ 'active' : current === 'form' }" @click.stop="changeCurrent('form')">
                                 <form class="y-footer-form">
                                     <div class="y-footer-input-wrap" :style="styleList('inputWrap')">
-                                        <input type="text" :style="styleList('input')"
-                                               :placeholder="settingItem('form').placeholder" name="test"
-                                               placeholder="please enter"
+                                        <input type="text"
+                                               name="test"
+                                               :style="styleList('input')"
+                                               :placeholder="settingItem('form').placeholder"
                                                class="y-footer-form-value y-footer-input-border"
                                                v-if="settingItem('form').elementTagName === 'input-border'">
                                         <textarea v-else :style="styleList('input')" class="y-footer-form-value"
