@@ -25,6 +25,16 @@ class Message extends Model
         'is_default' => 'boolean',
     ];
 
+    /**
+     * @override
+     * @param mixed $value
+     * @return string
+     */
+    protected function asJson($value)
+    {
+        return json_encode($value, JSON_UNESCAPED_UNICODE);
+    }
+
     public function setting()
     {
         return $this->belongsTo(Settings::class, 'setting_id');
