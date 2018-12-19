@@ -53,7 +53,7 @@ class Message extends Model
         Finalseg::init();
 
         $messages->each(function ($item) {
-            $item->kw_arr = Jieba::cut($item->keyword);
+            $item->kw_arr = json_encode(Jieba::cut($item->keyword), JSON_UNESCAPED_UNICODE);
             $item->save();
         });
         return true;
