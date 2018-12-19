@@ -2,31 +2,51 @@
 
 namespace App;
 
+use Fukuball\Jieba\Finalseg;
+use Fukuball\Jieba\Jieba;
 use Illuminate\Database\Eloquent\Model;
 
 class Message extends Model
 {
     protected $fillable = [
-            'setting_id',
-            'keyword',
-            'message',
-            'is_default',
-            'user_id'
+        'setting_id',
+        'keyword',
+        'message',
+        'is_default',
+        'user_id',
+        'kw_arr',
+        'business',
+        'weight',
     ];
 
     protected $casts = [
-        'message' => 'json',
+        'message'    => 'json',
+        'kw_arr'     => 'json',
         'is_default' => 'boolean',
     ];
 
-    public function setting ()
+    public function setting()
     {
-        return $this->belongsTo(Settings::class , 'setting_id');
+        return $this->belongsTo(Settings::class, 'setting_id');
     }
 
-    public function user ()
+    public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public static function fixKeywordArray()
+    {
+        $messages = Message::all();
+
+        Jieba::init();
+        Finalseg::init();
+
+        $messages->each(function ($item) {
+            $item->kw_arr = Jieba::cut($item->keyword);
+            $item->save();
+        });
+        return true;
     }
 
 }

@@ -21,16 +21,19 @@ $api->version('v1', [
 
     $api->group([
         'middleware' => ['cors'],
-        'limit' => config('api.rate_limits.access.limit'),
-        'expires' => config('api.rate_limits.access.expires'),
-    ],function ($api) {
+        'limit'      => config('api.rate_limits.access.limit'),
+        'expires'    => config('api.rate_limits.access.expires'),
+    ], function ($api) {
 
-        $api->get('/domainSetting' , 'SettingController@pageGetSetting' )
+        $api->get('/messageSetting', 'MessageController@searchMessage')
+            ->name('api.message.searchMessage');
+
+        $api->get('/domainSetting', 'MessageController@searchMessage')
             ->name('api.setting.pageGetSetting');
-        $api->get('/message/{message}' , 'MessageController@one')
+        $api->get('/message/{message}', 'MessageController@one')
             ->name('api.message.one');
 
-        $api->post('/cl' , 'LogController@store')
+        $api->post('/cl', 'LogController@store')
             ->name('api.log.store');
 
     });
@@ -65,7 +68,7 @@ $api->version('v1', [
             ->name('api.auth.update');
         $api->delete('/auth/current', 'AuthorizationController@destroy')
             ->name('api.auth.destroy');
-        $api->get('/auth/current' , 'AuthorizationController@show')
+        $api->get('/auth/current', 'AuthorizationController@show')
             ->name('api.auth.show');
 
         /**
@@ -77,7 +80,7 @@ $api->version('v1', [
             ->name('api.setting.index');
         $api->patch('/setting/{settings}', 'SettingController@update')
             ->name('api.setting.update');
-        $api->delete('/setting/{ids}' , 'SettingController@destroy' )
+        $api->delete('/setting/{ids}', 'SettingController@destroy')
             ->name('api.setting.destroy');
         $api->get('/setting/{settings}', 'SettingController@show')
             ->name('api.setting.show');
@@ -111,28 +114,28 @@ $api->version('v1', [
             ->name('api.domain.index');
         $api->get('/domain/{domian}', 'DomianController@show')
             ->name('api.domain.show');
-        $api->get('/setting/{Settings}/domain' , 'DomianController@settingIndex')
+        $api->get('/setting/{Settings}/domain', 'DomianController@settingIndex')
             ->name('api.domain.settingIndex');
 
         /**
          * Template
          ***********************/
-        $api->post('/setting/{settings}/template' , 'TemplateController@store')
+        $api->post('/setting/{settings}/template', 'TemplateController@store')
             ->name('api.template.show');
-        $api->patch('/setting/{settings}/template/{template}' , 'TemplateController@update')
+        $api->patch('/setting/{settings}/template/{template}', 'TemplateController@update')
             ->name('api.template.update');
-        $api->get('/setting/{settings}/template/one' , 'TemplateController@one')
+        $api->get('/setting/{settings}/template/one', 'TemplateController@one')
             ->name('name.template.one');
-        $api->get('/setting/{settings}/template/{template}' , 'TemplateController@show')
+        $api->get('/setting/{settings}/template/{template}', 'TemplateController@show')
             ->name('name.template.show');
 
 
         /**
          * Log
          ***********************/
-        $api->get('/log','LogController@index')
+        $api->get('/log', 'LogController@index')
             ->name('api.log.index');
-        $api->delete('/log/{ids}' , 'LogController@destroy')
+        $api->delete('/log/{ids}', 'LogController@destroy')
             ->name('api.log.destroy');
     });
 

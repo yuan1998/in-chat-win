@@ -101,6 +101,13 @@
                                 autocomplete="off">
                         </el-input>
                     </el-form-item>
+                    <el-form-item
+                            label="权重"
+                            prop="weight"
+                    >
+                        <el-input-number v-model="form.weight" controls-position="right" :min="0"
+                                         :max="1000"></el-input-number>
+                    </el-form-item>
                     <h1>
                         回复短句
                         <el-button @click="addMessageItem"
@@ -207,6 +214,7 @@
     };
     const defaultForm    = {
         keyword: '',
+        weight : 0,
         message: [
             cloneOf(defaultMessage),
         ]
@@ -275,7 +283,7 @@
                     this.query = '';
             },
             addMessageTo(position, index) {
-                console.log("index :",index >= this.form.message.length);
+                console.log("index :", index >= this.form.message.length);
                 if (index >= this.form.message.length) {
                     this.addMessageItem();
                 }

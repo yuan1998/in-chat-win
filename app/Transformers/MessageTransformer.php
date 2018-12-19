@@ -19,6 +19,7 @@ class MessageTransformer extends TransformerAbstract
             'id'         => (int) $message->id,
             'keyword'    => (string) $message->keyword,
             'setting_id' => (int) $message->setting_id,
+            'weight' => (int) $message->weight,
             'is_default' => (boolean) $message->is_default,
             'message'    => $message->message,
             'create_at'  => $message->created_at->toDateTimeString(),
