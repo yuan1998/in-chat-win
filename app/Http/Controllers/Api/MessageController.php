@@ -134,7 +134,7 @@ class MessageController extends Controller
 
         $setting_id = $setting->id;
         $default_id = $setting->default_message;
-
+        logger('memory_limit is :' . ini_get('memory_limit'));
         Jieba::init();
         Finalseg::init();
 
