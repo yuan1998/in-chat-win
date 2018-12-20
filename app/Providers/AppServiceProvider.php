@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        ini_set('memory_limit', '1024M');
+        ini_set('memory_limit', env('MEMORY_LIMIT','1024M'));
 
         Domian::observe(\App\Observers\DomainObserver::class);
 
