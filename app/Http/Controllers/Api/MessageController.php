@@ -134,9 +134,13 @@ class MessageController extends Controller
 
         $setting_id = $setting->id;
         $default_id = $setting->default_message;
-        logger('memory_limit is :' . ini_get('memory_limit'));
+        
+        $now = \Carbon\Carbon::now()->timestamp;
+        logger('=========== Jieba Init Start');
         Jieba::init();
         Finalseg::init();
+        logger(\Carbon\Carbon::now()->timestamp - $now);
+        logger('=========== Jieba Init end' );
 
         $kwArr  = json_encode(Jieba::cut($keyword), JSON_UNESCAPED_UNICODE);
         $result = self::searchOf($kwArr, $id, $setting_id, $default_id);
