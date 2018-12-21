@@ -8,9 +8,8 @@ use App\Message;
 use App\Settings;
 use App\Template;
 use App\Transformers\MessageTransformer;
-use Fukuball\Jieba\Finalseg;
-use Fukuball\Jieba\Jieba;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class MessageController extends Controller
 {
@@ -22,9 +21,9 @@ class MessageController extends Controller
         $data            = $request->all();
         $data['user_id'] = $user->id;
 
-        Jieba::init();
-        Finalseg::init();
-        $data['kw_arr'] = Jieba::cut($request->get('keyword', ''));
+        $jieba = Redis::connection('jieba');
+
+        $data['kw_arr'] = $jieba->executeRaw(['cut', $request->get('keyword', ''), 0]);
 
         $item = Message::create($data);
 
@@ -40,11 +39,10 @@ class MessageController extends Controller
         }
         $data = $request->all();
 
-        if ($request->get('keyword', null) !== $message->keyword) {
-            Jieba::init();
-            Finalseg::init();
+        if ($request->get('keyword', $message->keyword) !== $message->keyword) {
+            $jieba = Redis::connection('jieba');
 
-            $data['kw_arr'] = Jieba::cut($request->get('keyword', ''));
+            $data['kw_arr'] = $jieba->executeRaw(['cut', $request->get('keyword', ''), 0]);
         }
 
         $message->fill($data);
@@ -134,15 +132,10 @@ class MessageController extends Controller
 
         $setting_id = $setting->id;
         $default_id = $setting->default_message;
-        
-        $now = \Carbon\Carbon::now()->timestamp;
-        logger('=========== Jieba Init Start');
-        Jieba::init();
-        Finalseg::init();
-        logger(\Carbon\Carbon::now()->timestamp - $now);
-        logger('=========== Jieba Init end' );
 
-        $kwArr  = json_encode(Jieba::cut($keyword), JSON_UNESCAPED_UNICODE);
+        $jieba = Redis::connection('jieba');
+
+        $kwArr  = json_encode($jieba->executeRaw(['cut', $keyword, 0]), JSON_UNESCAPED_UNICODE);
         $result = self::searchOf($kwArr, $id, $setting_id, $default_id);
 
         if (!$result) {

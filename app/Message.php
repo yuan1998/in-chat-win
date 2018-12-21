@@ -5,6 +5,7 @@ namespace App;
 use Fukuball\Jieba\Finalseg;
 use Fukuball\Jieba\Jieba;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redis;
 
 class Message extends Model
 {
@@ -49,11 +50,10 @@ class Message extends Model
     {
         $messages = Message::all();
 
-        Jieba::init();
-        Finalseg::init();
+        $jieba = Redis::connection('jieba');
 
-        $messages->each(function ($item) {
-            $item->kw_arr = Jieba::cut($item->keyword);
+        $messages->each(function ($item) use ($jieba) {
+            $item->kw_arr = $jieba->executeRaw(['cut', $item->keyword, 0]);
             $item->save();
         });
         return true;
