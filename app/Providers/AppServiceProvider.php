@@ -18,7 +18,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Domian::observe(\App\Observers\DomainObserver::class);
 
-
         $this->app->validator->resolver(function ( $translator , $data , $rules , $message , $attributes ) {
             return new MessageValidator($translator , $data , $rules , $message , $attributes );
         });

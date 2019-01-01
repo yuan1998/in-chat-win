@@ -11,6 +11,7 @@
     * PHP >= 7.0.0
     * MySql >= 5.7.8
     * laravel 5.5
+    * [redis-jieba](https://github.com/jonnywang/goredisjieba)
 
 ### 工具
 - 前端
@@ -109,7 +110,7 @@
 ### install
 > 先配置根目录的 .env 文件 , 参照.env.example
 ```
-$ npm i
+$ npm ix
 $ comporse install
 $ php artisan migrate
 $ npm run dev
